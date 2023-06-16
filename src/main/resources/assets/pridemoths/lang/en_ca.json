@@ -1,0 +1,31 @@
+{
+  "item.pridemoths.moth_spawn_egg": "Moth Spawn Egg",
+  "entity.pridemoths.moth": "Moth",
+
+  "item.pridemoths.moth_bottle": "Bottled Moth",
+  "item.pridemoths.trans_moth_bottle": "Bottled Moth",
+  "item.pridemoths.lgbt_moth_bottle": "Bottled Moth",
+  "item.pridemoths.non_binary_moth_bottle": "Bottled Moth",
+  "item.pridemoths.agender_moth_bottle": "Bottled Moth",
+  "item.pridemoths.asexual_moth_bottle": "Bottled Moth",
+  "item.pridemoths.bisexual_moth_bottle": "Bottled Moth",
+  "item.pridemoths.pansexual_moth_bottle": "Bottled Moth",
+  "item.pridemoths.gay_moth_bottle": "Bottled Moth",
+  "item.pridemoths.lesbian_moth_bottle": "Bottled Moth",
+
+  "text.pridemoths.variant.default": "Default",
+  "text.pridemoths.variant.trans": "Transgender",
+  "text.pridemoths.variant.lgbt": "LGBT (Rainbow Colouring)",
+  "text.pridemoths.variant.non_binary": "Non-Binary",
+  "text.pridemoths.variant.agender": "Agender",
+  "text.pridemoths.variant.asexual": "Asexual",
+  "text.pridemoths.variant.bisexual": "Bisexual",
+  "text.pridemoths.variant.pansexual": "Pansexual",
+  "text.pridemoths.variant.gay": "Gay (MLM Colouring)",
+  "text.pridemoths.variant.lesbian": "Lesbian",
+
+  "advancement.pridemoths.obtain_pride_moth_bottle.title": "Happy Pride Moth!",
+  "advancement.pridemoths.obtain_pride_moth_bottle.description": "Obtain a Bottled Moth for Pride",
+  "advancement.pridemoths.obtain_all_pride_moth_bottles.title": "Pride Moth to the Moon!",
+  "advancement.pridemoths.obtain_all_pride_moth_bottles.description": "Bottle all Pride Variants of Moths"
+}

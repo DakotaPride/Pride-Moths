@@ -1,0 +1,166 @@
+{
+  "display": {
+    "icon": {
+      "item": "pridemoths:asexual_moth_bottle"
+    },
+    "title": {
+      "translate": "advancement.pridemoths.obtain_all_pride_moth_bottles.title"
+    },
+    "description": {
+      "translate": "advancement.pridemoths.obtain_all_pride_moth_bottles.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pridemoths:husbandry/obtain_pride_moth_bottle",
+  "criteria": {
+    "has_trans_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {}
+            }
+          }
+        ],
+        "items": [
+          {
+            "items": [
+              "pridemoths:trans_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_lgbt_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:lgbt_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_agender_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:agender_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_gay_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:gay_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_lesbian_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:lesbian_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_bisexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:bisexual_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_pansexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:pansexual_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_asexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:asexual_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_non_binary_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_trans_bottle"
+    ],
+    [
+      "has_lgbt_bottle"
+    ],
+    [
+      "has_agender_bottle"
+    ],
+    [
+      "has_gay_bottle"
+    ],
+    [
+      "has_lesbian_bottle"
+    ],
+    [
+      "has_bisexual_bottle"
+    ],
+    [
+      "has_pansexual_bottle"
+    ],
+    [
+      "has_asexual_bottle"
+    ],
+    [
+      "has_non_binary_bottle"
+    ]
+  ]
+}

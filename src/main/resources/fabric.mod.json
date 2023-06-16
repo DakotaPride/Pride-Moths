@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "modid",
+  "version": "${version}",
+
+  "name": "Happy Pride Moth!",
+  "description": "Love bugs AND pride? Why not both!",
+  "authors": [
+    "DakotaPride",
+    "HoloScopeStudios"
+  ],
+  "contact": {
+    "homepage": "modrinth.com/mod/pride-moths",
+    "sources": "https://github.com/DakotaPride/pride-moths"
+  },
+
+  "license": "MIT",
+  "icon": "assets/pridemoths/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.dakotapride.pridemoths.PrideMothsInitialize"
+    ],
+    "client": [
+      "net.dakotapride.pridemoths.client.PrideMothsClient"
+    ]
+  },
+  "mixins": [
+    "pridemoths.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric-api": "*",
+    "minecraft": "~1.19",
+    "java": ">=17",
+    "geckolib3": "*"
+  }
+}
