@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "pridemoths:item/bottle/default"
+    "layer0": "pridemoths:item/bottle/blue"
   }
 }

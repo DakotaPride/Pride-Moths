@@ -33,7 +33,10 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static EntityType<MothEntity> MOTH;
 	public static Item MOTH_SPAWN_EGG;
 	public static Item MOTH_WING;
-	public static Item MOTH_BOTTLE;
+	public static Item ORANGE_MOTH_BOTTLE;
+	public static Item BLUE_MOTH_BOTTLE;
+	public static Item YELLOW_MOTH_BOTTLE;
+	public static Item GREEN_MOTH_BOTTLE;
 	public static Item TRANS_MOTH_BOTTLE;
 	public static Item LGBT_MOTH_BOTTLE;
 	public static Item NON_BINARY_MOTH_BOTTLE;
@@ -62,8 +65,14 @@ public class PrideMothsInitialize implements ModInitializer {
 						.statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA), 1.0F)
 						.statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING), 1.0F).build())));
 
-		MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_bottle"),
-				new MothBottleItem(MothVariant.DEFAULT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/default.png")));
+		ORANGE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "orange_moth_bottle"),
+				new MothBottleItem(MothVariant.DEFAULT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+		BLUE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "blue_moth_bottle"),
+				new MothBottleItem(MothVariant.BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+		YELLOW_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "yellow_moth_bottle"),
+				new MothBottleItem(MothVariant.YELLOW.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+		GREEN_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "green_moth_bottle"),
+				new MothBottleItem(MothVariant.GREEN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		TRANS_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "trans_moth_bottle"),
 				new MothBottleItem(MothVariant.TRANS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/trans.png")));
 		LGBT_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "lgbt_moth_bottle"),
@@ -85,7 +94,10 @@ public class PrideMothsInitialize implements ModInitializer {
 
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> entries.add(MOTH_WING));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(ORANGE_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(BLUE_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(YELLOW_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(GREEN_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(TRANS_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(LGBT_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(NON_BINARY_MOTH_BOTTLE));
@@ -95,6 +107,7 @@ public class PrideMothsInitialize implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(ASEXUAL_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(PANSEXUAL_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(BISEXUAL_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> entries.add(MOTH_SPAWN_EGG));
 
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.

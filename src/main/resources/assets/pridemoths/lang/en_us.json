@@ -2,7 +2,10 @@
   "item.pridemoths.moth_spawn_egg": "Moth Spawn Egg",
   "entity.pridemoths.moth": "Moth",
 
-  "item.pridemoths.moth_bottle": "Bottled Moth",
+  "item.pridemoths.orange_moth_bottle": "Bottled Moth",
+  "item.pridemoths.blue_moth_bottle": "Bottled Moth",
+  "item.pridemoths.yellow_moth_bottle": "Bottled Moth",
+  "item.pridemoths.green_moth_bottle": "Bottled Moth",
   "item.pridemoths.trans_moth_bottle": "Bottled Moth",
   "item.pridemoths.lgbt_moth_bottle": "Bottled Moth",
   "item.pridemoths.non_binary_moth_bottle": "Bottled Moth",
@@ -13,7 +16,10 @@
   "item.pridemoths.gay_moth_bottle": "Bottled Moth",
   "item.pridemoths.lesbian_moth_bottle": "Bottled Moth",
 
-  "text.pridemoths.variant.default": "Default",
+  "text.pridemoths.variant.default": "Default (Orange Coloring)",
+  "text.pridemoths.variant.blue": "Default (Blue Coloring)",
+  "text.pridemoths.variant.yellow": "Default (Yellow Coloring)",
+  "text.pridemoths.variant.green": "Default (Green Coloring)",
   "text.pridemoths.variant.trans": "Transgender",
   "text.pridemoths.variant.lgbt": "LGBT (Rainbow Coloring)",
   "text.pridemoths.variant.non_binary": "Non-Binary",

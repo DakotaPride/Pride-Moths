@@ -191,7 +191,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
             Item item = Items.GLASS_BOTTLE;
 
             switch (this.getMothVariant()) {
-                case DEFAULT -> item = PrideMothsInitialize.MOTH_BOTTLE;
+                case DEFAULT -> item = PrideMothsInitialize.ORANGE_MOTH_BOTTLE;
                 case TRANS -> item = PrideMothsInitialize.TRANS_MOTH_BOTTLE;
                 case NON_BINARY -> item = PrideMothsInitialize.NON_BINARY_MOTH_BOTTLE;
                 case AGENDER -> item = PrideMothsInitialize.AGENDER_MOTH_BOTTLE;

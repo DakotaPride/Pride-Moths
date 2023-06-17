@@ -16,6 +16,12 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
             Util.make(Maps.newEnumMap(MothVariant.class), (map) -> {
                 map.put(MothVariant.DEFAULT,
                         new Identifier("pridemoths", "textures/model/orange.png"));
+                map.put(MothVariant.BLUE,
+                        new Identifier("pridemoths", "textures/model/blue.png"));
+                map.put(MothVariant.YELLOW,
+                        new Identifier("pridemoths", "textures/model/yellow.png"));
+                map.put(MothVariant.GREEN,
+                        new Identifier("pridemoths", "textures/model/green.png"));
                 // Pride Variants
                 map.put(MothVariant.TRANS,
                         new Identifier("pridemoths", "textures/model/pride/trans.png"));

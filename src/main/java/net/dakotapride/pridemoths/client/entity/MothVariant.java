@@ -2,6 +2,10 @@ package net.dakotapride.pridemoths.client.entity;
 
 public enum MothVariant {
     DEFAULT("default"),
+    BLUE("blue"),
+    YELLOW("yellow"),
+    GREEN("green"),
+    // Pride Variations
     TRANS("trans"),
     LGBT("lgbt"),
     NON_BINARY("non_binary"),

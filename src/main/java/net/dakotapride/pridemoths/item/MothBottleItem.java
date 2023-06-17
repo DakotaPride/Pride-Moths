@@ -25,7 +25,7 @@ public class MothBottleItem extends Item {
     private final String variantByString;
 
     public MothBottleItem(String variantByString, Settings settings, Identifier texture) {
-        super(settings);
+        super(settings.maxCount(16));
         this.texture = texture;
         this.variantByString = variantByString;
     }
@@ -42,8 +42,14 @@ public class MothBottleItem extends Item {
     public static MothVariant getMothVariant(Item item) {
         MothVariant variant = null;
 
-        if (item == PrideMothsInitialize.MOTH_BOTTLE) {
+        if (item == PrideMothsInitialize.ORANGE_MOTH_BOTTLE) {
             variant = MothVariant.DEFAULT;
+        } else if (item == PrideMothsInitialize.BLUE_MOTH_BOTTLE) {
+            variant = MothVariant.BLUE;
+        } else if (item == PrideMothsInitialize.YELLOW_MOTH_BOTTLE) {
+            variant = MothVariant.YELLOW;
+        } else if (item == PrideMothsInitialize.GREEN_MOTH_BOTTLE) {
+            variant = MothVariant.GREEN;
         } else if (item == PrideMothsInitialize.TRANS_MOTH_BOTTLE) {
             variant = MothVariant.TRANS;
         } else if (item == PrideMothsInitialize.LGBT_MOTH_BOTTLE) {
