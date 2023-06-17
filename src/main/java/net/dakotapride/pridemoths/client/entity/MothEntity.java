@@ -58,9 +58,15 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
     public static final List<MothVariant> PRIDE_MOTH = ImmutableList.of(
             MothVariant.TRANS, MothVariant.LGBT, MothVariant.NON_BINARY, MothVariant.AGENDER, MothVariant.ASEXUAL,
             MothVariant.GAY, MothVariant.LESBIAN, MothVariant.BISEXUAL, MothVariant.PANSEXUAL);
+    public static final List<MothVariant> NATURAL = ImmutableList.of(
+            MothVariant.DEFAULT, MothVariant.YELLOW, MothVariant.BLUE, MothVariant.GREEN);
 
     public static MothVariant getPrideMothGeneration(Random random) {
         return PRIDE_MOTH.get(random.nextInt(PRIDE_MOTH.size()));
+    }
+
+    public static MothVariant getNaturalGeneration(Random random) {
+        return NATURAL.get(random.nextInt(NATURAL.size()));
     }
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -153,7 +159,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
         if (DateTimeFormatter.ofPattern("dd/MM").format(date).equals(date.getDayOfMonth() + "/06")) {
             this.dataTracker.startTracking(VARIANT, getPrideMothGeneration(random).toString());
         } else {
-            this.dataTracker.startTracking(VARIANT, MothVariant.DEFAULT.toString());
+            this.dataTracker.startTracking(VARIANT, getNaturalGeneration(random).toString());
         }
     }
 
