@@ -3,9 +3,9 @@ package net.dakotapride.pridemoths.client.model;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.renderer.MothRenderer;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class MothModel extends AnimatedGeoModel<MothEntity> {
+public class MothModel extends GeoModel<MothEntity> {
 
     @Override
     public Identifier getModelResource(MothEntity entity) {

@@ -7,7 +7,7 @@ import net.dakotapride.pridemoths.client.model.MothModel;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import java.util.Map;
 
@@ -15,7 +15,8 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
     public static final Map<MothVariant, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MothVariant.class), (map) -> {
                 map.put(MothVariant.DEFAULT,
-                        new Identifier("pridemoths", "textures/model/moth.png"));
+                        new Identifier("pridemoths", "textures/model/orange.png"));
+                // Pride Variants
                 map.put(MothVariant.TRANS,
                         new Identifier("pridemoths", "textures/model/pride/trans.png"));
                 map.put(MothVariant.LGBT,
@@ -41,7 +42,7 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
     }
 
     @Override
-    public Identifier getTextureResource(MothEntity entity) {
+    public Identifier getTextureLocation(MothEntity entity) {
         return LOCATION_BY_VARIANT.get(entity.getMothVariant());
     }
 }

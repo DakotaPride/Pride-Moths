@@ -40,24 +40,20 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
 import java.util.List;
 
-public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer {
+public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
     private static final TrackedData<String> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.STRING);
-    private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public boolean fromBottle = false;
     public static final List<MothVariant> PRIDE_MOTH = ImmutableList.of(
             MothVariant.TRANS, MothVariant.LGBT, MothVariant.NON_BINARY, MothVariant.AGENDER, MothVariant.ASEXUAL,
@@ -130,15 +126,15 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer {
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controller) {
+        controller.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.moth.flight", true));
+            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.flight", Animation.LoopType.LOOP));
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.moth.idle", true));
+            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
         }
         return PlayState.CONTINUE;
     }
@@ -146,8 +142,8 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer {
 
 
     @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 
     protected void initDataTracker() {
