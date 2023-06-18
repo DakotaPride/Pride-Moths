@@ -22,6 +22,9 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
                         new Identifier("pridemoths", "textures/model/yellow.png"));
                 map.put(MothVariant.GREEN,
                         new Identifier("pridemoths", "textures/model/green.png"));
+                // Rare Variant
+                map.put(MothVariant.PALOS_VERDES_BLUE,
+                        new Identifier("pridemoths", "textures/model/palos_verdes_blue.png"));
                 // Pride Variants
                 map.put(MothVariant.TRANS,
                         new Identifier("pridemoths", "textures/model/pride/trans.png"));
