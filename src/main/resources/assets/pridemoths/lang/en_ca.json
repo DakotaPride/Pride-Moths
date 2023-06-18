@@ -1,6 +1,7 @@
 {
   "item.pridemoths.moth_spawn_egg": "Moth Spawn Egg",
   "entity.pridemoths.moth": "Moth",
+  "item.pridemoths.moth_wing": "Moth Wing",
 
   "item.pridemoths.orange_moth_bottle": "Bottled Moth",
   "item.pridemoths.blue_moth_bottle": "Bottled Moth",
@@ -37,5 +38,7 @@
   "advancement.pridemoths.obtain_all_pride_moth_bottles.title": "Pride Moth to the Moon!",
   "advancement.pridemoths.obtain_all_pride_moth_bottles.description": "Bottle all Pride Variants of Moths",
   "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.title": "This Isn't Los Angeles",
-  "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.description": "Bottle The Palos Verdes Blue Moth Variation"
+  "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.description": "Bottle The Palos Verdes Blue Moth Variation",
+  "advancements.pridemoths.kill_a_moth.title": "You Wouldn't Dare!",
+  "advancements.pridemoths.kill_a_moth.description": "Kill a Moth... Really?"
 }

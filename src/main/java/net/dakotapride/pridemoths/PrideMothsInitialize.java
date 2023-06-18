@@ -3,6 +3,7 @@ package net.dakotapride.pridemoths;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.MothVariant;
 import net.dakotapride.pridemoths.item.MothBottleItem;
+import net.dakotapride.pridemoths.mixin.BrewingRecipeRegistryMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -15,16 +16,18 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.*;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 
 public class PrideMothsInitialize implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -50,6 +53,7 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static Item BISEXUAL_MOTH_BOTTLE;
 	public static Item LESBIAN_MOTH_BOTTLE;
 	public static Item GAY_MOTH_BOTTLE;
+	public static Potion MOTH_MASTER_POTION;
 
 	@Override
 	public void onInitialize() {
@@ -66,8 +70,8 @@ public class PrideMothsInitialize implements ModInitializer {
 
 		MOTH_WING = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_wing"),
 				new Item(new FabricItemSettings().food(new FoodComponent.Builder().saturationModifier(0.3F).hunger(1).snack()
-						.statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA), 1.0F)
-						.statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING), 1.0F).build())));
+						.statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 1), 1.0F)
+						.statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 300), 1.0F).build())));
 
 		ORANGE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "orange_moth_bottle"),
 				new MothBottleItem(MothVariant.DEFAULT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
@@ -98,6 +102,12 @@ public class PrideMothsInitialize implements ModInitializer {
 		PANSEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "pansexual_moth_bottle"),
 				new MothBottleItem(MothVariant.PANSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/pansexual.png")));
 
+		MOTH_MASTER_POTION = Registry.register(Registries.POTION, new Identifier("pridemoths", "moth_master"),
+				new Potion(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 0),
+						new StatusEffectInstance(StatusEffects.RESISTANCE, 760, 1),
+						new StatusEffectInstance(StatusEffects.NIGHT_VISION, 840, 0)));
+
+		BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.SLOW_FALLING, MOTH_WING, MOTH_MASTER_POTION);
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> entries.add(MOTH_WING));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(ORANGE_MOTH_BOTTLE));
