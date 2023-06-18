@@ -16,7 +16,7 @@
   },
   "parent": "minecraft:husbandry/root",
   "criteria": {
-    "has_rare_bottle": {
+    "has_bottles": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
