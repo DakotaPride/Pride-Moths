@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "pridemoths:palos_verdes_blue_moth_bottle"
+    },
+    "title": {
+      "translate": "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.title"
+    },
+    "description": {
+      "translate": "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "has_rare_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:palos_verdes_blue_moth_bottle"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rare_bottle"
+    ]
+  ]
+}

@@ -2,6 +2,7 @@ package net.dakotapride.pridemoths.client.entity;
 
 import com.google.common.collect.ImmutableList;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
+import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
@@ -48,10 +49,10 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.util.List;
 
-public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
+public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IPrideMoths {
     private static final TrackedData<String> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.STRING);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public boolean fromBottle = false;
@@ -66,7 +67,17 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
     }
 
     public static MothVariant getNaturalGeneration(Random random) {
-        return NATURAL.get(random.nextInt(NATURAL.size()));
+        int rarePatternChance = 120;
+        if (IPrideMoths.isWorldMothWeek()) {
+            rarePatternChance = 40;
+        }
+
+
+        if (random.nextInt(rarePatternChance) == 0) {
+            return MothVariant.PALOS_VERDES_BLUE;
+        } else {
+            return NATURAL.get(random.nextInt(NATURAL.size()));
+        }
     }
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -153,10 +164,13 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
     }
 
     protected void initDataTracker() {
-        LocalDate date = LocalDate.now();
+        LocalDate date;
+        date = LocalDate.now();
+        int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
+
         super.initDataTracker();
 
-        if (DateTimeFormatter.ofPattern("dd/MM").format(date).equals(date.getDayOfMonth() + "/06")) {
+        if (getLocalMonthFromUser == 6) {
             this.dataTracker.startTracking(VARIANT, getPrideMothGeneration(random).toString());
         } else {
             this.dataTracker.startTracking(VARIANT, getNaturalGeneration(random).toString());

@@ -6,6 +6,7 @@
   "item.pridemoths.blue_moth_bottle": "Bottled Moth",
   "item.pridemoths.yellow_moth_bottle": "Bottled Moth",
   "item.pridemoths.green_moth_bottle": "Bottled Moth",
+  "item.pridemoths.palos_verdes_blue_moth_bottle": "Bottled Moth",
   "item.pridemoths.trans_moth_bottle": "Bottled Moth",
   "item.pridemoths.lgbt_moth_bottle": "Bottled Moth",
   "item.pridemoths.non_binary_moth_bottle": "Bottled Moth",
@@ -20,6 +21,7 @@
   "text.pridemoths.variant.blue": "Default (Blue Colouring)",
   "text.pridemoths.variant.yellow": "Default (Yellow Colouring)",
   "text.pridemoths.variant.green": "Default (Green Colouring)",
+  "text.pridemoths.variant.palos_verdes_blue": "Default (Rare Colouring)",
   "text.pridemoths.variant.trans": "Transgender",
   "text.pridemoths.variant.lgbt": "LGBT (Rainbow Colouring)",
   "text.pridemoths.variant.non_binary": "Non-Binary",
@@ -31,7 +33,9 @@
   "text.pridemoths.variant.lesbian": "Lesbian",
 
   "advancement.pridemoths.obtain_pride_moth_bottle.title": "Happy Pride Moth!",
-  "advancement.pridemoths.obtain_pride_moth_bottle.description": "Obtain a Bottled Moth for Pride",
+  "advancement.pridemoths.obtain_pride_moth_bottle.description": "Bottle a Moth for Pride",
   "advancement.pridemoths.obtain_all_pride_moth_bottles.title": "Pride Moth to the Moon!",
-  "advancement.pridemoths.obtain_all_pride_moth_bottles.description": "Bottle all Pride Variants of Moths"
+  "advancement.pridemoths.obtain_all_pride_moth_bottles.description": "Bottle all Pride Variants of Moths",
+  "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.title": "This Isn't Los Angeles",
+  "advancement.pridemoths.obtain_palos_verdes_blue_moth_bottle.description": "Bottle The Palos Verdes Blue Moth Variation"
 }

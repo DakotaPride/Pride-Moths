@@ -23,6 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+
 public class PrideMothsInitialize implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
@@ -37,6 +40,7 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static Item BLUE_MOTH_BOTTLE;
 	public static Item YELLOW_MOTH_BOTTLE;
 	public static Item GREEN_MOTH_BOTTLE;
+	public static Item PALOS_VERDES_BLUE_MOTH_BOTTLE;
 	public static Item TRANS_MOTH_BOTTLE;
 	public static Item LGBT_MOTH_BOTTLE;
 	public static Item NON_BINARY_MOTH_BOTTLE;
@@ -73,6 +77,8 @@ public class PrideMothsInitialize implements ModInitializer {
 				new MothBottleItem(MothVariant.YELLOW.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		GREEN_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "green_moth_bottle"),
 				new MothBottleItem(MothVariant.GREEN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+		PALOS_VERDES_BLUE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "palos_verdes_blue_moth_bottle"),
+				new MothBottleItem(MothVariant.PALOS_VERDES_BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/palos_verde_blue.png")));
 		TRANS_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "trans_moth_bottle"),
 				new MothBottleItem(MothVariant.TRANS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/trans.png")));
 		LGBT_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "lgbt_moth_bottle"),
