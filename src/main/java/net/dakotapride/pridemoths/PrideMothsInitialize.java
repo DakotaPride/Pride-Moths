@@ -53,6 +53,16 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static Item BISEXUAL_MOTH_BOTTLE;
 	public static Item LESBIAN_MOTH_BOTTLE;
 	public static Item GAY_MOTH_BOTTLE;
+	public static Item POLYAMOROUS_MOTH_BOTTLE;
+	public static Item POLYSEXUAL_MOTH_BOTTLE;
+	public static Item OMNISEXUAL_MOTH_BOTTLE;
+	public static Item DEMIBOY_MOTH_BOTTLE;
+	public static Item DEMIGIRL_MOTH_BOTTLE;
+	public static Item DEMIGENDER_MOTH_BOTTLE;
+	public static Item AROACE_MOTH_BOTTLE;
+	public static Item DEMISEXUAL_MOTH_BOTTLE;
+	public static Item DEMIROMANTIC_MOTH_BOTTLE;
+	public static Item AROMANTIC_MOTH_BOTLE;
 	public static Potion MOTH_MASTER_POTION;
 
 	@Override
@@ -101,6 +111,26 @@ public class PrideMothsInitialize implements ModInitializer {
 				new MothBottleItem(MothVariant.BISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/bisexual.png")));
 		PANSEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "pansexual_moth_bottle"),
 				new MothBottleItem(MothVariant.PANSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/pansexual.png")));
+		POLYAMOROUS_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "polyamorous_moth_bottle"),
+				new MothBottleItem(MothVariant.POLYAMOROUS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/polyamorous.png")));
+		POLYSEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "polysexual_moth_bottle"),
+				new MothBottleItem(MothVariant.POLYSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/polysexual.png")));
+		OMNISEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "omnisexual_moth_bottle"),
+				new MothBottleItem(MothVariant.OMNISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/omnisexual.png")));
+		DEMISEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demisexual_moth_bottle"),
+				new MothBottleItem(MothVariant.DEMISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demisexual.png")));
+		DEMIROMANTIC_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demiromantic_moth_bottle"),
+				new MothBottleItem(MothVariant.DEMIROMANTIC.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demiromantic.png")));
+		AROACE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "aroace_moth_bottle"),
+				new MothBottleItem(MothVariant.AROACE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/aroace.png")));
+		DEMIBOY_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demiboy_moth_bottle"),
+				new MothBottleItem(MothVariant.DEMIBOY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demiboy.png")));
+		DEMIGIRL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demigirl_moth_bottle"),
+				new MothBottleItem(MothVariant.DEMIGIRL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demigirl.png")));
+		DEMIGENDER_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demigender_moth_bottle"),
+				new MothBottleItem(MothVariant.DEMIGENDER.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demigender.png")));
+		AROMANTIC_MOTH_BOTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "aromantic_moth_bottle"),
+				new MothBottleItem(MothVariant.AROMANTIC.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/aromantic.png")));
 
 		MOTH_MASTER_POTION = Registry.register(Registries.POTION, new Identifier("pridemoths", "moth_master"),
 				new Potion(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 0),
@@ -124,6 +154,15 @@ public class PrideMothsInitialize implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(ASEXUAL_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(PANSEXUAL_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(BISEXUAL_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(POLYAMOROUS_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(POLYSEXUAL_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(OMNISEXUAL_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(DEMISEXUAL_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(DEMIROMANTIC_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(AROACE_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(DEMIBOY_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(DEMIGIRL_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(DEMIGENDER_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> entries.add(MOTH_SPAWN_EGG));
 
 		// This code runs as soon as Minecraft is in a mod-load-ready state.

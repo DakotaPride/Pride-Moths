@@ -70,6 +70,26 @@ public class MothBottleItem extends Item {
             variant = MothVariant.PANSEXUAL;
         } else if (item == PrideMothsInitialize.BISEXUAL_MOTH_BOTTLE) {
             variant = MothVariant.BISEXUAL;
+        } else if (item == PrideMothsInitialize.POLYAMOROUS_MOTH_BOTTLE) {
+            variant = MothVariant.POLYAMOROUS;
+        } else if (item == PrideMothsInitialize.POLYSEXUAL_MOTH_BOTTLE) {
+            variant = MothVariant.POLYSEXUAL;
+        } else if (item == PrideMothsInitialize.OMNISEXUAL_MOTH_BOTTLE) {
+            variant = MothVariant.OMNISEXUAL;
+        } else if (item == PrideMothsInitialize.DEMISEXUAL_MOTH_BOTTLE) {
+            variant = MothVariant.DEMISEXUAL;
+        } else if (item == PrideMothsInitialize.DEMIROMANTIC_MOTH_BOTTLE) {
+            variant = MothVariant.DEMIROMANTIC;
+        } else if (item == PrideMothsInitialize.DEMIBOY_MOTH_BOTTLE) {
+            variant = MothVariant.DEMIBOY;
+        } else if (item == PrideMothsInitialize.DEMIGIRL_MOTH_BOTTLE) {
+            variant = MothVariant.DEMIGIRL;
+        } else if (item == PrideMothsInitialize.DEMIGENDER_MOTH_BOTTLE) {
+            variant = MothVariant.DEMIGENDER;
+        } else if (item == PrideMothsInitialize.AROACE_MOTH_BOTTLE) {
+            variant = MothVariant.AROACE;
+        } else if (item == PrideMothsInitialize.AROMANTIC_MOTH_BOTLE) {
+            variant = MothVariant.AROMANTIC;
         }
 
         return variant;

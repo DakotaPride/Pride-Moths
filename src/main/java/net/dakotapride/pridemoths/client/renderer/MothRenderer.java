@@ -44,6 +44,26 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
                         new Identifier("pridemoths", "textures/model/pride/pansexual.png"));
                 map.put(MothVariant.BISEXUAL,
                         new Identifier("pridemoths", "textures/model/pride/bisexual.png"));
+                map.put(MothVariant.POLYAMOROUS,
+                        new Identifier("pridemoths", "textures/model/pride/polyamorous.png"));
+                map.put(MothVariant.POLYSEXUAL,
+                        new Identifier("pridemoths", "textures/model/pride/polysexual.png"));
+                map.put(MothVariant.OMNISEXUAL,
+                        new Identifier("pridemoths", "textures/model/pride/omnisexual.png"));
+                map.put(MothVariant.DEMISEXUAL,
+                        new Identifier("pridemoths", "textures/model/pride/demisexual.png"));
+                map.put(MothVariant.DEMIBOY,
+                        new Identifier("pridemoths", "textures/model/pride/demiboy.png"));
+                map.put(MothVariant.DEMIGIRL,
+                        new Identifier("pridemoths", "textures/model/pride/demigirl.png"));
+                map.put(MothVariant.DEMIGENDER,
+                        new Identifier("pridemoths", "textures/model/pride/demigender.png"));
+                map.put(MothVariant.DEMIROMANTIC,
+                        new Identifier("pridemoths", "textures/model/pride/demiromantic.png"));
+                map.put(MothVariant.AROACE,
+                        new Identifier("pridemoths", "textures/model/pride/aroace.png"));
+                map.put(MothVariant.AROMANTIC,
+                        new Identifier("pridemoths", "textures/model/pride/aromantic.png"));
             });
 
     public MothRenderer(EntityRendererFactory.Context ctx) {

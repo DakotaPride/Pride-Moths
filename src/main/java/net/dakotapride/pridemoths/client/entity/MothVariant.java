@@ -16,7 +16,18 @@ public enum MothVariant {
     AGENDER("agender"),
     ASEXUAL("asexual"),
     PANSEXUAL("pansexual"),
-    BISEXUAL("bisexual");
+    BISEXUAL("bisexual"),
+    // 1.3
+    POLYAMOROUS("polyamorous"),
+    POLYSEXUAL("polysexual"),
+    OMNISEXUAL("omnisexual"),
+    AROMANTIC("aromantic"),
+    DEMISEXUAL("demisexual"),
+    DEMIBOY("demiboy"),
+    DEMIGIRL("demigirl"),
+    DEMIGENDER("demigender"),
+    AROACE("aroace"),
+    DEMIROMANTIC("demiromantic");
 
     private final String variation;
 

@@ -132,6 +132,126 @@
           }
         ]
       }
+    },
+    "has_aroace_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_aromantic_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_demiboy_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_demigirl_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_demigender_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_demisexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_demiromantic_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_omnisexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_polysexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_polyamorous_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
     }
   },
   "requirements": [
