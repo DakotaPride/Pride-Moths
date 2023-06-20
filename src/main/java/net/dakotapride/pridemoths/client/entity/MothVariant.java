@@ -5,6 +5,7 @@ public enum MothVariant {
     BLUE("blue"),
     YELLOW("yellow"),
     GREEN("green"),
+    RED("red"),
     // Rare Pattern
     PALOS_VERDES_BLUE("palos_verdes_blue"),
     // Pride Variations

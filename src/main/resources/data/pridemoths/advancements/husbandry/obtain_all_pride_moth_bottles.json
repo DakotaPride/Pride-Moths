@@ -281,6 +281,36 @@
     ],
     [
       "has_non_binary_bottle"
+    ],
+    [
+      "has_aroace_bottle"
+    ],
+    [
+      "has_aromantic_bottle"
+    ],
+    [
+      "has_demiboy_bottle"
+    ],
+    [
+      "has_demigirl_bottle"
+    ],
+    [
+      "has_demigender_bottle"
+    ],
+    [
+      "has_demisexual_bottle"
+    ],
+    [
+      "has_demiromantic_bottle"
+    ],
+    [
+      "has_omnisexual_bottle"
+    ],
+    [
+      "has_polysexual_bottle"
+    ],
+    [
+      "has_polyamorous_bottle"
     ]
   ]
 }

@@ -43,6 +43,7 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static Item BLUE_MOTH_BOTTLE;
 	public static Item YELLOW_MOTH_BOTTLE;
 	public static Item GREEN_MOTH_BOTTLE;
+	public static Item RED_MOTH_BOTTLE;
 	public static Item PALOS_VERDES_BLUE_MOTH_BOTTLE;
 	public static Item TRANS_MOTH_BOTTLE;
 	public static Item LGBT_MOTH_BOTTLE;
@@ -91,6 +92,8 @@ public class PrideMothsInitialize implements ModInitializer {
 				new MothBottleItem(MothVariant.YELLOW.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		GREEN_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "green_moth_bottle"),
 				new MothBottleItem(MothVariant.GREEN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+		RED_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "red_moth_bottle"),
+				new MothBottleItem(MothVariant.RED.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/red.png")));
 		PALOS_VERDES_BLUE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "palos_verdes_blue_moth_bottle"),
 				new MothBottleItem(MothVariant.PALOS_VERDES_BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/palos_verde_blue.png")));
 		TRANS_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "trans_moth_bottle"),

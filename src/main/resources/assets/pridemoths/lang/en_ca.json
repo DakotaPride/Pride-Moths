@@ -53,6 +53,11 @@
   "text.pridemoths.variant.demiromantic": "Demiromantic",
   "text.pridemoths.variant.demisexual": "Demisexual",
 
+  "item.minecraft.potion.effect.moth_master": "Potion of the Moth Master",
+  "item.minecraft.splash_potion.effect.moth_master": "Splash Potion of the Moth Master",
+  "item.minecraft.lingering_potion.effect.moth_master": "Lingering Potion of the Moth Master",
+  "item.minecraft.tipped_arrow.effect.moth_master": "Arrow of the Moth Master",
+
   "advancement.pridemoths.obtain_pride_moth_bottle.title": "Happy Pride Moth!",
   "advancement.pridemoths.obtain_pride_moth_bottle.description": "Bottle a Moth for Pride",
   "advancement.pridemoths.obtain_all_pride_moth_bottles.title": "Pride Moth to the Moon!",

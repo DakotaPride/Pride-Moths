@@ -50,6 +50,8 @@ public class MothBottleItem extends Item {
             variant = MothVariant.YELLOW;
         } else if (item == PrideMothsInitialize.GREEN_MOTH_BOTTLE) {
             variant = MothVariant.GREEN;
+        } else if (item == PrideMothsInitialize.RED_MOTH_BOTTLE) {
+            variant = MothVariant.RED;
         } else if (item == PrideMothsInitialize.PALOS_VERDES_BLUE_MOTH_BOTTLE) {
             variant = MothVariant.PALOS_VERDES_BLUE;
         } else if (item == PrideMothsInitialize.TRANS_MOTH_BOTTLE) {
