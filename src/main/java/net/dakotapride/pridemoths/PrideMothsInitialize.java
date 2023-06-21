@@ -25,15 +25,15 @@ import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
+
+import java.util.logging.Logger;
 
 public class PrideMothsInitialize implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger("Pride Moths");
+	public static final Logger LOGGER = Logger.getLogger("Pride Moths");
 
 
 	public static EntityType<MothEntity> MOTH;

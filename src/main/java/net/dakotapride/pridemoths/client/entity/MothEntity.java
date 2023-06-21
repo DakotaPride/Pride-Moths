@@ -1,17 +1,13 @@
 package net.dakotapride.pridemoths.client.entity;
 
-import com.google.common.collect.ImmutableList;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.FlyGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
@@ -24,8 +20,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -41,10 +35,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -58,18 +50,17 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.List;
-import java.util.UUID;
 
 public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
     private static final TrackedData<String> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.STRING);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public boolean fromBottle = false;
-    public static final List<MothVariant> PRIDE_MOTH = ImmutableList.of(
+    public static final List<MothVariant> PRIDE_MOTH = List.of(
             MothVariant.TRANS, MothVariant.LGBT, MothVariant.NON_BINARY, MothVariant.AGENDER, MothVariant.ASEXUAL,
             MothVariant.GAY, MothVariant.LESBIAN, MothVariant.BISEXUAL, MothVariant.PANSEXUAL, MothVariant.POLYAMOROUS,
             MothVariant.POLYSEXUAL, MothVariant.OMNISEXUAL, MothVariant.AROMANTIC, MothVariant.AROACE, MothVariant.DEMIGIRL,
             MothVariant.DEMISEXUAL, MothVariant.DEMIGENDER, MothVariant.DEMIROMANTIC);
-    public static final List<MothVariant> NATURAL = ImmutableList.of(
+    public static final List<MothVariant> NATURAL = List.of(
             MothVariant.DEFAULT, MothVariant.YELLOW, MothVariant.BLUE, MothVariant.GREEN, MothVariant.RED);
 
 
@@ -343,7 +334,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
 
     @Override
     public boolean isInAir() {
-        return !this.onGround;
+        return !this.isOnGround();
     }
 
     @Override
