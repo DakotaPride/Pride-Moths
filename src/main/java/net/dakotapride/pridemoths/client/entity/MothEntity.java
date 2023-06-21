@@ -60,7 +60,7 @@ import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.UUID;
 
-public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, Angerable {
+public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
     private static final TrackedData<String> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.STRING);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public boolean fromBottle = false;
@@ -71,9 +71,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, An
             MothVariant.DEMISEXUAL, MothVariant.DEMIGENDER, MothVariant.DEMIROMANTIC);
     public static final List<MothVariant> NATURAL = ImmutableList.of(
             MothVariant.DEFAULT, MothVariant.YELLOW, MothVariant.BLUE, MothVariant.GREEN, MothVariant.RED);
-    private static final TrackedData<Integer> ANGER_TIME = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(44, 76);
-    private UUID targetUuid;
 
 
     public static MothVariant getPrideMothGeneration(Random random) {
@@ -109,10 +106,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, An
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.25F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0F)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0F)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0F);
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.25F);
     }
 
     protected void initGoals() {
@@ -193,7 +187,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, An
             this.dataTracker.startTracking(VARIANT, getNaturalGeneration(random).toString());
         }
 
-        this.dataTracker.startTracking(ANGER_TIME, 0);
     }
 
     @Override
@@ -322,7 +315,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, An
         if (tag.contains("MothVariant")) {
             this.setMothVariant(MothVariant.valueOf(tag.getString("MothVariant")));
         }
-        this.readAngerFromNbt(this.world, tag);
     }
 
     @Override
@@ -331,7 +323,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, An
 
         tag.putBoolean("FromBottle", fromBottle);
         tag.putString("MothVariant", this.getMothVariant().toString());
-        this.writeAngerToNbt(tag);
     }
 
     @Nullable
@@ -358,30 +349,5 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, An
     @Override
     public boolean canTarget(EntityType<?> type) {
         return type == EntityType.PLAYER;
-    }
-
-    @Override
-    public int getAngerTime() {
-        return this.dataTracker.get(ANGER_TIME);
-    }
-
-    @Override
-    public void setAngerTime(int ticks) {
-        this.dataTracker.set(ANGER_TIME, ticks);
-    }
-
-    @Override
-    public void chooseRandomAngerTime() {
-        this.setAngerTime(ANGER_TIME_RANGE.get(this.random));
-    }
-
-    @Override
-    public UUID getAngryAt() {
-        return this.targetUuid;
-    }
-
-    @Override
-    public void setAngryAt(@Nullable UUID uuid) {
-        this.targetUuid = uuid;
     }
 }
