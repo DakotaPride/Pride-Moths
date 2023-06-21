@@ -6,16 +6,20 @@ import net.dakotapride.pridemoths.item.MothBottleItem;
 import net.dakotapride.pridemoths.mixin.BrewingRecipeRegistryMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
+import net.fabricmc.fabric.impl.tag.convention.TagRegistration;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -24,7 +28,11 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import software.bernie.geckolib.GeckoLib;
 
 import java.util.logging.Logger;
@@ -74,7 +82,8 @@ public class PrideMothsInitialize implements ModInitializer {
 				FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MothEntity::new)
 						.dimensions(EntityDimensions.fixed(0.2f, 0.2f)).build());
 		FabricDefaultAttributeRegistry.register(MOTH, MothEntity.setAttributes());
-		BiomeModifications.addSpawn(biome -> biome.hasTag(ConventionalBiomeTags.PLAINS), SpawnGroup.CREATURE, MOTH, 60, 3, 7);
+		BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE), SpawnGroup.CREATURE, MOTH, 60, 3, 7);
+		BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.PLAINS), SpawnGroup.CREATURE, MOTH, 100, 3, 7);
 
 		MOTH_SPAWN_EGG = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_spawn_egg"),
 				new SpawnEggItem(MOTH, 0xB1552D, 0x921F12, new FabricItemSettings()));
