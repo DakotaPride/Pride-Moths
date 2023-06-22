@@ -300,8 +300,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
             return ActionResult.SUCCESS;
         }
 
-        System.out.println(MothVaration.valueOf(this.dataTracker.get(VARIANT)));
-
         return super.interactMob(player, hand);
     }
 
