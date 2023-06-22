@@ -24,7 +24,7 @@ public class MothBottleItem extends Item {
     private final String variantByString;
 
     public MothBottleItem(String variantByString, Settings settings, Identifier texture) {
-        super(settings.maxCount(1));
+        super(settings.maxCount(16));
         this.texture = texture;
         this.variantByString = variantByString;
     }
