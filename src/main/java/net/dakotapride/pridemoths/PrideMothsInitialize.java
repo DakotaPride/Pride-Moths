@@ -1,25 +1,19 @@
 package net.dakotapride.pridemoths;
 
 import net.dakotapride.pridemoths.client.entity.MothEntity;
-import net.dakotapride.pridemoths.client.entity.MothVariant;
 import net.dakotapride.pridemoths.item.MothBottleItem;
 import net.dakotapride.pridemoths.mixin.BrewingRecipeRegistryMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
-import net.fabricmc.fabric.impl.tag.convention.TagRegistration;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -28,10 +22,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import software.bernie.geckolib.GeckoLib;
 
@@ -94,55 +85,55 @@ public class PrideMothsInitialize implements ModInitializer {
 						.statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 300), 1.0F).build())));
 
 		ORANGE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "orange_moth_bottle"),
-				new MothBottleItem(MothVariant.DEFAULT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+				new MothBottleItem(MothEntity.MothVaration.DEFAULT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		BLUE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "blue_moth_bottle"),
-				new MothBottleItem(MothVariant.BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+				new MothBottleItem(MothEntity.MothVaration.BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		YELLOW_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "yellow_moth_bottle"),
-				new MothBottleItem(MothVariant.YELLOW.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+				new MothBottleItem(MothEntity.MothVaration.YELLOW.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		GREEN_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "green_moth_bottle"),
-				new MothBottleItem(MothVariant.GREEN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
+				new MothBottleItem(MothEntity.MothVaration.GREEN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/orange.png")));
 		RED_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "red_moth_bottle"),
-				new MothBottleItem(MothVariant.RED.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/red.png")));
+				new MothBottleItem(MothEntity.MothVaration.RED.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/red.png")));
 		PALOS_VERDES_BLUE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "palos_verdes_blue_moth_bottle"),
-				new MothBottleItem(MothVariant.PALOS_VERDES_BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/palos_verde_blue.png")));
+				new MothBottleItem(MothEntity.MothVaration.PALOS_VERDES_BLUE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/palos_verde_blue.png")));
 		TRANS_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "trans_moth_bottle"),
-				new MothBottleItem(MothVariant.TRANS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/trans.png")));
+				new MothBottleItem(MothEntity.MothVaration.TRANS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/trans.png")));
 		LGBT_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "lgbt_moth_bottle"),
-				new MothBottleItem(MothVariant.LGBT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/lgbt.png")));
+				new MothBottleItem(MothEntity.MothVaration.LGBT.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/lgbt.png")));
 		NON_BINARY_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "non_binary_moth_bottle"),
-				new MothBottleItem(MothVariant.NON_BINARY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/non_binary.png")));
+				new MothBottleItem(MothEntity.MothVaration.NON_BINARY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/non_binary.png")));
 		AGENDER_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "agender_moth_bottle"),
-				new MothBottleItem(MothVariant.AGENDER.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/agender.png")));
+				new MothBottleItem(MothEntity.MothVaration.AGENDER.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/agender.png")));
 		GAY_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "gay_moth_bottle"),
-				new MothBottleItem(MothVariant.GAY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/gay.png")));
+				new MothBottleItem(MothEntity.MothVaration.GAY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/gay.png")));
 		LESBIAN_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "lesbian_moth_bottle"),
-				new MothBottleItem(MothVariant.LESBIAN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/lesbian.png")));
+				new MothBottleItem(MothEntity.MothVaration.LESBIAN.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/lesbian.png")));
 		ASEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "asexual_moth_bottle"),
-				new MothBottleItem(MothVariant.ASEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/asexual.png")));
+				new MothBottleItem(MothEntity.MothVaration.ASEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/asexual.png")));
 		BISEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "bisexual_moth_bottle"),
-				new MothBottleItem(MothVariant.BISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/bisexual.png")));
+				new MothBottleItem(MothEntity.MothVaration.BISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/bisexual.png")));
 		PANSEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "pansexual_moth_bottle"),
-				new MothBottleItem(MothVariant.PANSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/pansexual.png")));
+				new MothBottleItem(MothEntity.MothVaration.PANSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/pansexual.png")));
 		POLYAMOROUS_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "polyamorous_moth_bottle"),
-				new MothBottleItem(MothVariant.POLYAMOROUS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/polyamorous.png")));
+				new MothBottleItem(MothEntity.MothVaration.POLYAMOROUS.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/polyamorous.png")));
 		POLYSEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "polysexual_moth_bottle"),
-				new MothBottleItem(MothVariant.POLYSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/polysexual.png")));
+				new MothBottleItem(MothEntity.MothVaration.POLYSEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/polysexual.png")));
 		OMNISEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "omnisexual_moth_bottle"),
-				new MothBottleItem(MothVariant.OMNISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/omnisexual.png")));
+				new MothBottleItem(MothEntity.MothVaration.OMNISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/omnisexual.png")));
 		DEMISEXUAL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demisexual_moth_bottle"),
-				new MothBottleItem(MothVariant.DEMISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demisexual.png")));
+				new MothBottleItem(MothEntity.MothVaration.DEMISEXUAL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demisexual.png")));
 		DEMIROMANTIC_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demiromantic_moth_bottle"),
-				new MothBottleItem(MothVariant.DEMIROMANTIC.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demiromantic.png")));
+				new MothBottleItem(MothEntity.MothVaration.DEMIROMANTIC.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demiromantic.png")));
 		AROACE_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "aroace_moth_bottle"),
-				new MothBottleItem(MothVariant.AROACE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/aroace.png")));
+				new MothBottleItem(MothEntity.MothVaration.AROACE.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/aroace.png")));
 		DEMIBOY_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demiboy_moth_bottle"),
-				new MothBottleItem(MothVariant.DEMIBOY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demiboy.png")));
+				new MothBottleItem(MothEntity.MothVaration.DEMIBOY.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demiboy.png")));
 		DEMIGIRL_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demigirl_moth_bottle"),
-				new MothBottleItem(MothVariant.DEMIGIRL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demigirl.png")));
+				new MothBottleItem(MothEntity.MothVaration.DEMIGIRL.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demigirl.png")));
 		DEMIGENDER_MOTH_BOTTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "demigender_moth_bottle"),
-				new MothBottleItem(MothVariant.DEMIGENDER.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demigender.png")));
+				new MothBottleItem(MothEntity.MothVaration.DEMIGENDER.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/demigender.png")));
 		AROMANTIC_MOTH_BOTLE = Registry.register(Registries.ITEM, new Identifier("pridemoths", "aromantic_moth_bottle"),
-				new MothBottleItem(MothVariant.AROMANTIC.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/aromantic.png")));
+				new MothBottleItem(MothEntity.MothVaration.AROMANTIC.getVariation(), new FabricItemSettings(), new Identifier("pridemoths", "textures/item/bottle/aromantic.png")));
 
 		MOTH_MASTER_POTION = Registry.register(Registries.POTION, new Identifier("pridemoths", "moth_master"),
 				new Potion(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 0),
