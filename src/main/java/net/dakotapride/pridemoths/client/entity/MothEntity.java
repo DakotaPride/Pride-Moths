@@ -3,8 +3,10 @@ package net.dakotapride.pridemoths.client.entity;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
@@ -29,6 +31,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -38,6 +41,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -165,19 +170,27 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
         return this.cache;
     }
 
+    @Override
     protected void initDataTracker() {
+        super.initDataTracker();
+
+        this.dataTracker.startTracking(VARIANT, NATURAL.get(0).toString());
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
+                                 @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
         LocalDate date;
         date = LocalDate.now();
         int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
 
-        super.initDataTracker();
-
         if (getLocalMonthFromUser == 6) {
-            this.dataTracker.startTracking(VARIANT, getPrideMothGeneration(random).toString());
+            setMothVariant(getPrideMothGeneration(random));
         } else {
-            this.dataTracker.startTracking(VARIANT, getNaturalGeneration(random).toString());
+            setMothVariant(getNaturalGeneration(random));
         }
 
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     @Override
@@ -286,6 +299,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer {
             this.discard();
             return ActionResult.SUCCESS;
         }
+
+        System.out.println(MothVaration.valueOf(this.dataTracker.get(VARIANT)));
 
         return super.interactMob(player, hand);
     }
