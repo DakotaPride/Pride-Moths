@@ -147,6 +147,7 @@ public class PrideMothsInitialize implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(BLUE_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(YELLOW_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(GREEN_MOTH_BOTTLE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(RED_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(PALOS_VERDES_BLUE_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(TRANS_MOTH_BOTTLE));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.add(LGBT_MOTH_BOTTLE));
