@@ -19,15 +19,6 @@
     "has_trans_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type_specific": {}
-            }
-          }
-        ],
         "items": [
           {
             "items": [
@@ -49,6 +40,18 @@
         ]
       }
     },
+    "has_non_binary_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:non_binary_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
     "has_agender_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -56,54 +59,6 @@
           {
             "items": [
               "pridemoths:agender_moth_bottle"
-            ]
-          }
-        ]
-      }
-    },
-    "has_gay_bottle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "pridemoths:gay_moth_bottle"
-            ]
-          }
-        ]
-      }
-    },
-    "has_lesbian_bottle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "pridemoths:lesbian_moth_bottle"
-            ]
-          }
-        ]
-      }
-    },
-    "has_bisexual_bottle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "pridemoths:bisexual_moth_bottle"
-            ]
-          }
-        ]
-      }
-    },
-    "has_pansexual_bottle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "pridemoths:pansexual_moth_bottle"
             ]
           }
         ]
@@ -121,37 +76,85 @@
         ]
       }
     },
-    "has_non_binary_bottle": {
+    "has_pansexual_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "pridemoths:non_binary_moth_bottle"
+              "pridemoths:pansexual_moth_bottle"
             ]
           }
         ]
       }
     },
-    "has_aroace_bottle": {
+    "has_bisexual_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "pridemoths:aroace_moth_bottle"
+              "pridemoths:bisexual_moth_bottle"
             ]
           }
         ]
       }
     },
-    "has_aromantic_bottle": {
+    "has_lesbian_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "pridemoths:aromantic_moth_bottle"
+              "pridemoths:lesbian_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_gay_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:gay_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_polyamorous_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:polyamorous_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_polysexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:polysexual_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_omnisexual_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:omnisexual_moth_bottle"
             ]
           }
         ]
@@ -193,13 +196,25 @@
         ]
       }
     },
+    "has_aroace_bottle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:aroace_moth_bottle"
+            ]
+          }
+        ]
+      }
+    },
     "has_demisexual_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "pridemoths:demisexual"
+              "pridemoths:demisexual_moth_bottle"
             ]
           }
         ]
@@ -217,37 +232,13 @@
         ]
       }
     },
-    "has_omnisexual_bottle": {
+    "has_aromantic_bottle": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "pridemoths:omnisexual_moth_bottle"
-            ]
-          }
-        ]
-      }
-    },
-    "has_polysexual_bottle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "pridemoths:polysexual_moth_bottle"
-            ]
-          }
-        ]
-      }
-    },
-    "has_polyamorous_bottle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "pridemoths:polyamorous_moth_bottle"
+              "pridemoths:aromantic_moth_bottle"
             ]
           }
         ]
@@ -262,31 +253,34 @@
       "has_lgbt_bottle"
     ],
     [
+      "has_non_binary_bottle"
+    ],
+    [
       "has_agender_bottle"
-    ],
-    [
-      "has_gay_bottle"
-    ],
-    [
-      "has_lesbian_bottle"
-    ],
-    [
-      "has_bisexual_bottle"
-    ],
-    [
-      "has_pansexual_bottle"
     ],
     [
       "has_asexual_bottle"
     ],
     [
-      "has_non_binary_bottle"
+      "has_pansexual_bottle"
     ],
     [
-      "has_aroace_bottle"
+      "has_bisexual_bottle"
     ],
     [
-      "has_aromantic_bottle"
+      "has_lesbian_bottle"
+    ],
+    [
+      "has_gay_bottle"
+    ],
+    [
+      "has_polyamorous_bottle"
+    ],
+    [
+      "has_polysexual_bottle"
+    ],
+    [
+      "has_omnisexual_bottle"
     ],
     [
       "has_demiboy_bottle"
@@ -298,19 +292,17 @@
       "has_demigender_bottle"
     ],
     [
+      "has_aroace_bottle"
+    ],
+    [
       "has_demisexual_bottle"
     ],
     [
       "has_demiromantic_bottle"
     ],
     [
-      "has_omnisexual_bottle"
-    ],
-    [
-      "has_polysexual_bottle"
-    ],
-    [
-      "has_polyamorous_bottle"
+      "has_aromantic_bottle"
     ]
-  ]
+  ],
+  "sends_telemetry_event": false
 }
