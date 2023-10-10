@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Happy Pride Moth!",
-  "description": "Love bugs AND pride? Why not both!",
+  "description": "Love moths AND pride? Why not both!",
   "authors": [
     "DakotaPride",
     "HoloScopeStudios"
@@ -33,7 +33,7 @@
   "depends": {
     "fabricloader": ">=0.14.10",
     "fabric-api": "*",
-    "minecraft": ">=1.20",
+    "minecraft": ">=1.19.3",
     "java": ">=17",
     "geckolib": "*"
   }

@@ -8,7 +8,7 @@ public interface IPrideMoths {
     int getLocalDayFromUser = date.get(ChronoField.DAY_OF_MONTH);
     int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
 
-    static boolean isWorldMothWeek() {
+     static boolean isWorldMothWeek() {
         return getLocalDayFromUser >= 25 && getLocalMonthFromUser == 7;
     }
 }
