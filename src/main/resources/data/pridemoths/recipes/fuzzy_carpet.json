@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "carpet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "pridemoths:moth_fuzz"
+    }
+  },
+  "result": {
+    "item": "pridemoths:fuzzy_carpet",
+    "count": 1
+  }
+}

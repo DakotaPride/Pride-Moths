@@ -1,11 +1,22 @@
 package net.dakotapride.pridemoths.item;
 
 import net.dakotapride.pridemoths.PrideMothsInitialize;
+import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,16 +77,43 @@ public class GlassJarItem extends Item {
     }
 
     @Override
-    public String getTranslationKey() {
-        return "item.pridemoths.glass_jar";
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        MothVariation variation = getMothVariant(context.getStack().getItem());
+        if (variation != null && context.getPlayer() != null && context.getPlayer().isSneaking()) {
+            MothEntity moth = new MothEntity(PrideMothsInitialize.MOTH, context.getWorld());
+
+            BlockHitResult blockHitResult = BucketItem.raycast(context.getWorld(), context.getPlayer(), RaycastContext.FluidHandling.SOURCE_ONLY);
+            BlockPos blockPos = blockHitResult.getBlockPos();
+            Direction direction = blockHitResult.getSide();
+            BlockPos blockPos2 = blockPos.offset(direction);
+
+            moth.setPosition(blockPos2.getX() + .5f, blockPos2.getY(), blockPos2.getZ() + .5f);
+            moth.setMothVariant(variation);
+            moth.fromJar = true;
+
+            if (context.getStack().hasCustomName()) {
+                moth.setCustomName(context.getStack().getName());
+            }
+
+            context.getWorld().playSound(context.getPlayer(), context.getBlockPos(), SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.NEUTRAL, 1.0f, 1.4f);
+            context.getWorld().spawnEntity(moth);
+
+            if (context.getPlayer() != null && !context.getPlayer().getAbilities().creativeMode) {
+                context.getPlayer().setStackInHand(context.getHand(), new ItemStack(PrideMothsInitialize.GLASS_JAR));
+            }
+
+            return ActionResult.SUCCESS;
+        }
+
+        return super.useOnBlock(context);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("text.pridemoths.net.description"));
+        tooltip.add(Text.translatable("text.pridemoths.jar.details").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
 
         if (!stack.isOf(PrideMothsInitialize.GLASS_JAR)) {
-            tooltip.add(Text.translatable(getMothVariant(stack.getItem()).getVariation()));
+            tooltip.add(Text.translatable("text.pridemoths.jar." + getMothVariant(stack.getItem()).getVariation()).formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
         }
     }
 }

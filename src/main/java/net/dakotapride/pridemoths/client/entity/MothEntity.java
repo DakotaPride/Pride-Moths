@@ -4,13 +4,11 @@ import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.FlyGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
@@ -23,6 +21,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -30,6 +30,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -40,6 +41,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -49,6 +51,7 @@ import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
@@ -87,10 +90,44 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
+        this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
     }
 
      public static MothVariation getPrideVariation(Random random) {
         return PRIDE_VARIATIONS.get(random.nextInt(PRIDE_VARIATIONS.size()));
+    }
+
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return PrideMothsInitialize.MOTH.create(world);
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return isFavouredFoodItem(stack);
+    }
+
+    public boolean isFavouredFoodItem(ItemStack stack) {
+        return stack.getItem() == PrideMothsInitialize.FRUITFUL_STEW || stack.getItem() == Items.HONEY_BOTTLE;
+    }
+
+    @Override
+    public EntityDimensions getDimensions(EntityPose pose) {
+        if (this.isBaby()) {
+            return EntityDimensions.fixed(0.2F, 0.2F);
+        } else {
+            return EntityDimensions.fixed(0.4F, 0.4F);
+        }
+    }
+
+    @Override
+    protected void onGrowUp() {
+        super.onGrowUp();
+        if (!this.isBaby() && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
+            this.dropItem(PrideMothsInitialize.MOTH_FUZZ, 1);
+        }
+
     }
 
     @Override
@@ -111,7 +148,11 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR) {
+        if (isBreedingItem(getActiveItem()) && !this.isBaby()) {
+            return super.interactMob(player, hand);
+        }
+
+        if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR && !this.isBaby()) {
             Item item = PrideMothsInitialize.GLASS_JAR;
 
             switch (this.getMothVariant()) {
@@ -207,7 +248,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     public void tick() {
         super.tick();
 
-        if (this.hasCustomName()) {
+        if (this.hasCustomName() && !this.isBaby()) {
             if (this.getMothVariant() != MothVariation.NON_BINARY && this.getCustomName().getString().equals("non-binary")) {
                 this.setMothVariant(MothVariation.NON_BINARY);
             } else if (this.getMothVariant() != MothVariation.TRANSGENDER && this.getCustomName().getString().equals("trans")) {
@@ -278,12 +319,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Override
     public boolean isInAir() {
         return !this.isOnGround();
-    }
-
-    @Nullable
-    @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return null;
     }
 
     @Override
