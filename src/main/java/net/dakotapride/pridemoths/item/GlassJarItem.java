@@ -33,6 +33,8 @@ public class GlassJarItem extends Item {
 
         if (stack.isOf(PrideMothsInitialize.MOTH_JAR)) {
             variant = MothVariation.DEFAULT;
+        } else if (stack.isOf(PrideMothsInitialize.RARE_MOTH_JAR)) {
+            variant = MothVariation.RARE;
         } else if (stack.isOf(PrideMothsInitialize.AGENDER_MOTH_JAR)) {
             variant = MothVariation.AGENDER;
         } else if (stack.isOf(PrideMothsInitialize.AROACE_MOTH_JAR)) {

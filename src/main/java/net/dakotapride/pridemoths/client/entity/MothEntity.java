@@ -3,6 +3,7 @@ package net.dakotapride.pridemoths.client.entity;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
@@ -21,8 +22,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -32,6 +31,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -41,17 +41,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.time.LocalDate;
@@ -63,10 +60,10 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public boolean fromJar = false;
     public static final List<MothVariation> PRIDE_VARIATIONS = List.of(
-                MothVariation.TRANSGENDER, MothVariation.LGBT, MothVariation.NON_BINARY, MothVariation.AGENDER, MothVariation.ASEXUAL,
-                MothVariation.GAY, MothVariation.LESBIAN, MothVariation.BISEXUAL, MothVariation.PANSEXUAL, MothVariation.POLYAMOROUS,
-                MothVariation.POLYSEXUAL, MothVariation.OMNISEXUAL, MothVariation.AROMANTIC, MothVariation.AROACE, MothVariation.DEMIGIRL,
-                MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC);
+            MothVariation.TRANSGENDER, MothVariation.LGBT, MothVariation.NON_BINARY, MothVariation.AGENDER, MothVariation.ASEXUAL,
+            MothVariation.GAY, MothVariation.LESBIAN, MothVariation.BISEXUAL, MothVariation.PANSEXUAL, MothVariation.POLYAMOROUS,
+            MothVariation.POLYSEXUAL, MothVariation.OMNISEXUAL, MothVariation.AROMANTIC, MothVariation.AROACE, MothVariation.DEMIGIRL,
+            MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC);
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -93,8 +90,21 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
     }
 
-     public static MothVariation getPrideVariation(Random random) {
+    public static MothVariation getPrideVariation(Random random) {
         return PRIDE_VARIATIONS.get(random.nextInt(PRIDE_VARIATIONS.size()));
+    }
+
+    public static MothVariation getOtherVariation(Random random) {
+        int rarePatternChance = 240;
+        if (IPrideMoths.isWorldMothWeek()) {
+            rarePatternChance = 120;
+        }
+
+        if (random.nextInt(rarePatternChance) == 1) {
+            return MothVariation.RARE;
+        } else {
+            return MothVariation.DEFAULT;
+        }
     }
 
     @Nullable
@@ -140,7 +150,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         if (getLocalMonthFromUser == 6) {
             setMothVariant(getPrideVariation(random));
         } else {
-            setMothVariant(MothVariation.DEFAULT);
+            setMothVariant(getOtherVariation(random));
         }
 
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
@@ -153,10 +163,10 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         }
 
         if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR && !this.isBaby()) {
-            Item item = PrideMothsInitialize.GLASS_JAR;
+            Item item;
 
             switch (this.getMothVariant()) {
-                case DEFAULT -> item = PrideMothsInitialize.MOTH_JAR;
+                case RARE -> item = PrideMothsInitialize.RARE_MOTH_JAR;
                 case AGENDER -> item = PrideMothsInitialize.AGENDER_MOTH_JAR;
                 case AROACE -> item = PrideMothsInitialize.AROACE_MOTH_JAR;
                 case AROMANTIC -> item = PrideMothsInitialize.AROMANTIC_MOTH_JAR;
@@ -176,6 +186,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 case POLYAMOROUS -> item = PrideMothsInitialize.POLYAMOROUS_MOTH_JAR;
                 case POLYSEXUAL -> item = PrideMothsInitialize.POLYSEXUAL_MOTH_JAR;
                 case TRANSGENDER -> item = PrideMothsInitialize.TRANSGENDER_MOTH_JAR;
+                default -> item = PrideMothsInitialize.MOTH_JAR;
             }
 
             ItemStack itemStack = new ItemStack(item);
@@ -201,6 +212,10 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             this.getWorld().playSound(player, player.getBlockPos(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
             this.discard();
             return ActionResult.SUCCESS;
+        }
+
+        if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.DEVELOPMENT_TOOL && FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            System.out.println("Moth Variant Present: " + getMothVariant());
         }
 
         return super.interactMob(player, hand);
@@ -322,7 +337,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {}
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
+    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controller) {
@@ -354,7 +370,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {}
+    protected void playStepSound(BlockPos pos, BlockState state) {
+    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -365,4 +382,5 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     public boolean canTarget(EntityType<?> type) {
         return type == EntityType.PLAYER;
     }
+
 }

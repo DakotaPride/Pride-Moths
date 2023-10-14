@@ -20,6 +20,7 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
     public static final Map<MothVariation, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MothVariation.class), (map) -> {
                 map.put(MothVariation.DEFAULT, new Identifier("pridemoths", "textures/model/moth.png"));
+                map.put(MothVariation.RARE, new Identifier("pridemoths", "textures/model/rare.png"));
 
                 map.put(MothVariation.AGENDER, new Identifier("pridemoths", "textures/model/pride/agender.png"));
                 map.put(MothVariation.AROACE, new Identifier("pridemoths", "textures/model/pride/aroace.png"));
@@ -49,7 +50,11 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
     @Override
     public Identifier getTextureLocation(MothEntity entity) {
         if (entity.isBaby()) {
-            return new Identifier("pridemoths", "textures/model/baby/moth.png");
+            if (entity.getMothVariant() == MothVariation.RARE) {
+                return new Identifier("pridemoths", "textures/model/baby/rare.png");
+            } else {
+                return new Identifier("pridemoths", "textures/model/baby/moth.png");
+            }
         }
 
         return LOCATION_BY_VARIANT.get(entity.getMothVariant());

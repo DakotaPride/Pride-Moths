@@ -1,14 +1,17 @@
 package net.dakotapride.pridemoths.client.entity.pride;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
+import java.util.Calendar;
 
 public interface IPrideMoths {
-    LocalDate date = LocalDate.now();
-    int getLocalDayFromUser = date.get(ChronoField.DAY_OF_MONTH);
-    int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
 
-     static boolean isWorldMothWeek() {
-        return getLocalDayFromUser >= 25 && getLocalMonthFromUser == 7;
+    static boolean isWorldMothWeek() {
+        return week() == 4;
     }
+
+    static int week() {
+        Calendar calendar = Calendar.getInstance();
+
+        return calendar.get(Calendar.WEEK_OF_MONTH);
+    }
+
 }

@@ -2,6 +2,7 @@ package net.dakotapride.pridemoths.client.entity.pride;
 
 public enum MothVariation {
     DEFAULT("default"),
+    RARE("rare"),
 
     TRANSGENDER("transgender"),
     LGBT("lgbt"),

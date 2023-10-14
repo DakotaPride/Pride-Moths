@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:torch",
+    "minecraft:wall_torch",
+    "minecraft:soul_torch",
+    "minecraft:glowstone",
+    "minecraft:shroomlight",
+    "minecraft:end_rod",
+    "minecraft:sea_lantern"
+  ]
+}
