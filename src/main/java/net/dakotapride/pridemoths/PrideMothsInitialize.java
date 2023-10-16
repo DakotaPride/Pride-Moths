@@ -69,8 +69,6 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static Block FUZZY_CARPET;
 	public static BlockItem FUZZY_CARPET_ITEM;
 
-	public static Item DEVELOPMENT_TOOL;
-
 	@Override
 	public void onInitialize() {
 
@@ -161,10 +159,6 @@ public class PrideMothsInitialize implements ModInitializer {
 		RARE_MOTH_JAR = Registry.register(Registries.ITEM,
 				new Identifier("pridemoths", MothVariation.RARE.getVariation() + "_moth_jar"),
 				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-
-		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-			DEVELOPMENT_TOOL = Registry.register(Registries.ITEM, new Identifier("development", "tool"), new Item(new FabricItemSettings()));
-		}
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> entries.add(MOTH_SPAWN_EGG));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(GLASS_JAR));

@@ -214,10 +214,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             return ActionResult.SUCCESS;
         }
 
-        if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.DEVELOPMENT_TOOL && FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            System.out.println("Moth Variant Present: " + getMothVariant());
-        }
-
         return super.interactMob(player, hand);
     }
 
