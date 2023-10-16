@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "pridemoths:fuzzy_carpet"
+    },
+    "title": {
+      "translate": "advancements.pridemoths.fuzzy_carpet.title"
+    },
+    "description": {
+      "translate": "advancements.pridemoths.fuzzy_carpet.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "fuzzy_carpet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:fuzzy_carpet"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fuzzy_carpet"
+    ]
+  ]
+}
