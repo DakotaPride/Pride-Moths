@@ -124,11 +124,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     @Override
     public EntityDimensions getDimensions(EntityPose pose) {
-        if (this.isBaby()) {
-            return EntityDimensions.fixed(0.2F, 0.2F);
-        } else {
-            return EntityDimensions.fixed(0.4F, 0.4F);
-        }
+        return EntityDimensions.fixed(0.3F, 0.3F);
     }
 
     @Override
