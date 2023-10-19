@@ -8,7 +8,6 @@ import net.dakotapride.pridemoths.item.GlassJarItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -18,18 +17,15 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.Heightmap;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeKeys;
-import software.bernie.geckolib.GeckoLib;
+import software.bernie.geckolib3.GeckoLib;
 
 import java.util.logging.Logger;
 
@@ -73,116 +69,92 @@ public class PrideMothsInitialize implements ModInitializer {
 	public void onInitialize() {
 
 		MOTH = Registry.register(
-				Registries.ENTITY_TYPE, new Identifier("pridemoths", "moth"),
+				Registry.ENTITY_TYPE, new Identifier("pridemoths", "moth"),
 				FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MothEntity::new)
 						.dimensions(EntityDimensions.fixed(0.3F, 0.3F)).build());
 		FabricDefaultAttributeRegistry.register(MOTH, MothEntity.setAttributes());
-		BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE),
-				SpawnGroup.CREATURE, MOTH, 60, 3, 7);
+		// BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE),
+		//				SpawnGroup.CREATURE, MOTH, 60, 3, 7);
 		BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.PLAINS),
 				SpawnGroup.CREATURE, MOTH, 100, 3, 7);
 
-		FUZZY_CARPET = Registry.register(Registries.BLOCK, new Identifier("pridemoths", "fuzzy_carpet"),
+		FUZZY_CARPET = Registry.register(Registry.BLOCK, new Identifier("pridemoths", "fuzzy_carpet"),
 				new FuzzyCarpetBlock(FabricBlockSettings.copyOf(Blocks.MOSS_CARPET).sounds(BlockSoundGroup.WOOL)));
-		FUZZY_CARPET_ITEM = Registry.register(Registries.ITEM, new Identifier("pridemoths", "fuzzy_carpet"),
-				new BlockItem(FUZZY_CARPET, new FabricItemSettings()));
+		FUZZY_CARPET_ITEM = Registry.register(Registry.ITEM, new Identifier("pridemoths", "fuzzy_carpet"),
+				new BlockItem(FUZZY_CARPET, new FabricItemSettings().group(ItemGroup.MISC)));
 
-		MOTH_SPAWN_EGG = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_spawn_egg"),
-				new SpawnEggItem(MOTH, 0xCECAC4, 0x82635C, new FabricItemSettings()));
-		MOTH_FUZZ = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_fuzz"),
-				new Item(new FabricItemSettings()));
-		FRUITFUL_STEW = Registry.register(Registries.ITEM, new Identifier("pridemoths", "fruitful_stew"),
-				new FruitfulStewFoodItem(new FabricItemSettings().maxCount(1)));
-		GLASS_JAR = Registry.register(Registries.ITEM,
+		MOTH_SPAWN_EGG = Registry.register(Registry.ITEM, new Identifier("pridemoths", "moth_spawn_egg"),
+				new SpawnEggItem(MOTH, 0xCECAC4, 0x82635C, new FabricItemSettings().group(ItemGroup.MISC)));
+		MOTH_FUZZ = Registry.register(Registry.ITEM, new Identifier("pridemoths", "moth_fuzz"),
+				new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+		FRUITFUL_STEW = Registry.register(Registry.ITEM, new Identifier("pridemoths", "fruitful_stew"),
+				new FruitfulStewFoodItem(new FabricItemSettings().maxCount(1).group(ItemGroup.FOOD)));
+		GLASS_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", "glass_jar"),
-				new GlassJarItem(new FabricItemSettings()));
-		MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().group(ItemGroup.TOOLS)));
+		MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", "moth_jar"),
-				new GlassJarItem(new FabricItemSettings()));
-		TRANSGENDER_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		TRANSGENDER_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.TRANSGENDER.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		LGBT_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		LGBT_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.LGBT.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		NON_BINARY_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		NON_BINARY_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.NON_BINARY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		LESBIAN_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		LESBIAN_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.LESBIAN.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		GAY_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		GAY_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.GAY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		AGENDER_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		AGENDER_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.AGENDER.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		ASEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		ASEXUAL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.ASEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		PANSEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		PANSEXUAL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.PANSEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		BISEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		BISEXUAL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.BISEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		POLYAMOROUS_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		POLYAMOROUS_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.POLYAMOROUS.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		POLYSEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		POLYSEXUAL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.POLYSEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		OMNISEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		OMNISEXUAL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.OMNISEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		AROMANTIC_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		AROMANTIC_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.AROMANTIC.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		DEMISEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		DEMISEXUAL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.DEMISEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		DEMIBOY_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		DEMIBOY_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.DEMIBOY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		DEMIGIRL_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		DEMIGIRL_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.DEMIGIRL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		DEMIGENDER_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		DEMIGENDER_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.DEMIGENDER.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		AROACE_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		AROACE_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.AROACE.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		DEMIROMANTIC_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		DEMIROMANTIC_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.DEMIROMANTIC.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-		RARE_MOTH_JAR = Registry.register(Registries.ITEM,
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
+		RARE_MOTH_JAR = Registry.register(Registry.ITEM,
 				new Identifier("pridemoths", MothVariation.RARE.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
-
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> entries.add(MOTH_SPAWN_EGG));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(GLASS_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(RARE_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(TRANSGENDER_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(LGBT_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(NON_BINARY_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(LESBIAN_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(GAY_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(AGENDER_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(ASEXUAL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(PANSEXUAL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(BISEXUAL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(POLYAMOROUS_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(POLYSEXUAL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(OMNISEXUAL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(AROMANTIC_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMISEXUAL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIBOY_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIGIRL_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIGENDER_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(AROACE_MOTH_JAR));
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIROMANTIC_MOTH_JAR));
+				new GlassJarItem(new FabricItemSettings().maxCount(1).group(ItemGroup.TOOLS)));
 
 		GeckoLib.initialize();
 

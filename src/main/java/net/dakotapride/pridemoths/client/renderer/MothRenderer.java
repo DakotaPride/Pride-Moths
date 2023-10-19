@@ -5,14 +5,12 @@ import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.client.model.MothModel;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import java.util.Map;
 
@@ -58,15 +56,5 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
         }
 
         return LOCATION_BY_VARIANT.get(entity.getMothVariant());
-    }
-
-    @Override
-    public RenderLayer getRenderType(MothEntity entity, Identifier texture, @Nullable VertexConsumerProvider bufferSource, float partialTick) {
-
-        if (entity.isBaby()) {
-
-        }
-
-        return super.getRenderType(entity, texture, bufferSource, partialTick);
     }
 }
