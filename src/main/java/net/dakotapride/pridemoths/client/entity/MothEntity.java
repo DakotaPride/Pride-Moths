@@ -77,17 +77,23 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer, 
         this.setPathfindingPenalty(PathNodeType.FENCE, -1.0F);
     }
 
+    @Override
+    public boolean hurtByWater() {
+        return true;
+    }
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.25F);
     }
 
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
+        this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(5, new TravelToLightSourceGoal(this, 32));
         this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
     }
 
