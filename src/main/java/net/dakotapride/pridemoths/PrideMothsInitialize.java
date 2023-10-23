@@ -25,6 +25,7 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
@@ -39,6 +40,7 @@ public class PrideMothsInitialize implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = Logger.getLogger("Pride Moths");
 
+	public static TagKey<Block> LIGHT_SOURCES_TAG = TagKey.of(Registries.BLOCK.getKey(), new Identifier("pridemoths", "light_sources"));
 
 	public static EntityType<MothEntity> MOTH;
 	public static Item MOTH_SPAWN_EGG;

@@ -65,6 +65,10 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             MothVariation.POLYSEXUAL, MothVariation.OMNISEXUAL, MothVariation.AROMANTIC, MothVariation.AROACE, MothVariation.DEMIGIRL,
             MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC);
 
+    public BlockPos lightPos;
+
+    private int refreshLightPosIn = 0;
+
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.ignoreCameraFrustum = true;
@@ -76,17 +80,23 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         this.setPathfindingPenalty(PathNodeType.FENCE, -1.0F);
     }
 
+    @Override
+    public boolean hurtByWater() {
+        return true;
+    }
+
     public static DefaultAttributeContainer.Builder setAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.25F);
     }
 
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
+        this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(5, new TravelToLightSourceGoal(this, 32));
         this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
     }
 
@@ -254,6 +264,17 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Override
     public void tick() {
         super.tick();
+        if (lightPos != null && this.isAlive() && !this.getWorld().isClient()) {
+            if (refreshLightPosIn-- < 0) {
+                refreshLightPosIn = 40 + random.nextInt(100);
+                if (this.squaredDistanceTo(Vec3d.ofCenter(lightPos)) >= 256
+                        || !this.getWorld().getBlockState(lightPos).isIn(PrideMothsInitialize.LIGHT_SOURCES_TAG)
+                        || this.getWorld().getLightLevel(lightPos) <= 0) {
+
+                    lightPos = null;
+                }
+            }
+        }
 
         if (this.hasCustomName() && !this.isBaby()) {
             if (this.getMothVariant() != MothVariation.NON_BINARY && this.getCustomName().getString().equals("non-binary")) {
