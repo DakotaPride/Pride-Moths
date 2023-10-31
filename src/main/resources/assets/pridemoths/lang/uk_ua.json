@@ -25,6 +25,8 @@
   "text.pridemoths.jar.polyamorous": " — Забарвлення «Поліаморія»",
   "text.pridemoths.jar.transgender": " — Забарвлення «Трансгендер»",
 
+  "item.pridemoths.fruitful_stew": "Fruitful Stew", //
+
   "item.pridemoths.moth_fuzz": "Пух молі",
   "item.pridemoths.fuzzy_carpet": "Пуховий килим",
   "block.pridemoths.fuzzy_carpet": "Пуховий килим",
@@ -50,6 +52,7 @@
   "item.pridemoths.polyamorous_moth_jar": "Міль у банці",
   "item.pridemoths.polysexual_moth_jar": "Міль у банці",
   "item.pridemoths.transgender_moth_jar": "Міль у банці",
+  "item.pridemoths.ally_moth_jar": "Glass Jar With Moth", //
 
   "advancements.pridemoths.fuzzy_carpet.title": "Пухнастик!",
   "advancements.pridemoths.fuzzy_carpet.description": "Отримайте пуховий килим",

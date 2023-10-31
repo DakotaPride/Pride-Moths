@@ -73,6 +73,8 @@ public class GlassJarItem extends Item {
             variant = MothVariation.POLYSEXUAL;
         } else if (stack.isOf(PrideMothsInitialize.TRANSGENDER_MOTH_JAR)) {
             variant = MothVariation.TRANSGENDER;
+        } else if (stack.isOf(PrideMothsInitialize.ALLY_MOTH_JAR)) {
+            variant = MothVariation.ALLY;
         }
 
         return variant;
