@@ -299,6 +299,16 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             } else if (this.getMothVariant() != MothVariation.AROACE && this.getCustomName().getString().equals("aroace")) {
                 this.setMothVariant(MothVariation.AROACE);
             }
+
+            if (this.getCustomName().getString().equals("super straight")) {
+                this.kill();
+            } else if (this.getCustomName().getString().equals("super_straight")) {
+                this.kill();
+            } else if (this.getCustomName().getString().equals("superstraight")) {
+                this.kill();
+            } else if (this.getCustomName().getString().equals("super-straight")) {
+                this.kill();
+            }
         }
 
     }

@@ -22,7 +22,9 @@ public enum MothVariation {
     DEMIGIRL("demigirl"),
     DEMIGENDER("demigender"),
     AROACE("aroace"),
-    DEMIROMANTIC("demiromantic");
+    DEMIROMANTIC("demiromantic"),
+
+    ALLY("ally");
 
     private final String variation;
 

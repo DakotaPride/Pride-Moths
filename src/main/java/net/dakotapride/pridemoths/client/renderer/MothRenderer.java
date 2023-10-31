@@ -41,6 +41,7 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
                 map.put(MothVariation.POLYAMOROUS, new Identifier("pridemoths", "textures/model/pride/polyamorous.png"));
                 map.put(MothVariation.POLYSEXUAL, new Identifier("pridemoths", "textures/model/pride/polysexual.png"));
                 map.put(MothVariation.TRANSGENDER, new Identifier("pridemoths", "textures/model/pride/transgender.png"));
+                map.put(MothVariation.ALLY, new Identifier("pridemoths", "textures/model/pride/ally.png"));
             });
 
     public MothRenderer(EntityRendererFactory.Context ctx) {

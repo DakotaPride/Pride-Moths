@@ -68,6 +68,7 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static Item DEMIGENDER_MOTH_JAR;
 	public static Item AROACE_MOTH_JAR;
 	public static Item DEMIROMANTIC_MOTH_JAR;
+	public static Item ALLY_MOTH_JAR;
 	public static Block FUZZY_CARPET;
 	public static BlockItem FUZZY_CARPET_ITEM;
 
@@ -157,6 +158,9 @@ public class PrideMothsInitialize implements ModInitializer {
 				new GlassJarItem(new FabricItemSettings().maxCount(1)));
 		DEMIROMANTIC_MOTH_JAR = Registry.register(Registries.ITEM,
 				new Identifier("pridemoths", MothVariation.DEMIROMANTIC.getVariation() + "_moth_jar"),
+				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+		ALLY_MOTH_JAR = Registry.register(Registries.ITEM,
+				new Identifier("pridemoths", MothVariation.ALLY.getVariation() + "_moth_jar"),
 				new GlassJarItem(new FabricItemSettings().maxCount(1)));
 		RARE_MOTH_JAR = Registry.register(Registries.ITEM,
 				new Identifier("pridemoths", MothVariation.RARE.getVariation() + "_moth_jar"),
