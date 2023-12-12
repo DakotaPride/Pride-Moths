@@ -1,0 +1,38 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "pridemoths:moth_fuzz"
+    },
+    {
+      "item": "pridemoths:moth_fuzz"
+    },
+    {
+      "item": "pridemoths:moth_fuzz"
+    },
+    {
+      "item": "pridemoths:moth_fuzz"
+    },
+    {
+      "item": "minecraft:light_gray_dye"
+    },
+    {
+      "amount": 1000,
+      "fluid": "minecraft:water",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:light_gray_wool"
+    }
+  ]
+}

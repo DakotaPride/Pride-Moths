@@ -23,6 +23,7 @@
   "text.pridemoths.jar.omnisexual": " — Забарвлення «Омнісексуальність»",
   "text.pridemoths.jar.pansexual": " — Забарвлення «Пансексуальність»",
   "text.pridemoths.jar.polyamorous": " — Забарвлення «Поліаморія»",
+  "text.pridemoths.jar.polysexual": " - Polysexual Colouration", //
   "text.pridemoths.jar.transgender": " — Забарвлення «Трансгендер»",
 
   "item.pridemoths.fruitful_stew": "Fruitful Stew", //
@@ -57,5 +58,7 @@
   "advancements.pridemoths.fuzzy_carpet.title": "Пухнастик!",
   "advancements.pridemoths.fuzzy_carpet.description": "Отримайте пуховий килим",
   "advancements.pridemoths.kill_a_moth.title": "Як ти ПОСМІВ!",
-  "advancements.pridemoths.kill_a_moth.description": "Убийте міль... навіщо..."
+  "advancements.pridemoths.kill_a_moth.description": "Убийте міль... навіщо...",
+  "advancements.pridemoths.moth_jar.title": "Gotcha!", //
+  "advancements.pridemoths.moth_jar.description": "Catch a Moth in a Glass Jar" //
 }

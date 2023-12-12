@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "pridemoths:moth_jar",
+    "pridemoths:agender_moth_jar",
+    "pridemoths:ally_moth_jar",
+    "pridemoths:aroace_moth_jar",
+    "pridemoths:aromantic_moth_jar",
+    "pridemoths:asexual_moth_jar",
+    "pridemoths:bisexual_moth_jar",
+    "pridemoths:demiboy_moth_jar",
+    "pridemoths:demigender_moth_jar",
+    "pridemoths:demigirl_moth_jar",
+    "pridemoths:demiromantic_moth_jar",
+    "pridemoths:demisexual_moth_jar",
+    "pridemoths:gay_moth_jar",
+    "pridemoths:lesbian_moth_jar",
+    "pridemoths:lgbt_moth_jar",
+    "pridemoths:non_binary_moth_jar",
+    "pridemoths:omnisexual_moth_jar",
+    "pridemoths:pansexual_moth_jar",
+    "pridemoths:polyamorous_moth_jar",
+    "pridemoths:polysexual_moth_jar",
+    "pridemoths:transgender_moth_jar"
+  ]
+}

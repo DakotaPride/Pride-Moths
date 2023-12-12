@@ -8,10 +8,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.FlyGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -30,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -77,11 +75,6 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer, 
         this.setPathfindingPenalty(PathNodeType.FENCE, -1.0F);
     }
 
-    @Override
-    public boolean hurtByWater() {
-        return true;
-    }
-
     public static DefaultAttributeContainer.Builder setAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
@@ -94,6 +87,7 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer, 
         this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(5, new TravelToLightSourceGoal(this, 32));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.fromTag(PrideMothsInitialize.CAN_MOTH_EAT), false));
         this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
     }
 
@@ -126,7 +120,15 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer, 
     }
 
     public boolean isFavouredFoodItem(ItemStack stack) {
-        return stack.getItem() == PrideMothsInitialize.FRUITFUL_STEW || stack.getItem() == Items.HONEY_BOTTLE;
+        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.CAN_MOTH_EAT);
+    }
+
+    public boolean dislikesFoodItem(ItemStack stack) {
+        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.DAMAGES_MOTH_UPON_CONSUMPTION);
+    }
+
+    public boolean isAllergicToFoodItem(ItemStack stack) {
+        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.KILLS_MOTH_UPON_CONSUMPTION);
     }
 
     @Override
@@ -163,6 +165,10 @@ public class MothEntity extends AnimalEntity implements IAnimatable, Flutterer, 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (isBreedingItem(getActiveItem()) && !this.isBaby()) {
             return super.interactMob(player, hand);
+        } else if (dislikesFoodItem(getActiveItem())) {
+            this.damage(DamageSource.GENERIC, 1.0F);
+        } else if (isAllergicToFoodItem(getActiveItem()) || (getActiveItem().getItem().getFoodComponent() != null && getActiveItem().getItem().getFoodComponent().isMeat())) {
+            this.kill();
         }
 
         if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR && !this.isBaby()) {

@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "farmersdelight:bacon_and_eggs",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pasta_with_meatballs",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pasta_with_mutton_chop",
+      "required": false
+    },
+
+    {
+      "id": "#garnished:mastic_paste",
+      "required": false
+    },
+    {
+      "id": "#garnished:slime_drops",
+      "required": false
+    }
+  ]
+}

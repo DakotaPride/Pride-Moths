@@ -1,0 +1,30 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "pridemoths:fuzzy_carpet"
+    }
+  ],
+  "result": [
+    {
+      "count": 2,
+      "item": "pridemoths:moth_fuzz"
+    },
+    {
+      "chance": 0.10,
+      "count": 1,
+      "item": "minecraft:string"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}
