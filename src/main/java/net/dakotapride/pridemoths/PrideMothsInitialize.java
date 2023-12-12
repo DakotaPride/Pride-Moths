@@ -37,6 +37,9 @@ public class PrideMothsInitialize implements ModInitializer {
 	public static final Logger LOGGER = Logger.getLogger("Pride Moths");
 
 	public static TagKey<Block> LIGHT_SOURCES_TAG = TagKey.of(Registry.BLOCK.getKey(), new Identifier("pridemoths", "light_sources"));
+	public static TagKey<Item> CAN_MOTH_EAT = TagKey.of(Registry.ITEM.getKey(), new Identifier("pridemoths", "can_moth_eat"));
+	public static TagKey<Item> DAMAGES_MOTH_UPON_CONSUMPTION = TagKey.of(Registry.ITEM.getKey(), new Identifier("pridemoths", "damages_moth_upon_consumption"));
+	public static TagKey<Item> KILLS_MOTH_UPON_CONSUMPTION = TagKey.of(Registry.ITEM.getKey(), new Identifier("pridemoths", "kills_moth_upon_consumption"));
 
 	public static EntityType<MothEntity> MOTH;
 	public static Item MOTH_SPAWN_EGG;
