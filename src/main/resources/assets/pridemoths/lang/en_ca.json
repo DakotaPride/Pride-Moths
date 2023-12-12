@@ -23,6 +23,7 @@
   "text.pridemoths.jar.omnisexual": " - Omnisexual Colouration",
   "text.pridemoths.jar.pansexual": " - Pansexual Colouration",
   "text.pridemoths.jar.polyamorous": " - Polyamorous Colouration",
+  "text.pridemoths.jar.polysexual": " - Polysexual Colouration",
   "text.pridemoths.jar.transgender": " - Transgender Colouration",
 
   "item.pridemoths.fruitful_stew": "Fruitful Stew",
@@ -57,5 +58,7 @@
   "advancements.pridemoths.fuzzy_carpet.title": "Fuzzyness!",
   "advancements.pridemoths.fuzzy_carpet.description": "Obtain a Fuzzy Carpet",
   "advancements.pridemoths.kill_a_moth.title": "How DARE You!",
-  "advancements.pridemoths.kill_a_moth.description": "Kill a Moth... Why..."
+  "advancements.pridemoths.kill_a_moth.description": "Kill a Moth... Why...",
+  "advancements.pridemoths.moth_jar.title": "Gotcha!",
+  "advancements.pridemoths.moth_jar.description": "Catch a Moth in a Glass Jar"
 }

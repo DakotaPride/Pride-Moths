@@ -3,16 +3,12 @@ package net.dakotapride.pridemoths.client.entity;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.FlyGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -29,9 +25,9 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -41,7 +37,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.*;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -76,11 +75,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         this.setPathfindingPenalty(PathNodeType.FENCE, -1.0F);
     }
 
-    @Override
-    public boolean hurtByWater() {
-        return true;
-    }
-
     public static DefaultAttributeContainer.Builder setAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
@@ -93,6 +87,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(5, new TravelToLightSourceGoal(this, 32));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.fromTag(PrideMothsInitialize.CAN_MOTH_EAT), false));
         this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
     }
 
@@ -125,7 +120,15 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     public boolean isFavouredFoodItem(ItemStack stack) {
-        return stack.getItem() == PrideMothsInitialize.FRUITFUL_STEW || stack.getItem() == Items.HONEY_BOTTLE;
+        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.CAN_MOTH_EAT);
+    }
+
+    public boolean dislikesFoodItem(ItemStack stack) {
+        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.DAMAGES_MOTH_UPON_CONSUMPTION);
+    }
+
+    public boolean isAllergicToFoodItem(ItemStack stack) {
+        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.KILLS_MOTH_UPON_CONSUMPTION);
     }
 
     @Override
@@ -162,6 +165,10 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (isBreedingItem(getActiveItem()) && !this.isBaby()) {
             return super.interactMob(player, hand);
+        } else if (dislikesFoodItem(getActiveItem())) {
+            this.damage(this.getDamageSources().generic(), 1.0F);
+        } else if (isAllergicToFoodItem(getActiveItem()) || (getActiveItem().getItem().getFoodComponent() != null && getActiveItem().getItem().getFoodComponent().isMeat())) {
+            this.kill();
         }
 
         if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR && !this.isBaby()) {

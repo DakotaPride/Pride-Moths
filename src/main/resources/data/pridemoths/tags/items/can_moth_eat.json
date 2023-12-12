@@ -1,0 +1,76 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:honey_bottle",
+    "minecraft:apple",
+    "minecraft:cocoa_beans",
+    "pridemoths:fruitful_stew",
+
+    {
+      "id": "create:honeyed_apple",
+      "required": false
+    },
+    {
+      "id": "create:chocolate_glazed_berries",
+      "required": false
+    },
+    {
+      "id": "create:sweet_roll",
+      "required": false
+    },
+    {
+      "id": "create:bar_of_chocolate",
+      "required": false
+    },
+
+    {
+      "id": "farmersdelight:cabbage_leaf",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cabbage_rolls",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pumpkin_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:fruit_salad",
+      "required": false
+    },
+
+    {
+      "id": "#garnished:sweetened_nuts",
+      "required": false
+    },
+    {
+      "id": "#garnished:chocolate_glazed_nuts",
+      "required": false
+    },
+    {
+      "id": "#garnished:honeyed_nuts",
+      "required": false
+    },
+    {
+      "id": "garnished:sweetened_nut_mix",
+      "required": false
+    },
+    {
+      "id": "garnished:chocolate_glazed_nut_mix",
+      "required": false
+    },
+    {
+      "id": "garnished:honeyed_nut_mix",
+      "required": false
+    },
+    {
+      "id": "#garnished:venerable_delicacies",
+      "required": false
+    },
+    {
+      "id": "garnished:cashew_sorbet_scoop",
+      "required": false
+    }
+  ]
+}

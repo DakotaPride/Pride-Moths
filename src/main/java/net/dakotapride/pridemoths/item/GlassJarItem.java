@@ -4,10 +4,7 @@ import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -23,8 +20,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class GlassJarItem extends Item {
+    public GlassJarItem(boolean i, Settings settings) {
+        super(settings.maxCount(16));
+    }
+
     public GlassJarItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     public static MothVariation getMothVariant(Item item) {

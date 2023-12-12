@@ -1,29 +1,27 @@
 {
   "display": {
     "icon": {
-      "item": "pridemoths:fuzzy_carpet"
+      "item": "pridemoths:moth_jar"
     },
     "title": {
-      "translate": "advancements.pridemoths.fuzzy_carpet.title"
+      "translate": "advancements.pridemoths.moth_jar.title"
     },
     "description": {
-      "translate": "advancements.pridemoths.fuzzy_carpet.description"
+      "translate": "advancements.pridemoths.moth_jar.description"
     },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "pridemoths:husbandry/moth_jar",
+  "parent": "minecraft:husbandry/root",
   "criteria": {
-    "fuzzy_carpet": {
+    "moth_jar": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "pridemoths:fuzzy_carpet"
-            ]
+            "tag": "pridemoths:moth_jars"
           }
         ]
       }
@@ -31,7 +29,7 @@
   },
   "requirements": [
     [
-      "fuzzy_carpet"
+      "moth_jar"
     ]
   ]
 }
