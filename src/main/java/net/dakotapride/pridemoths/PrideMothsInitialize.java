@@ -192,6 +192,7 @@ public class PrideMothsInitialize implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIGENDER_MOTH_JAR));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(AROACE_MOTH_JAR));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIROMANTIC_MOTH_JAR));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(ALLY_MOTH_JAR));
 
 		GeckoLib.initialize();
 
