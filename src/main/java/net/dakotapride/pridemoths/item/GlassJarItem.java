@@ -23,8 +23,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class GlassJarItem extends Item {
+    public GlassJarItem(boolean i, Settings settings) {
+        super(settings.maxCount(16));
+    }
+
     public GlassJarItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     public static MothVariation getMothVariant(Item item) {
