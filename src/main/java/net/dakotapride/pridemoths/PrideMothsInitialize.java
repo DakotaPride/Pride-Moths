@@ -3,6 +3,7 @@ package net.dakotapride.pridemoths;
 import net.dakotapride.pridemoths.block.FuzzyCarpetBlock;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
+import net.dakotapride.pridemoths.config.PrideMothsConfigs;
 import net.dakotapride.pridemoths.item.FruitfulStewFoodItem;
 import net.dakotapride.pridemoths.item.GlassJarItem;
 import net.fabricmc.api.ModInitializer;
@@ -42,8 +43,6 @@ public class PrideMothsInitialize implements ModInitializer {
 
 	public static TagKey<Block> LIGHT_SOURCES_TAG = TagKey.of(Registries.BLOCK.getKey(), new Identifier("pridemoths", "light_sources"));
 	public static TagKey<Item> CAN_MOTH_EAT = TagKey.of(Registries.ITEM.getKey(), new Identifier("pridemoths", "can_moth_eat"));
-	public static TagKey<Item> DAMAGES_MOTH_UPON_CONSUMPTION = TagKey.of(Registries.ITEM.getKey(), new Identifier("pridemoths", "damages_moth_upon_consumption"));
-	public static TagKey<Item> KILLS_MOTH_UPON_CONSUMPTION = TagKey.of(Registries.ITEM.getKey(), new Identifier("pridemoths", "kills_moth_upon_consumption"));
 
 	public static EntityType<MothEntity> MOTH;
 	public static Item MOTH_SPAWN_EGG;
@@ -77,6 +76,7 @@ public class PrideMothsInitialize implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		PrideMothsConfigs.registerConfigs();
 
 		MOTH = Registry.register(
 				Registries.ENTITY_TYPE, new Identifier("pridemoths", "moth"),

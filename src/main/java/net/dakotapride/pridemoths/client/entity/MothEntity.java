@@ -3,6 +3,7 @@ package net.dakotapride.pridemoths.client.entity;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
+import net.dakotapride.pridemoths.config.PrideMothsConfigs;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
@@ -96,9 +97,9 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     public static MothVariation getOtherVariation(Random random) {
-        int rarePatternChance = 240;
+        int rarePatternChance = PrideMothsConfigs.BASE_RARE_CHANCE;
         if (IPrideMoths.isWorldMothWeek()) {
-            rarePatternChance = 120;
+            rarePatternChance = PrideMothsConfigs.BASE_RARE_CHANCE_MOTH_WEEK;
         }
 
         if (random.nextInt(rarePatternChance) == 1) {
@@ -122,15 +123,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     public boolean isFavouredFoodItem(ItemStack stack) {
         return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.CAN_MOTH_EAT);
     }
-
-    public boolean dislikesFoodItem(ItemStack stack) {
-        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.DAMAGES_MOTH_UPON_CONSUMPTION);
-    }
-
-    public boolean isAllergicToFoodItem(ItemStack stack) {
-        return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.KILLS_MOTH_UPON_CONSUMPTION);
-    }
-
     @Override
     public EntityDimensions getDimensions(EntityPose pose) {
         return EntityDimensions.fixed(0.3F, 0.3F);
@@ -152,7 +144,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         date = LocalDate.now();
         int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
 
-        if (getLocalMonthFromUser == 6) {
+        if (getLocalMonthFromUser == 6 || PrideMothsConfigs.GENERATE_PRIDE_VARIANTS_OUTSIDE_OF_PRIDE_MONTH) {
             setMothVariant(getPrideVariation(random));
         } else {
             setMothVariant(getOtherVariation(random));
@@ -163,12 +155,27 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (isBreedingItem(getActiveItem()) && !this.isBaby()) {
-            return super.interactMob(player, hand);
-        } else if (dislikesFoodItem(getActiveItem())) {
-            this.damage(this.getDamageSources().generic(), 1.0F);
-        } else if (isAllergicToFoodItem(getActiveItem()) || (getActiveItem().getItem().getFoodComponent() != null && getActiveItem().getItem().getFoodComponent().isMeat())) {
-            this.kill();
+        ItemStack itemstack = player.getStackInHand(hand);
+        if (isBreedingItem(itemstack)) {
+            if (isFavouredFoodItem(itemstack)) {
+                int i = this.getBreedingAge();
+                if (!this.getWorld().isClient && i == 0 && this.canEat()) {
+                    this.eat(player, hand, itemstack);
+                    this.lovePlayer(player);
+                    return ActionResult.SUCCESS;
+                }
+
+                if (this.isBaby()) {
+                    this.eat(player, hand, itemstack);
+                    this.growUp(toGrowUpAge(-i), true);
+                    return ActionResult.success(this.getWorld().isClient);
+                }
+
+                if (this.getWorld().isClient) {
+                    return ActionResult.CONSUME;
+                }
+
+            }
         }
 
         if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR && !this.isBaby()) {
@@ -223,7 +230,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             return ActionResult.SUCCESS;
         }
 
-        return super.interactMob(player, hand);
+        return ActionResult.PASS;
     }
 
     public void setMothVariant(MothVariation type) {
