@@ -8,7 +8,6 @@ import net.dakotapride.pridemoths.item.FruitfulStewFoodItem;
 import net.dakotapride.pridemoths.item.GlassJarItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -19,7 +18,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -29,7 +27,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.BiomeKeys;
 import software.bernie.geckolib.GeckoLib;
 
@@ -41,8 +38,8 @@ public class PrideMothsInitialize implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = Logger.getLogger("Pride Moths");
 
-	public static TagKey<Block> LIGHT_SOURCES_TAG = TagKey.of(Registries.BLOCK.getKey(), new Identifier("pridemoths", "light_sources"));
-	public static TagKey<Item> CAN_MOTH_EAT = TagKey.of(Registries.ITEM.getKey(), new Identifier("pridemoths", "can_moth_eat"));
+	public static TagKey<Block> LIGHT_SOURCES_TAG = TagKey.of(Registries.BLOCK.getKey(), Identifier.of("pridemoths", "light_sources"));
+	public static TagKey<Item> CAN_MOTH_EAT = TagKey.of(Registries.ITEM.getKey(), Identifier.of("pridemoths", "can_moth_eat"));
 
 	public static EntityType<MothEntity> MOTH;
 	public static Item MOTH_SPAWN_EGG;
@@ -79,7 +76,7 @@ public class PrideMothsInitialize implements ModInitializer {
 		PrideMothsConfigs.registerConfigs();
 
 		MOTH = Registry.register(
-				Registries.ENTITY_TYPE, new Identifier("pridemoths", "moth"),
+				Registries.ENTITY_TYPE, Identifier.of("pridemoths", "moth"),
 				FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MothEntity::new)
 						.dimensions(EntityDimensions.fixed(0.3F, 0.3F)).build());
 		FabricDefaultAttributeRegistry.register(MOTH, MothEntity.setAttributes());
@@ -88,86 +85,86 @@ public class PrideMothsInitialize implements ModInitializer {
 		BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.PLAINS),
 				SpawnGroup.CREATURE, MOTH, 100, 3, 7);
 
-		FUZZY_CARPET = Registry.register(Registries.BLOCK, new Identifier("pridemoths", "fuzzy_carpet"),
+		FUZZY_CARPET = Registry.register(Registries.BLOCK, Identifier.of("pridemoths", "fuzzy_carpet"),
 				new FuzzyCarpetBlock(FabricBlockSettings.copyOf(Blocks.MOSS_CARPET).sounds(BlockSoundGroup.WOOL)));
-		FUZZY_CARPET_ITEM = Registry.register(Registries.ITEM, new Identifier("pridemoths", "fuzzy_carpet"),
-				new BlockItem(FUZZY_CARPET, new FabricItemSettings()));
+		FUZZY_CARPET_ITEM = Registry.register(Registries.ITEM, Identifier.of("pridemoths", "fuzzy_carpet"),
+				new BlockItem(FUZZY_CARPET, new Item.Settings()));
 
-		MOTH_SPAWN_EGG = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_spawn_egg"),
-				new SpawnEggItem(MOTH, 0xCECAC4, 0x82635C, new FabricItemSettings()));
-		MOTH_FUZZ = Registry.register(Registries.ITEM, new Identifier("pridemoths", "moth_fuzz"),
-				new Item(new FabricItemSettings()));
-		FRUITFUL_STEW = Registry.register(Registries.ITEM, new Identifier("pridemoths", "fruitful_stew"),
-				new FruitfulStewFoodItem(new FabricItemSettings().maxCount(1)));
+		MOTH_SPAWN_EGG = Registry.register(Registries.ITEM, Identifier.of("pridemoths", "moth_spawn_egg"),
+				new SpawnEggItem(MOTH, 0xCECAC4, 0x82635C, new Item.Settings()));
+		MOTH_FUZZ = Registry.register(Registries.ITEM, Identifier.of("pridemoths", "moth_fuzz"),
+				new Item(new Item.Settings()));
+		FRUITFUL_STEW = Registry.register(Registries.ITEM, Identifier.of("pridemoths", "fruitful_stew"),
+				new FruitfulStewFoodItem(new Item.Settings().maxCount(1)));
 		GLASS_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", "glass_jar"),
-				new GlassJarItem(true, new FabricItemSettings()));
+				Identifier.of("pridemoths", "glass_jar"),
+				new GlassJarItem(true, new Item.Settings()));
 		MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", "moth_jar"),
-				new GlassJarItem(new FabricItemSettings()));
+				Identifier.of("pridemoths", "moth_jar"),
+				new GlassJarItem(new Item.Settings()));
 		TRANSGENDER_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.TRANSGENDER.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.TRANSGENDER.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		LGBT_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.LGBT.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.LGBT.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		NON_BINARY_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.NON_BINARY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.NON_BINARY.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		LESBIAN_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.LESBIAN.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.LESBIAN.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		GAY_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.GAY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.GAY.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		AGENDER_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.AGENDER.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.AGENDER.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		ASEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.ASEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.ASEXUAL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		PANSEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.PANSEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.PANSEXUAL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		BISEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.BISEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.BISEXUAL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		POLYAMOROUS_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.POLYAMOROUS.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.POLYAMOROUS.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		POLYSEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.POLYSEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.POLYSEXUAL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		OMNISEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.OMNISEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.OMNISEXUAL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		AROMANTIC_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.AROMANTIC.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.AROMANTIC.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		DEMISEXUAL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.DEMISEXUAL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.DEMISEXUAL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		DEMIBOY_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.DEMIBOY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.DEMIBOY.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		DEMIGIRL_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.DEMIGIRL.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.DEMIGIRL.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		DEMIGENDER_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.DEMIGENDER.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.DEMIGENDER.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		AROACE_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.AROACE.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.AROACE.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		DEMIROMANTIC_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.DEMIROMANTIC.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.DEMIROMANTIC.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		ALLY_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.ALLY.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.ALLY.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 		RARE_MOTH_JAR = Registry.register(Registries.ITEM,
-				new Identifier("pridemoths", MothVariation.RARE.getVariation() + "_moth_jar"),
-				new GlassJarItem(new FabricItemSettings().maxCount(1)));
+				Identifier.of("pridemoths", MothVariation.RARE.getVariation() + "_moth_jar"),
+				new GlassJarItem(new Item.Settings().maxCount(1)));
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> entries.add(MOTH_SPAWN_EGG));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(GLASS_JAR));
@@ -194,7 +191,7 @@ public class PrideMothsInitialize implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(DEMIROMANTIC_MOTH_JAR));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(ALLY_MOTH_JAR));
 
-		GeckoLib.initialize();
+		// GeckoLib.initialize();
 
 		if (!FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			System.out.println("[Happy Pride Moth!] Development Tool not present. If this is a development environment, you can ignore this message.");

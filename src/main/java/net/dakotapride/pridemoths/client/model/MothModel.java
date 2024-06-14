@@ -10,35 +10,35 @@ public class MothModel extends GeoModel<MothEntity> {
     @Override
     public Identifier getModelResource(MothEntity entity) {
         if (entity.isBaby()) {
-            return new Identifier("pridemoths", "geo/baby_moth.geo.json");
+            return Identifier.of("pridemoths", "geo/baby_moth.geo.json");
         }
 
-        return new Identifier("pridemoths", "geo/moth.geo.json");
+        return Identifier.of("pridemoths", "geo/moth.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(MothEntity entity) {
         if (entity.isBaby()) {
             if (entity.getMothVariant() == MothVariation.RARE) {
-                return new Identifier("pridemoths", "textures/model/baby/rare.png");
+                return Identifier.of("pridemoths", "textures/model/baby/rare.png");
             } else {
-                return new Identifier("pridemoths", "textures/model/baby/moth.png");
+                return Identifier.of("pridemoths", "textures/model/baby/moth.png");
             }
         }
 
         if (entity.getMothVariant() == MothVariation.RARE && !entity.isBaby()) {
-            return new Identifier("pridemoths", "textures/model/rare.png");
+            return Identifier.of("pridemoths", "textures/model/rare.png");
         } else {
-            return new Identifier("pridemoths", "textures/model/moth.png");
+            return Identifier.of("pridemoths", "textures/model/moth.png");
         }
     }
 
     @Override
     public Identifier getAnimationResource(MothEntity entity) {
         if (entity.isBaby()) {
-            return new Identifier("pridemoths", "animations/baby_moth.animation.json");
+            return Identifier.of("pridemoths", "animations/baby_moth.animation.json");
         }
 
-        return new Identifier("pridemoths", "animations/moth.animation.json");
+        return Identifier.of("pridemoths", "animations/moth.animation.json");
     }
 }

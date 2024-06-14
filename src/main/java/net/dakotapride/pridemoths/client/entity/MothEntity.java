@@ -5,6 +5,7 @@ import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.config.PrideMothsConfigs;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
@@ -28,7 +29,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -43,13 +43,12 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
@@ -123,8 +122,9 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     public boolean isFavouredFoodItem(ItemStack stack) {
         return stack.getItem().getDefaultStack().isIn(PrideMothsInitialize.CAN_MOTH_EAT);
     }
+
     @Override
-    public EntityDimensions getDimensions(EntityPose pose) {
+    protected EntityDimensions getBaseDimensions(EntityPose pose) {
         return EntityDimensions.fixed(0.3F, 0.3F);
     }
 
@@ -138,8 +138,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
-                                 @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
         LocalDate date;
         date = LocalDate.now();
         int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
@@ -150,7 +149,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             setMothVariant(getOtherVariation(random));
         }
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+        return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
     @Override
@@ -207,7 +206,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
             ItemStack itemStack = new ItemStack(item);
             if (this.hasCustomName()) {
-                itemStack.setCustomName(this.getCustomName());
+                this.setCustomName(itemStack.get(DataComponentTypes.CUSTOM_NAME));
+                // itemStack.setName(this.getCustomName());
             }
 
             if (!player.getAbilities().creativeMode) {
@@ -238,10 +238,12 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
 
-        this.dataTracker.startTracking(VARIANT, MothVariation.DEFAULT.toString());
+        builder.add(VARIANT, MothVariation.DEFAULT.toString());
+
+        // this.dataTracker.startTracking(VARIANT, MothVariation.DEFAULT.toString());
     }
 
     @Override

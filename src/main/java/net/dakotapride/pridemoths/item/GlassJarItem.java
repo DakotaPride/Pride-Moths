@@ -3,8 +3,12 @@ package net.dakotapride.pridemoths.item;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.*;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -14,8 +18,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.RaycastContext;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -96,7 +98,7 @@ public class GlassJarItem extends Item {
             moth.setMothVariant(variation);
             moth.fromJar = true;
 
-            if (context.getStack().hasCustomName()) {
+            if (this.getDefaultStack().get(DataComponentTypes.CUSTOM_NAME) != null) {
                 moth.setCustomName(context.getStack().getName());
             }
 
@@ -114,7 +116,7 @@ public class GlassJarItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("text.pridemoths.jar.details").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
 
         if (!stack.isOf(PrideMothsInitialize.GLASS_JAR)) {

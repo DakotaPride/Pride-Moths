@@ -1,8 +1,8 @@
 package net.dakotapride.pridemoths.item;
 
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class FruitfulStewFoodItem extends Item {
     public FruitfulStewFoodItem(Settings settings) {
-        super(settings.food(new FoodComponent.Builder().hunger(8).saturationModifier(0.3F).build()));
+        super(settings.food(new FoodComponent.Builder().nutrition(8).saturationModifier(0.3F).build()));
     }
 
     @Override
