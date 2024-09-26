@@ -64,6 +64,9 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             MothVariation.POLYSEXUAL, MothVariation.OMNISEXUAL, MothVariation.AROMANTIC, MothVariation.AROACE, MothVariation.DEMIGIRL,
             MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC);
 
+    public BlockPos lightPos;
+    private int refreshLightPosIn = 0;
+
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.ignoreCameraFrustum = true;
@@ -358,6 +361,15 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 this.kill();
             } else if (this.getCustomName().getString().equalsIgnoreCase("super-straight")) {
                 this.kill();
+            }
+        }
+
+        if (lightPos != null && this.isAlive() && !getWorld().isClient) {
+            if (refreshLightPosIn-- < 0) {
+                refreshLightPosIn = 40 + random.nextInt(100);
+                if (this.squaredDistanceTo(Vec3d.ofCenter(lightPos)) >= 256 || !getWorld().getBlockState(lightPos).isIn(PrideMothsInitialize.LIGHT_SOURCES_TAG) || getWorld().getLightLevel(lightPos) <= 0) {
+                    lightPos = null;
+                }
             }
         }
 

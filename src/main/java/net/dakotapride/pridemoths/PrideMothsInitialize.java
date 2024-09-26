@@ -28,7 +28,6 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.BiomeKeys;
-import software.bernie.geckolib.GeckoLib;
 
 import java.util.logging.Logger;
 
