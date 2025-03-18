@@ -90,7 +90,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         this.goalSelector.add(5, new SwimGoal(this));
         this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
         this.goalSelector.add(2, new TravelToLightSourceGoal(this, 32));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25, stack -> stack.isIn(PrideMothsInitialize.CAN_MOTH_EAT), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.fromTag(PrideMothsInitialize.CAN_MOTH_EAT), false));
         this.targetSelector.add(2, new AnimalMateGoal(this, 1.0));
     }
 
