@@ -1,16 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "misc",
   "pattern": [
     "A#A",
     "AAA"
   ],
   "key": {
-    "A": {
-      "item": "minecraft:glass"
-    },
-    "#": {
-      "item": "minecraft:leather"
-    }
+    "A": "#c:glass_blocks",
+    "#": "#c:leathers"
   },
   "result": {
     "id": "pridemoths:glass_jar",

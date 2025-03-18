@@ -28,7 +28,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -69,7 +68,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
-        this.ignoreCameraFrustum = true;
+        //this.ignoreCameraFrustum = true;
         this.moveControl = new FlightMoveControl(this, 20, true);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0F);
@@ -80,18 +79,19 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4F)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.25F);
+                .add(EntityAttributes.MAX_HEALTH, 8.0D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.4F)
+                .add(EntityAttributes.FLYING_SPEED, 0.25F)
+                .add(EntityAttributes.TEMPT_RANGE, 10.0);
     }
 
     protected void initGoals() {
         this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
-        this.goalSelector.add(2, new SwimGoal(this));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(5, new TravelToLightSourceGoal(this, 32));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.fromTag(PrideMothsInitialize.CAN_MOTH_EAT), false));
-        this.targetSelector.add(1, new AnimalMateGoal(this, 1.0));
+        this.goalSelector.add(5, new SwimGoal(this));
+        this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
+        this.goalSelector.add(2, new TravelToLightSourceGoal(this, 32));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25, stack -> stack.isIn(PrideMothsInitialize.CAN_MOTH_EAT), false));
+        this.targetSelector.add(2, new AnimalMateGoal(this, 1.0));
     }
 
     public static MothVariation getPrideVariation(Random random) {
@@ -114,7 +114,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return PrideMothsInitialize.MOTH.create(world);
+        return PrideMothsInitialize.MOTH.create(world, SpawnReason.BREEDING);
     }
 
     @Override
@@ -134,8 +134,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Override
     protected void onGrowUp() {
         super.onGrowUp();
-        if (!this.isBaby() && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
-            this.dropItem(PrideMothsInitialize.MOTH_FUZZ, 1);
+        if (!this.isBaby() && this.getWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
+            this.dropItem(serverWorld, PrideMothsInitialize.MOTH_FUZZ);
         }
 
     }
@@ -170,7 +170,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 if (this.isBaby()) {
                     this.eat(player, hand, itemstack);
                     this.growUp(toGrowUpAge(-i), true);
-                    return ActionResult.success(this.getWorld().isClient);
+                    return ActionResult.SUCCESS;
                 }
 
                 if (this.getWorld().isClient) {
@@ -353,14 +353,16 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 this.setMothVariant(MothVariation.ALLY);
             }
 
-            if (this.getCustomName().getString().equalsIgnoreCase("super straight")) {
-                this.kill();
-            } else if (this.getCustomName().getString().equalsIgnoreCase("super_straight")) {
-                this.kill();
-            } else if (this.getCustomName().getString().equalsIgnoreCase("superstraight")) {
-                this.kill();
-            } else if (this.getCustomName().getString().equalsIgnoreCase("super-straight")) {
-                this.kill();
+            if (this.getWorld() instanceof ServerWorld world) {
+                if (this.getCustomName().getString().equalsIgnoreCase("super straight")) {
+                    this.kill(world);
+                } else if (this.getCustomName().getString().equalsIgnoreCase("super_straight")) {
+                    this.kill(world);
+                } else if (this.getCustomName().getString().equalsIgnoreCase("superstraight")) {
+                    this.kill(world);
+                } else if (this.getCustomName().getString().equalsIgnoreCase("super-straight")) {
+                    this.kill(world);
+                }
             }
         }
 
@@ -396,7 +398,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         BirdNavigation birdNavigation = new BirdNavigation(this, world);
         birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(false);
-        birdNavigation.setCanEnterOpenDoors(false);
+        //birdNavigation.setCanEnterOpenDoors(false);
 
         return birdNavigation;
     }

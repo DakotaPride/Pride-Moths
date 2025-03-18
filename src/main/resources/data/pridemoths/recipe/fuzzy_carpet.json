@@ -5,9 +5,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "pridemoths:moth_fuzz"
-    }
+    "#": "pridemoths:moth_fuzz"
   },
   "result": {
     "id": "pridemoths:fuzzy_carpet",
