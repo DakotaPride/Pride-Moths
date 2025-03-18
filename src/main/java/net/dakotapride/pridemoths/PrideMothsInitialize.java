@@ -127,7 +127,7 @@ public class PrideMothsInitialize implements ModInitializer {
 		MOTH = Registry.register(
 				Registries.ENTITY_TYPE, Identifier.of(ID, "moth"),
 				EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
-						.dimensions(0.3F, 0.3F).build(keyOf("moth")));
+						.dimensions(0.45F, 0.45F).build(keyOf("moth")));
 		FabricDefaultAttributeRegistry.register(MOTH, MothEntity.setAttributes());
 		BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE),
 				SpawnGroup.CREATURE, MOTH, 60, 3, 7);

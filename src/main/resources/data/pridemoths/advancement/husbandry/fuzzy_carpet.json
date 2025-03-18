@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "pridemoths:fuzzy_carpet"
+      "id": "pridemoths:fuzzy_carpet"
     },
     "title": {
       "translate": "advancements.pridemoths.fuzzy_carpet.title"

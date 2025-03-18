@@ -164,13 +164,13 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 if (!this.getWorld().isClient && i == 0 && this.canEat()) {
                     this.eat(player, hand, itemstack);
                     this.lovePlayer(player);
-                    return ActionResult.SUCCESS;
+                    return ActionResult.SUCCESS_SERVER;
                 }
 
                 if (this.isBaby()) {
                     this.eat(player, hand, itemstack);
                     this.growUp(toGrowUpAge(-i), true);
-                    return ActionResult.SUCCESS;
+                    //return ActionResult.SUCCESS;
                 }
 
                 if (this.getWorld().isClient) {
