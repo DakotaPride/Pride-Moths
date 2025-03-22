@@ -4,6 +4,8 @@ import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.config.PrideMothsConfigs;
+import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
+import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.minecraft.block.BlockState;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.*;
@@ -47,11 +49,12 @@ import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animation.AnimationState;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.util.EnumSet;
 import java.util.List;
 
 public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IPrideMoths {
@@ -86,12 +89,13 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     protected void initGoals() {
-        this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
+        //this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
         this.goalSelector.add(5, new SwimGoal(this));
-        this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
+        //this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
         this.goalSelector.add(2, new TravelToLightSourceGoal(this, 32));
         this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.fromTag(PrideMothsInitialize.CAN_MOTH_EAT), false));
         this.targetSelector.add(2, new AnimalMateGoal(this, 1.0));
+        this.goalSelector.add(8, new MothWanderAroundGoal());
     }
 
     public static MothVariation getPrideVariation(Random random) {
@@ -114,7 +118,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return PrideMothsInitialize.MOTH.create(world);
+        return EntityTypeRegistrar.MOTH.create(world);
     }
 
     @Override
@@ -135,7 +139,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     protected void onGrowUp() {
         super.onGrowUp();
         if (!this.isBaby() && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
-            this.dropItem(PrideMothsInitialize.MOTH_FUZZ, 1);
+            this.dropItem(ItemsRegistrar.MOTH_FUZZ, 1);
         }
 
     }
@@ -180,31 +184,31 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             }
         }
 
-        if (player.getStackInHand(hand).getItem() == PrideMothsInitialize.GLASS_JAR && !this.isBaby()) {
+        if (player.getStackInHand(hand).getItem() == ItemsRegistrar.GLASS_JAR && !this.isBaby()) {
             Item item;
 
             switch (this.getMothVariant()) {
-                case RARE -> item = PrideMothsInitialize.RARE_MOTH_JAR;
-                case AGENDER -> item = PrideMothsInitialize.AGENDER_MOTH_JAR;
-                case AROACE -> item = PrideMothsInitialize.AROACE_MOTH_JAR;
-                case AROMANTIC -> item = PrideMothsInitialize.AROMANTIC_MOTH_JAR;
-                case ASEXUAL -> item = PrideMothsInitialize.ASEXUAL_MOTH_JAR;
-                case BISEXUAL -> item = PrideMothsInitialize.BISEXUAL_MOTH_JAR;
-                case DEMIBOY -> item = PrideMothsInitialize.DEMIBOY_MOTH_JAR;
-                case DEMIGENDER -> item = PrideMothsInitialize.DEMIGENDER_MOTH_JAR;
-                case DEMIGIRL -> item = PrideMothsInitialize.DEMIGIRL_MOTH_JAR;
-                case DEMIROMANTIC -> item = PrideMothsInitialize.DEMIROMANTIC_MOTH_JAR;
-                case DEMISEXUAL -> item = PrideMothsInitialize.DEMISEXUAL_MOTH_JAR;
-                case GAY -> item = PrideMothsInitialize.GAY_MOTH_JAR;
-                case LESBIAN -> item = PrideMothsInitialize.LESBIAN_MOTH_JAR;
-                case LGBT -> item = PrideMothsInitialize.LGBT_MOTH_JAR;
-                case NON_BINARY -> item = PrideMothsInitialize.NON_BINARY_MOTH_JAR;
-                case OMNISEXUAL -> item = PrideMothsInitialize.OMNISEXUAL_MOTH_JAR;
-                case PANSEXUAL -> item = PrideMothsInitialize.PANSEXUAL_MOTH_JAR;
-                case POLYAMOROUS -> item = PrideMothsInitialize.POLYAMOROUS_MOTH_JAR;
-                case POLYSEXUAL -> item = PrideMothsInitialize.POLYSEXUAL_MOTH_JAR;
-                case TRANSGENDER -> item = PrideMothsInitialize.TRANSGENDER_MOTH_JAR;
-                default -> item = PrideMothsInitialize.MOTH_JAR;
+                case RARE -> item = ItemsRegistrar.RARE_MOTH_JAR;
+                case AGENDER -> item = ItemsRegistrar.AGENDER_MOTH_JAR;
+                case AROACE -> item = ItemsRegistrar.AROACE_MOTH_JAR;
+                case AROMANTIC -> item = ItemsRegistrar.AROMANTIC_MOTH_JAR;
+                case ASEXUAL -> item = ItemsRegistrar.ASEXUAL_MOTH_JAR;
+                case BISEXUAL -> item = ItemsRegistrar.BISEXUAL_MOTH_JAR;
+                case DEMIBOY -> item = ItemsRegistrar.DEMIBOY_MOTH_JAR;
+                case DEMIGENDER -> item = ItemsRegistrar.DEMIGENDER_MOTH_JAR;
+                case DEMIGIRL -> item = ItemsRegistrar.DEMIGIRL_MOTH_JAR;
+                case DEMIROMANTIC -> item = ItemsRegistrar.DEMIROMANTIC_MOTH_JAR;
+                case DEMISEXUAL -> item = ItemsRegistrar.DEMISEXUAL_MOTH_JAR;
+                case GAY -> item = ItemsRegistrar.GAY_MOTH_JAR;
+                case LESBIAN -> item = ItemsRegistrar.LESBIAN_MOTH_JAR;
+                case LGBT -> item = ItemsRegistrar.LGBT_MOTH_JAR;
+                case NON_BINARY -> item = ItemsRegistrar.NON_BINARY_MOTH_JAR;
+                case OMNISEXUAL -> item = ItemsRegistrar.OMNISEXUAL_MOTH_JAR;
+                case PANSEXUAL -> item = ItemsRegistrar.PANSEXUAL_MOTH_JAR;
+                case POLYAMOROUS -> item = ItemsRegistrar.POLYAMOROUS_MOTH_JAR;
+                case POLYSEXUAL -> item = ItemsRegistrar.POLYSEXUAL_MOTH_JAR;
+                case TRANSGENDER -> item = ItemsRegistrar.TRANSGENDER_MOTH_JAR;
+                default -> item = ItemsRegistrar.MOTH_JAR;
             }
 
             ItemStack itemStack = new ItemStack(item);
@@ -448,9 +452,42 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         return this.cache;
     }
 
+    // Fake target
     @Override
     public boolean canTarget(EntityType<?> type) {
         return type == EntityType.PLAYER;
+    }
+
+    class MothWanderAroundGoal extends Goal {
+        MothWanderAroundGoal() {
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
+        }
+
+        @Override
+        public boolean canStart() {
+            return MothEntity.this.navigation.isIdle() && MothEntity.this.random.nextInt(10) == 0;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return MothEntity.this.navigation.isFollowingPath();
+        }
+
+        @Override
+        public void start() {
+            Vec3d vec3d = this.getRandomLocation();
+            if (vec3d != null) {
+                MothEntity.this.navigation.startMovingAlong(MothEntity.this.navigation.findPathTo(BlockPos.ofFloored(vec3d), 1), 1.0);
+            }
+        }
+
+        @Nullable
+        private Vec3d getRandomLocation() {
+            Vec3d vec3d2 = MothEntity.this.getRotationVec(0.35F);
+
+            Vec3d vec3d3 = AboveGroundTargeting.find(MothEntity.this, 8, 7, vec3d2.x, vec3d2.z, (float) (Math.PI / 2), 3, 1);
+            return vec3d3 != null ? vec3d3 : NoPenaltySolidTargeting.find(MothEntity.this, 8, 4, -2, vec3d2.x, vec3d2.z, (float) (Math.PI / 2));
+        }
     }
 
 }

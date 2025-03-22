@@ -29,6 +29,8 @@
 
   "item.pridemoths.fruitful_stew": "Fruitful Stew", //
 
+  "block.pridemoths.moth_enclosure": "Moth Enclosure", //
+
   "item.pridemoths.moth_fuzz": "Пух молі",
   "item.pridemoths.fuzzy_carpet": "Пуховий килим",
   "block.pridemoths.fuzzy_carpet": "Пуховий килим",
@@ -62,4 +64,6 @@
   "advancements.pridemoths.kill_a_moth.description": "Убийте міль... навіщо...",
   "advancements.pridemoths.moth_jar.title": "Gotcha!", //
   "advancements.pridemoths.moth_jar.description": "Catch a Moth in a Glass Jar" //
+  "advancements.pridemoths.moth_enclosure.title": "On full display", //
+  "advancements.pridemoths.moth_enclosure.description": "Create a Moth Enclosure to both store moth jars and to more effectively gather Moth Fuzz" //
 }

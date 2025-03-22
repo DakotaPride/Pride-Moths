@@ -1,0 +1,515 @@
+{
+  "variants": {
+    "facing=east,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure",
+      "y": 90
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure"
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure",
+      "y": 180
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure",
+      "y": 270
+    },
+
+    "facing=east,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_1",
+      "y": 90
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_1"
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_1",
+      "y": 180
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_1",
+      "y": 270
+    },
+
+    "facing=east,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_2",
+      "y": 90
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_2"
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_2",
+      "y": 180
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_2",
+      "y": 270
+    },
+
+    "facing=east,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_3",
+      "y": 90
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_3"
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_3",
+      "y": 180
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_level_3",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled",
+      "y": 90
+    },
+    "facing=east,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled",
+      "y": 90
+    },
+    "facing=east,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled",
+      "y": 90
+    },
+    "facing=east,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled",
+      "y": 90
+    },
+    "facing=east,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled",
+      "y": 90
+    },
+    "facing=east,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled",
+      "y": 90
+    },
+    "facing=east,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled",
+      "y": 90
+    },
+
+    "facing=north,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled"
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled"
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled"
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled"
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled"
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled"
+    },
+    "facing=north,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled"
+    },
+
+    "facing=south,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled",
+      "y": 180
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled",
+      "y": 180
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled",
+      "y": 180
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled",
+      "y": 180
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled",
+      "y": 180
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled",
+      "y": 180
+    },
+    "facing=south,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled",
+      "y": 180
+    },
+
+    "facing=west,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled",
+      "y": 270
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled",
+      "y": 270
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled",
+      "y": 270
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled",
+      "y": 270
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled",
+      "y": 270
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled",
+      "y": 270
+    },
+    "facing=west,fuzz_level=0,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_1",
+      "y": 90
+    },
+    "facing=east,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_1",
+      "y": 90
+    },
+    "facing=east,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_1",
+      "y": 90
+    },
+    "facing=east,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_1",
+      "y": 90
+    },
+    "facing=east,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_1",
+      "y": 90
+    },
+    "facing=east,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_1",
+      "y": 90
+    },
+    "facing=east,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_1",
+      "y": 90
+    },
+
+    "facing=north,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_1"
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_1"
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_1"
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_1"
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_1"
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_1"
+    },
+    "facing=north,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_1"
+    },
+
+    "facing=south,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_1",
+      "y": 180
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_1",
+      "y": 180
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_1",
+      "y": 180
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_1",
+      "y": 180
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_1",
+      "y": 180
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_1",
+      "y": 180
+    },
+    "facing=south,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_1",
+      "y": 180
+    },
+
+    "facing=west,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_1",
+      "y": 270
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_1",
+      "y": 270
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_1",
+      "y": 270
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_1",
+      "y": 270
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_1",
+      "y": 270
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_1",
+      "y": 270
+    },
+    "facing=west,fuzz_level=1,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_1",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_2",
+      "y": 90
+    },
+    "facing=east,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_2",
+      "y": 90
+    },
+    "facing=east,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_2",
+      "y": 90
+    },
+    "facing=east,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_2",
+      "y": 90
+    },
+    "facing=east,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_2",
+      "y": 90
+    },
+    "facing=east,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_2",
+      "y": 90
+    },
+    "facing=east,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_2",
+      "y": 90
+    },
+
+    "facing=north,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_2"
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_2"
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_2"
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_2"
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_2"
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_2"
+    },
+    "facing=north,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_2"
+    },
+
+    "facing=south,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_2",
+      "y": 180
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_2",
+      "y": 180
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_2",
+      "y": 180
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_2",
+      "y": 180
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_2",
+      "y": 180
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_2",
+      "y": 180
+    },
+    "facing=south,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_2",
+      "y": 180
+    },
+
+    "facing=west,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_2",
+      "y": 270
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_2",
+      "y": 270
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_2",
+      "y": 270
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_2",
+      "y": 270
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_2",
+      "y": 270
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_2",
+      "y": 270
+    },
+    "facing=west,fuzz_level=2,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_2",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_3",
+      "y": 90
+    },
+    "facing=east,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_3",
+      "y": 90
+    },
+    "facing=east,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_3",
+      "y": 90
+    },
+    "facing=east,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_3",
+      "y": 90
+    },
+    "facing=east,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_3",
+      "y": 90
+    },
+    "facing=east,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_3",
+      "y": 90
+    },
+    "facing=east,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_3",
+      "y": 90
+    },
+
+    "facing=north,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_3"
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_3"
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_3"
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_3"
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_3"
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_3"
+    },
+    "facing=north,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_3"
+    },
+
+    "facing=south,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_3",
+      "y": 180
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_3",
+      "y": 180
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_3",
+      "y": 180
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_3",
+      "y": 180
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_3",
+      "y": 180
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_3",
+      "y": 180
+    },
+    "facing=south,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_3",
+      "y": 180
+    },
+
+    "facing=west,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_first_jar_filled_level_3",
+      "y": 270
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_second_jar_filled_level_3",
+      "y": 270
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_third_jar_filled_level_3",
+      "y": 270
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false": {
+      "model": "pridemoths:block/moth_enclosure_left_jars_filled_level_3",
+      "y": 270
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=false,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_right_jars_filled_level_3",
+      "y": 270
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_side_jars_filled_level_3",
+      "y": 270
+    },
+    "facing=west,fuzz_level=3,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true": {
+      "model": "pridemoths:block/moth_enclosure_all_jars_filled_level_3",
+      "y": 270
+    }
+  }
+}
