@@ -5,6 +5,7 @@ import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.item.GlassJarItem;
 import net.dakotapride.pridemoths.register.BlockEntityTypeRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -190,7 +191,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
                 int i = state.get(FUZZ_LEVEL);
                 boolean bl = false;
                 if (i >= 1) {
-                    if (stack.isOf(Items.SHEARS)) {
+                    if (stack.isIn(ConventionalItemTags.SHEAR_TOOLS)) {
                         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         dropMothFuzz(world, pos, state);
                         stack.damage(1, player, LivingEntity.getSlotForHand(hand));
