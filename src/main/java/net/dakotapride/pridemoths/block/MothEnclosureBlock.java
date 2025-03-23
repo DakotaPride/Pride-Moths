@@ -2,17 +2,23 @@ package net.dakotapride.pridemoths.block;
 
 import com.mojang.serialization.MapCodec;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
+import net.dakotapride.pridemoths.item.GlassJarItem;
+import net.dakotapride.pridemoths.register.BlockEntityTypeRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlockStateComponent;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -23,6 +29,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +39,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -295,24 +303,50 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     @Override
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient
-                && player.isCreative()
+                //&& player.isCreative()
                 && world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)
                 && world.getBlockEntity(pos) instanceof MothEnclosureBlockEntity mothEnclosureBlockEntity) {
-            int i = state.get(FUZZ_LEVEL);
-            if (i > 0) {
+            //int i = state.get(FUZZ_LEVEL);
+            boolean slot0 = state.get(SLOT_OCCUPIED_PROPERTIES.getFirst());
+            boolean slot1 = state.get(SLOT_OCCUPIED_PROPERTIES.get(1));
+            boolean slot2 = state.get(SLOT_OCCUPIED_PROPERTIES.get(2));
+            if (slot0 || slot1 || slot2) {
                 ItemStack itemStack = new ItemStack(this);
                 itemStack.applyComponentsFrom(mothEnclosureBlockEntity.createComponentMap());
-                itemStack.set(DataComponentTypes.BLOCK_STATE, BlockStateComponent.DEFAULT.with(FUZZ_LEVEL, i));
+                world.getBlockEntity(pos, BlockEntityTypeRegistrar.MOTH_ENCLOSURE_BLOCK_ENTITY).ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack, world.getRegistryManager()));
+                itemStack.set(DataComponentTypes.BLOCK_STATE, BlockStateComponent.DEFAULT
+                        .with(SLOT_OCCUPIED_PROPERTIES.getFirst(), slot0)
+                        .with(SLOT_OCCUPIED_PROPERTIES.get(1), slot1)
+                        .with(SLOT_OCCUPIED_PROPERTIES.get(2), slot2));
                 if (mothEnclosureBlockEntity.hasCustomName()) {
                     itemStack.set(DataComponentTypes.CUSTOM_NAME, mothEnclosureBlockEntity.getCustomName());
                 }
-                ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
+
+                ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, itemStack);
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
             }
         }
 
         return super.onBreak(world, pos, state, player);
+    }
+
+    @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+        ItemStack itemStack = super.getPickStack(world, pos, state);
+        world.getBlockEntity(pos, BlockEntityTypeRegistrar.MOTH_ENCLOSURE_BLOCK_ENTITY).ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack, world.getRegistryManager()));
+        return itemStack;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+        super.appendTooltip(stack, context, tooltip, options);
+
+        for (ItemStack itemStack : stack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).iterateNonEmpty()) {
+            if (itemStack.isIn(PrideMothsInitialize.MOTH_JARS) && itemStack.getItem() instanceof GlassJarItem jarItem) {
+                tooltip.add(Text.translatable("container.mothEnclosure.itemCount." + GlassJarItem.getMothVariant(jarItem).getVariation()).formatted(Formatting.ITALIC, Formatting.GRAY));
+            }
+        }
     }
 
     @Override
@@ -344,21 +378,8 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
 
     @Override
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.isOf(newState.getBlock())) {
-            if (world.getBlockEntity(pos) instanceof MothEnclosureBlockEntity mothEnclosureBlockEntity && !mothEnclosureBlockEntity.isEmpty()) {
-                for (int i = 0; i < 3; i++) {
-                    ItemStack itemStack = mothEnclosureBlockEntity.getStack(i);
-                    if (!itemStack.isEmpty()) {
-                        ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
-                    }
-                }
-
-                mothEnclosureBlockEntity.clear();
-                world.updateComparators(pos, this);
-            }
-
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
+        world.updateComparators(pos, this);
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     @Override

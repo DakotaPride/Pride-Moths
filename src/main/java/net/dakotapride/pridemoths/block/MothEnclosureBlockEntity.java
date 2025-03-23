@@ -67,8 +67,11 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        this.inventory.clear();
-        Inventories.readNbt(nbt, this.inventory, registryLookup);
+        //this.inventory.clear();
+        this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+        if (nbt.contains("Items", NbtElement.LIST_TYPE)) {
+            Inventories.readNbt(nbt, this.inventory, registryLookup);
+        }
         this.lastInteractedSlot = nbt.getInt("last_interacted_slot");
         if (nbt.contains("CustomName", NbtElement.STRING_TYPE)) {
             this.customName = tryParseCustomName(nbt.getString("CustomName"), registryLookup);
@@ -78,7 +81,7 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
-        Inventories.writeNbt(nbt, this.inventory, true, registryLookup);
+        Inventories.writeNbt(nbt, this.inventory, false, registryLookup);
         nbt.putInt("last_interacted_slot", this.lastInteractedSlot);
         if (this.hasCustomName()) {
             nbt.putString("CustomName", Text.Serialization.toJsonString(this.customName, registryLookup));
