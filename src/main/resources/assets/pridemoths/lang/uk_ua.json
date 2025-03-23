@@ -30,27 +30,27 @@
   "item.pridemoths.fruitful_stew": "Fruitful Stew", //
 
   "block.pridemoths.moth_enclosure": "Moth Enclosure", //
-  "container.mothEnclosure.itemCount.default": "Default Colouration", //
-  "container.mothEnclosure.itemCount.rare": "Golden Colouration", //
-  "container.mothEnclosure.itemCount.agender": "Agender Colouration", //
-  "container.mothEnclosure.itemCount.aroace": "Aroace Colouration", //
-  "container.mothEnclosure.itemCount.aromantic": "Aromantic Colouration", //
-  "container.mothEnclosure.itemCount.asexual": "Asexual Colouration", //
-  "container.mothEnclosure.itemCount.bisexual": "Bisexual Colouration", //
-  "container.mothEnclosure.itemCount.demiboy": "Demiboy Colouration", //
-  "container.mothEnclosure.itemCount.demigender": "Demigender Colouration", //
-  "container.mothEnclosure.itemCount.demigirl": "Demigirl Colouration", //
-  "container.mothEnclosure.itemCount.demiromantic": "Demiromantic Colouration", //
-  "container.mothEnclosure.itemCount.demisexual": "Demisexual Colouration", //
-  "container.mothEnclosure.itemCount.gay": "MLM Colouration", //
-  "container.mothEnclosure.itemCount.lesbian": "Lesbian Colouration", //
-  "container.mothEnclosure.itemCount.lgbt": "LGBT Colouration", //
-  "container.mothEnclosure.itemCount.non_binary": "Non-Binary Colouration", //
-  "container.mothEnclosure.itemCount.omnisexual": "Omnisexual Colouration", //
-  "container.mothEnclosure.itemCount.pansexual": "Pansexual Colouration", //
-  "container.mothEnclosure.itemCount.polyamorous": "Polyamorous Colouration", //
-  "container.mothEnclosure.itemCount.polysexual": "Polysexual Colouration", //
-  "container.mothEnclosure.itemCount.transgender": "Transgender Colouration", //
+  "container.mothEnclosure.itemCount.default": "Типове забарвлення",
+  "container.mothEnclosure.itemCount.rare": "Золоте забарвлення",
+  "container.mothEnclosure.itemCount.agender": "Забарвлення «Агендер»",
+  "container.mothEnclosure.itemCount.aroace": "Забарвлення «Ароас»",
+  "container.mothEnclosure.itemCount.aromantic": "Забарвлення «Аромантичність»",
+  "container.mothEnclosure.itemCount.asexual": "Забарвлення «Асексуальність»",
+  "container.mothEnclosure.itemCount.bisexual": "Забарвлення «Бісексуальність»",
+  "container.mothEnclosure.itemCount.demiboy": "Забарвлення «Демібой»",
+  "container.mothEnclosure.itemCount.demigender": "Забарвлення «Демігендер»",
+  "container.mothEnclosure.itemCount.demigirl": "Забарвлення «Демі—дівчина»",
+  "container.mothEnclosure.itemCount.demiromantic": "Забарвлення «Деміромантичність»",
+  "container.mothEnclosure.itemCount.demisexual": "Забарвлення «Демісексуальність»",
+  "container.mothEnclosure.itemCount.gay": "Забарвлення «Ґей (MLM)»",
+  "container.mothEnclosure.itemCount.lesbian": "Забарвлення «Лесбійка»",
+  "container.mothEnclosure.itemCount.lgbt": "Забарвлення «LGBT»",
+  "container.mothEnclosure.itemCount.non_binary": "Забарвлення «Небінарність»",
+  "container.mothEnclosure.itemCount.omnisexual": "Забарвлення «Омнісексуальність»",
+  "container.mothEnclosure.itemCount.pansexual": "Забарвлення «Пансексуальність»",
+  "container.mothEnclosure.itemCount.polyamorous": "Забарвлення «Поліаморія»",
+  "container.mothEnclosure.itemCount.polysexual": " - Polysexual Colouration", //
+  "container.mothEnclosure.itemCount.transgender": "Забарвлення «Трансгендер»",
   "container.mothEnclosure.itemCount.ally": "Ally Colouration", //
 
   "item.pridemoths.moth_fuzz": "Пух молі",
