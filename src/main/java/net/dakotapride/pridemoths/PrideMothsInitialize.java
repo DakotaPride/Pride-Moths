@@ -64,6 +64,10 @@ public class PrideMothsInitialize implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(ItemsRegistrar.AROACE_MOTH_JAR));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(ItemsRegistrar.DEMIROMANTIC_MOTH_JAR));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(ItemsRegistrar.ALLY_MOTH_JAR));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> entries.add(BlocksRegistrar.FUZZY_CARPET));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> entries.add(BlocksRegistrar.MOTH_ENCLOSURE));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> entries.add(ItemsRegistrar.MOTH_FUZZ));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> entries.add(ItemsRegistrar.FRUITFUL_STEW));
 
 		// GeckoLib.initialize();
 
