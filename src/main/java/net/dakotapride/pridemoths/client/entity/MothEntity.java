@@ -7,6 +7,7 @@ import net.dakotapride.pridemoths.config.PrideMothsConfigs;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
@@ -40,10 +41,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -92,10 +90,23 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         //this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
         this.goalSelector.add(5, new SwimGoal(this));
         //this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
-        this.goalSelector.add(2, new TravelToLightSourceGoal(this, 32));
+        //this.goalSelector.add(2, new TravelToLightSourceGoal(this, 8));
         this.goalSelector.add(3, new TemptGoal(this, 1.25, Ingredient.fromTag(PrideMothsInitialize.CAN_MOTH_EAT), false));
         this.targetSelector.add(2, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(8, new MothWanderAroundGoal());
+    }
+//
+//    @Override
+//    public float getPathfindingFavor(BlockPos pos) {
+//        return //this.getWorld().getBlockState(pos.down()).isIn(PrideMothsInitialize.LIGHT_SOURCES_TAG) ? 100.0F :
+//                //this.getWorld().getPhototaxisFavor(pos)
+//                this.getWorld().getLightLevel(pos);
+//
+//    }
+
+    @Override
+    public float getPathfindingFavor(BlockPos pos, WorldView world) {
+        return world.getBlockState(pos).isAir() ? 12.0F : world.getPhototaxisFavor(pos);
     }
 
     public static MothVariation getPrideVariation(Random random) {
@@ -368,14 +379,16 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             }
         }
 
-        if (lightPos != null && this.isAlive() && !getWorld().isClient) {
-            if (refreshLightPosIn-- < 0) {
-                refreshLightPosIn = 40 + random.nextInt(100);
-                if (this.squaredDistanceTo(Vec3d.ofCenter(lightPos)) >= 256 || !getWorld().getBlockState(lightPos).isIn(PrideMothsInitialize.LIGHT_SOURCES_TAG) || getWorld().getLightLevel(lightPos) <= 0) {
-                    lightPos = null;
-                }
-            }
-        }
+//        if (this.getWorld().random.nextFloat() * 4 == 4) {
+//            if (lightPos != null && this.isAlive() && !getWorld().isClient) {
+//                if (refreshLightPosIn-- < 0) {
+//                    refreshLightPosIn = 40 + random.nextInt(100);
+//                    if (this.squaredDistanceTo(Vec3d.ofCenter(lightPos)) >= 256 || !getWorld().getBlockState(lightPos).isIn(PrideMothsInitialize.LIGHT_SOURCES_TAG) || getWorld().getLightLevel(lightPos) <= 0) {
+//                        lightPos = null;
+//                    }
+//                }
+//            }
+//        }
 
     }
 
