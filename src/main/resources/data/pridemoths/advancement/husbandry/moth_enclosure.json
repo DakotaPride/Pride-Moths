@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "pridemoths:moth_enclosure"
+    },
+    "title": {
+      "translate": "advancements.pridemoths.moth_enclosure.title"
+    },
+    "description": {
+      "translate": "advancements.pridemoths.moth_enclosure.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pridemoths:husbandry/moth_jar",
+  "criteria": {
+    "moth_enclosure": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pridemoths:moth_enclosure"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "moth_enclosure"
+    ]
+  ]
+}

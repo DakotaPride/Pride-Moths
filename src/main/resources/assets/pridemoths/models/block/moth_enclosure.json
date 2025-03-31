@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "pridemoths:block/moth_enclosure_end",
+    "front": "pridemoths:block/moth_enclosure_empty",
+    "particle": "pridemoths:block/moth_enclosure_side",
+    "side": "pridemoths:block/moth_enclosure_side",
+    "top": "pridemoths:block/moth_enclosure_end"
+  }
+}

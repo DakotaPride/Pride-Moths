@@ -40,6 +40,10 @@ dependencies {
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${project.geckolib_version}"
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/pridemoths.accesswidener")
+}
+
 processResources {
 	inputs.property "version", project.version
 
