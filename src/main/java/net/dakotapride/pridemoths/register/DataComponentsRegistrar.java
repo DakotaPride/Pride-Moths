@@ -1,5 +1,6 @@
 package net.dakotapride.pridemoths.register;
 
+import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -14,7 +15,7 @@ public class DataComponentsRegistrar {
 //    );
 
     private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-        return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of("pridemoths", id), builderOperator.apply(ComponentType.builder()).build());
+        return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(PrideMothsInitialize.MOD_ID, id), builderOperator.apply(ComponentType.builder()).build());
     }
 
     public static void yep() {}

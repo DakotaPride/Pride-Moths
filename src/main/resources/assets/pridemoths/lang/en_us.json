@@ -25,6 +25,14 @@
   "text.pridemoths.jar.polyamorous": " - Polyamorous Coloration",
   "text.pridemoths.jar.polysexual": " - Polysexual Coloration",
   "text.pridemoths.jar.transgender": " - Transgender Coloration",
+  "text.pridemoths.jar.genderfluid": " - Genderfluid Coloration",
+  "text.pridemoths.jar.intersex": " - Intersex Coloration",
+  "text.pridemoths.jar.xenogender": " - Xenogender Coloration",
+  "text.pridemoths.jar.gender_queer": " - Gender Queer Coloration",
+  "text.pridemoths.jar.genderfae": " - Genderfae Coloration",
+  "text.pridemoths.jar.genderfaun": " - Genderfaun Coloration",
+  "text.pridemoths.jar.bigender": " - Bigender Coloration",
+  "text.pridemoths.jar.pangender": " - Pangender Coloration",
   "text.pridemoths.jar.ally": " - Ally Coloration",
 
   "item.pridemoths.fruitful_stew": "Fruitful Stew",
@@ -51,6 +59,14 @@
   "container.mothEnclosure.itemCount.polyamorous": "Polyamorous Coloration",
   "container.mothEnclosure.itemCount.polysexual": "Polysexual Coloration",
   "container.mothEnclosure.itemCount.transgender": "Transgender Coloration",
+  "container.mothEnclosure.itemCount.genderfluid": "Genderfluid Coloration",
+  "container.mothEnclosure.itemCount.intersex": "Intersex Coloration",
+  "container.mothEnclosure.itemCount.xenogender": "Xenogender Coloration",
+  "container.mothEnclosure.itemCount.gender_queer": "Gender Queer Coloration",
+  "container.mothEnclosure.itemCount.genderfae": "Genderfae Coloration",
+  "container.mothEnclosure.itemCount.genderfaun": "Genderfaun Coloration",
+  "container.mothEnclosure.itemCount.bigender": "Bigender Coloration",
+  "container.mothEnclosure.itemCount.pangender": "Pangender Coloration",
   "container.mothEnclosure.itemCount.ally": "Ally Coloration",
 
   "item.pridemoths.moth_fuzz": "Moth Fuzz",
@@ -78,6 +94,14 @@
   "item.pridemoths.polyamorous_moth_jar": "Glass Jar With Moth",
   "item.pridemoths.polysexual_moth_jar": "Glass Jar With Moth",
   "item.pridemoths.transgender_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.genderfluid_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.intersex_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.xenogender_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.gender_queer_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.genderfae_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.genderfaun_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.bigender_moth_jar": "Glass Jar With Moth",
+  "item.pridemoths.pangender_moth_jar": "Glass Jar With Moth",
   "item.pridemoths.ally_moth_jar": "Glass Jar With Moth",
 
   "advancements.pridemoths.fuzzy_carpet.title": "Fuzzyness!",
@@ -87,5 +111,7 @@
   "advancements.pridemoths.moth_jar.title": "Gotcha!",
   "advancements.pridemoths.moth_jar.description": "Catch a Moth in a Glass Jar",
   "advancements.pridemoths.moth_enclosure.title": "On full display",
-  "advancements.pridemoths.moth_enclosure.description": "Create a Moth Enclosure to both store moth jars and to more effectively gather Moth Fuzz"
+  "advancements.pridemoths.moth_enclosure.description": "Create a Moth Enclosure to both store moth jars and to more effectively gather Moth Fuzz",
+  "advancements.pridemoths.all_moth_jars.title": "Happy Pride Moth!",
+  "advancements.pridemoths.all_moth_jars.description": "Have fun with your cute, gay moths!"
 }

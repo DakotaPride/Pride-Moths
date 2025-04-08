@@ -1,5 +1,6 @@
 package net.dakotapride.pridemoths.register;
 
+import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -12,7 +13,7 @@ import net.minecraft.world.biome.BiomeKeys;
 
 public class EntityTypeRegistrar {
     public static EntityType<MothEntity> MOTH = Registry.register(
-            Registries.ENTITY_TYPE, Identifier.of("pridemoths", "moth"),
+            Registries.ENTITY_TYPE, Identifier.of(PrideMothsInitialize.MOD_ID, "moth"),
             EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
                     .dimensions(0.45F, 0.45F).build());
 

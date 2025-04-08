@@ -23,6 +23,14 @@ public enum MothVariation {
     DEMIGENDER("demigender"),
     AROACE("aroace"),
     DEMIROMANTIC("demiromantic"),
+    GENDERFLUID("genderfluid"),
+    INTERSEX("intersex"),
+    XENOGENDER("xenogender"),
+    GENDER_QUEER("gender_queer"),
+    GENDERFAE("genderfae"),
+    GENDERFAUN("genderfaun"),
+    BIGENDER("bigender"),
+    PANGENDER("pangender"),
 
     ALLY("ally");
 

@@ -1,6 +1,5 @@
 package net.dakotapride.pridemoths.item;
 
-import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
@@ -30,6 +29,11 @@ public class GlassJarItem extends Item {
 
     public GlassJarItem(Settings settings) {
         super(settings.maxCount(1));
+    }
+
+    @Override
+    public ItemStack getRecipeRemainder(ItemStack stack) {
+        return this.getDefaultStack();
     }
 
     public static MothVariation getMothVariant(Item item) {
@@ -78,6 +82,22 @@ public class GlassJarItem extends Item {
             variant = MothVariation.POLYSEXUAL;
         } else if (stack.isOf(ItemsRegistrar.TRANSGENDER_MOTH_JAR)) {
             variant = MothVariation.TRANSGENDER;
+        } else if (stack.isOf(ItemsRegistrar.GENDERFLUID_MOTH_JAR)) {
+            variant = MothVariation.GENDERFLUID;
+        } else if (stack.isOf(ItemsRegistrar.INTERSEX_MOTH_JAR)) {
+            variant = MothVariation.INTERSEX;
+        } else if (stack.isOf(ItemsRegistrar.XENOGENDER_MOTH_JAR)) {
+            variant = MothVariation.XENOGENDER;
+        } else if (stack.isOf(ItemsRegistrar.GENDER_QUEER_MOTH_JAR)) {
+            variant = MothVariation.GENDER_QUEER;
+        } else if (stack.isOf(ItemsRegistrar.GENDERFAE_MOTH_JAR)) {
+            variant = MothVariation.GENDERFAE;
+        } else if (stack.isOf(ItemsRegistrar.GENDERFAUN_MOTH_JAR)) {
+            variant = MothVariation.GENDERFAUN;
+        } else if (stack.isOf(ItemsRegistrar.BIGENDER_MOTH_JAR)) {
+            variant = MothVariation.BIGENDER;
+        } else if (stack.isOf(ItemsRegistrar.PANGENDER_MOTH_JAR)) {
+            variant = MothVariation.PANGENDER;
         } else if (stack.isOf(ItemsRegistrar.ALLY_MOTH_JAR)) {
             variant = MothVariation.ALLY;
         }

@@ -1,6 +1,5 @@
 package net.dakotapride.pridemoths.client;
 
-import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.renderer.MothRenderer;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
 import net.fabricmc.api.ClientModInitializer;
@@ -13,5 +12,6 @@ public class PrideMothsClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(EntityTypeRegistrar.MOTH, MothRenderer::new);
 
+        //BlockEntityRendererFactories.register(BlockEntityTypeRegistrar.MOTH_ENCLOSURE_BLOCK_ENTITY, PridePatchRenderer::new);
     }
 }

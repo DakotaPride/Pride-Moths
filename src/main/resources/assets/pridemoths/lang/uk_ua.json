@@ -23,13 +23,21 @@
   "text.pridemoths.jar.omnisexual": " — Забарвлення «Омнісексуальність»",
   "text.pridemoths.jar.pansexual": " — Забарвлення «Пансексуальність»",
   "text.pridemoths.jar.polyamorous": " — Забарвлення «Поліаморія»",
-  "text.pridemoths.jar.polysexual": " - Polysexual Colouration", //
+  "text.pridemoths.jar.polysexual": " - Polysexual Colouration",
   "text.pridemoths.jar.transgender": " — Забарвлення «Трансгендер»",
-  "text.pridemoths.jar.ally": " — Ally Colouration", //
+  "text.pridemoths.jar.genderfluid": " - Genderfluid Colouration",
+  "text.pridemoths.jar.intersex": " - Intersex Colouration",
+  "text.pridemoths.jar.xenogender": " - Xenogender Colouration",
+  "text.pridemoths.jar.gender_queer": " - Gender Queer Colouration",
+  "text.pridemoths.jar.genderfae": " - Genderfae Colouration",
+  "text.pridemoths.jar.genderfaun": " - Genderfaun Colouration",
+  "text.pridemoths.jar.bigender": " - Bigender Colouration",
+  "text.pridemoths.jar.pangender": " - Pangender Colouration",
+  "text.pridemoths.jar.ally": " — Ally Colouration",
 
-  "item.pridemoths.fruitful_stew": "Fruitful Stew", //
+  "item.pridemoths.fruitful_stew": "Fruitful Stew",
 
-  "block.pridemoths.moth_enclosure": "Moth Enclosure", //
+  "block.pridemoths.moth_enclosure": "Moth Enclosure",
   "container.mothEnclosure.itemCount.default": "Типове забарвлення",
   "container.mothEnclosure.itemCount.rare": "Золоте забарвлення",
   "container.mothEnclosure.itemCount.agender": "Забарвлення «Агендер»",
@@ -49,9 +57,17 @@
   "container.mothEnclosure.itemCount.omnisexual": "Забарвлення «Омнісексуальність»",
   "container.mothEnclosure.itemCount.pansexual": "Забарвлення «Пансексуальність»",
   "container.mothEnclosure.itemCount.polyamorous": "Забарвлення «Поліаморія»",
-  "container.mothEnclosure.itemCount.polysexual": " - Polysexual Colouration", //
+  "container.mothEnclosure.itemCount.polysexual": " Polysexual Colouration",
   "container.mothEnclosure.itemCount.transgender": "Забарвлення «Трансгендер»",
-  "container.mothEnclosure.itemCount.ally": "Ally Colouration", //
+  "container.mothEnclosure.itemCount.genderfluid": "Genderfluid Colouration",
+  "container.mothEnclosure.itemCount.intersex": "Intersex Colouration",
+  "container.mothEnclosure.itemCount.xenogender": "Xenogender Colouration",
+  "container.mothEnclosure.itemCount.gender_queer": "Gender Queer Colouration",
+  "container.mothEnclosure.itemCount.genderfae": "Genderfae Colouration",
+  "container.mothEnclosure.itemCount.genderfaun": "Genderfaun Colouration",
+  "container.mothEnclosure.itemCount.bigender": "Bigender Colouration",
+  "container.mothEnclosure.itemCount.pangender": "Pangender Colouration",
+  "container.mothEnclosure.itemCount.ally": "Ally Colouration",
 
   "item.pridemoths.moth_fuzz": "Пух молі",
   "item.pridemoths.fuzzy_carpet": "Пуховий килим",
@@ -78,14 +94,24 @@
   "item.pridemoths.polyamorous_moth_jar": "Міль у банці",
   "item.pridemoths.polysexual_moth_jar": "Міль у банці",
   "item.pridemoths.transgender_moth_jar": "Міль у банці",
-  "item.pridemoths.ally_moth_jar": "Glass Jar With Moth", //
+  "item.pridemoths.genderfluid_moth_jar": "Міль у банці",
+  "item.pridemoths.intersex_moth_jar": "Міль у банці",
+  "item.pridemoths.xenogender_moth_jar": "Міль у банці",
+  "item.pridemoths.gender_queer_moth_jar": "Міль у банці",
+  "item.pridemoths.genderfae_moth_jar": "Міль у банці",
+  "item.pridemoths.genderfaun_moth_jar": "Міль у банці",
+  "item.pridemoths.bigender_moth_jar": "Міль у банці",
+  "item.pridemoths.pangender_moth_jar": "Міль у банці",
+  "item.pridemoths.ally_moth_jar": "Міль у банці",
 
   "advancements.pridemoths.fuzzy_carpet.title": "Пухнастик!",
   "advancements.pridemoths.fuzzy_carpet.description": "Отримайте пуховий килим",
   "advancements.pridemoths.kill_a_moth.title": "Як ти ПОСМІВ!",
   "advancements.pridemoths.kill_a_moth.description": "Убийте міль... навіщо...",
-  "advancements.pridemoths.moth_jar.title": "Gotcha!", //
-  "advancements.pridemoths.moth_jar.description": "Catch a Moth in a Glass Jar" //
-  "advancements.pridemoths.moth_enclosure.title": "On full display", //
-  "advancements.pridemoths.moth_enclosure.description": "Create a Moth Enclosure to both store moth jars and to more effectively gather Moth Fuzz" //
+  "advancements.pridemoths.moth_jar.title": "Gotcha!",
+  "advancements.pridemoths.moth_jar.description": "Catch a Moth in a Glass Jar",
+  "advancements.pridemoths.moth_enclosure.title": "On full display",
+  "advancements.pridemoths.moth_enclosure.description": "Create a Moth Enclosure to both store moth jars and to more effectively gather Moth Fuzz",
+  "advancements.pridemoths.all_moth_jars.title": "Happy Pride Moth!",
+  "advancements.pridemoths.all_moth_jars.description": "Have fun with your cute, gay moths!"
 }
