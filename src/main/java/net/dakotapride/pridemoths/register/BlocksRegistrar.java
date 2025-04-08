@@ -24,7 +24,7 @@ public class BlocksRegistrar {
 
     public static Block MOTH_ENCLOSURE = registerBlock("moth_enclosure", MothEnclosureBlock::new,
             AbstractBlock.Settings.copy(Blocks.BEEHIVE), true);
-//    public static BlockItem MOTH_ENCLOSURE_ITEM = Registry.register(Registries.ITEM, Identifier.of("pridemoths", "moth_enclosure"),
+//    public static BlockItem MOTH_ENCLOSURE_ITEM = Registry.register(Registries.ITEM, Identifier.of(PrideMothsInitialize.MOD_ID, "moth_enclosure"),
 //            new BlockItem(MOTH_ENCLOSURE, new Item.Settings()));
 
     private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

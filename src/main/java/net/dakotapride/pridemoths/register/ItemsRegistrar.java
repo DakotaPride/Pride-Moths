@@ -44,12 +44,20 @@ public class ItemsRegistrar {
     public static Item DEMIGENDER_MOTH_JAR = registerMothContainedInJarItem(MothVariation.DEMIGENDER);
     public static Item AROACE_MOTH_JAR = registerMothContainedInJarItem(MothVariation.AROACE);
     public static Item DEMIROMANTIC_MOTH_JAR = registerMothContainedInJarItem(MothVariation.DEMIROMANTIC);
+    public static Item GENDERFLUID_MOTH_JAR = registerMothContainedInJarItem(MothVariation.GENDERFLUID);
+    public static Item INTERSEX_MOTH_JAR = registerMothContainedInJarItem(MothVariation.INTERSEX);
+    public static Item XENOGENDER_MOTH_JAR = registerMothContainedInJarItem(MothVariation.XENOGENDER);
+    public static Item GENDER_QUEER_MOTH_JAR = registerMothContainedInJarItem(MothVariation.GENDER_QUEER);
+    public static Item GENDERFAE_MOTH_JAR = registerMothContainedInJarItem(MothVariation.GENDERFAE);
+    public static Item GENDERFAUN_MOTH_JAR = registerMothContainedInJarItem(MothVariation.GENDERFAUN);
+    public static Item BIGENDER_MOTH_JAR = registerMothContainedInJarItem(MothVariation.BIGENDER);
+    public static Item PANGENDER_MOTH_JAR = registerMothContainedInJarItem(MothVariation.PANGENDER);
     public static Item ALLY_MOTH_JAR = registerMothContainedInJarItem(MothVariation.ALLY);
     public static Item RARE_MOTH_JAR = registerMothContainedInJarItem(MothVariation.RARE);
 
     public static Item registerItem(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         // Create the item key.
-        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(PrideMothsInitialize.ID, name));
+        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(PrideMothsInitialize.MOD_ID, name));
 
         // Create the item instance.
         Item item = itemFactory.apply(settings.registryKey(itemKey));

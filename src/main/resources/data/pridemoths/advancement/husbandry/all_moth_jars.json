@@ -1,0 +1,413 @@
+{
+  "display": {
+    "icon": {
+      "id": "pridemoths:transgender_moth_jar"
+    },
+    "description": {
+      "translate": "advancements.pridemoths.all_moth_jars.description"
+    },
+    "title": {
+      "translate": "advancements.pridemoths.all_moth_jars.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "pridemoths:husbandry/moth_jar",
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:moth_jar"
+          }
+        ]
+      }
+    },
+    "1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:rare_moth_jar"
+          }
+        ]
+      }
+    },
+    "2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:agender_moth_jar"
+          }
+        ]
+      }
+    },
+    "3": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:ally_moth_jar"
+          }
+        ]
+      }
+    },
+    "4": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:aromantic_moth_jar"
+          }
+        ]
+      }
+    },
+    "5": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:aroace_moth_jar"
+          }
+        ]
+      }
+    },
+    "6": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:gender_queer_moth_jar"
+          }
+        ]
+      }
+    },
+    "7": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:asexual_moth_jar"
+          }
+        ]
+      }
+    },
+    "8": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:bisexual_moth_jar"
+          }
+        ]
+      }
+    },
+    "9": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:demiboy_moth_jar"
+          }
+        ]
+      }
+    },
+    "10": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:demigirl_moth_jar"
+          }
+        ]
+      }
+    },
+    "11": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:demigender_moth_jar"
+          }
+        ]
+      }
+    },
+    "12": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:demisexual_moth_jar"
+          }
+        ]
+      }
+    },
+    "13": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:demiromantic_moth_jar"
+          }
+        ]
+      }
+    },
+    "14": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:gay_moth_jar"
+          }
+        ]
+      }
+    },
+    "15": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:lesbian_moth_jar"
+          }
+        ]
+      }
+    },
+    "16": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:lgbt_moth_jar"
+          }
+        ]
+      }
+    },
+    "17": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:non_binary_moth_jar"
+          }
+        ]
+      }
+    },
+    "18": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:omnisexual_moth_jar"
+          }
+        ]
+      }
+    },
+    "19": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:pansexual_moth_jar"
+          }
+        ]
+      }
+    },
+    "20": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:polyamorous_moth_jar"
+          }
+        ]
+      }
+    },
+    "21": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:polysexual_moth_jar"
+          }
+        ]
+      }
+    },
+    "22": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:transgender_moth_jar"
+          }
+        ]
+      }
+    },
+    "23": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:genderfluid_moth_jar"
+          }
+        ]
+      }
+    },
+    "24": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:intersex_moth_jar"
+          }
+        ]
+      }
+    },
+    "25": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:xenogender_moth_jar"
+          }
+        ]
+      }
+    },
+    "26": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:genderfae_moth_jar"
+          }
+        ]
+      }
+    },
+    "27": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:genderfaun_moth_jar"
+          }
+        ]
+      }
+    },
+    "28": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:bigender_moth_jar"
+          }
+        ]
+      }
+    },
+    "29": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pridemoths:pangender_moth_jar"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ],
+    [
+      "1"
+    ],
+    [
+      "2"
+    ],
+    [
+      "3"
+    ],
+    [
+      "4"
+    ],
+    [
+      "5"
+    ],
+    [
+      "6"
+    ],
+    [
+      "7"
+    ],
+    [
+      "8"
+    ],
+    [
+      "9"
+    ],
+    [
+      "10"
+    ],
+    [
+      "11"
+    ],
+    [
+      "12"
+    ],
+    [
+      "13"
+    ],
+    [
+      "14"
+    ],
+    [
+      "15"
+    ],
+    [
+      "16"
+    ],
+    [
+      "17"
+    ],
+    [
+      "18"
+    ],
+    [
+      "19"
+    ],
+    [
+      "20"
+    ],
+    [
+      "21"
+    ],
+    [
+      "22"
+    ],
+    [
+      "23"
+    ],
+    [
+      "24"
+    ],
+    [
+      "25"
+    ],
+    [
+      "26"
+    ],
+    [
+      "27"
+    ],
+    [
+      "28"
+    ],
+    [
+      "29"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -17,7 +17,7 @@ public class EntityTypeRegistrar {
 
     public static <T extends Entity> EntityType<T> registerEntityType(String id, EntityType.EntityFactory<T> entityType, SpawnGroup group, float width, float height) {
         return Registry.register(
-                Registries.ENTITY_TYPE, Identifier.of(PrideMothsInitialize.ID, id),
+                Registries.ENTITY_TYPE, Identifier.of(PrideMothsInitialize.MOD_ID, id),
                 EntityType.Builder.create(entityType, group)
                         .dimensions(width, height).build(PrideMothsInitialize.keyOf(id)));
     }

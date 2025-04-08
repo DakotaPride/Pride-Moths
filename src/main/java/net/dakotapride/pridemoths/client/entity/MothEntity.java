@@ -43,6 +43,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -64,7 +65,9 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             MothVariation.TRANSGENDER, MothVariation.LGBT, MothVariation.NON_BINARY, MothVariation.AGENDER, MothVariation.ASEXUAL,
             MothVariation.GAY, MothVariation.LESBIAN, MothVariation.BISEXUAL, MothVariation.PANSEXUAL, MothVariation.POLYAMOROUS,
             MothVariation.POLYSEXUAL, MothVariation.OMNISEXUAL, MothVariation.AROMANTIC, MothVariation.AROACE, MothVariation.DEMIGIRL,
-            MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC);
+            MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC, MothVariation.GENDERFLUID, MothVariation.INTERSEX,
+            MothVariation.XENOGENDER, MothVariation.GENDER_QUEER, MothVariation.GENDERFAE, MothVariation.GENDERFAUN, MothVariation.BIGENDER,
+            MothVariation.PANGENDER);
 
     public BlockPos lightPos;
     private int refreshLightPosIn = 0;
@@ -89,10 +92,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     protected void initGoals() {
-        //this.goalSelector.add(1, new MothFlyGoal(this, 1.0));
         this.goalSelector.add(5, new SwimGoal(this));
-        //this.goalSelector.add(4, new WanderAroundGoal(this, 1.0));
-        //this.goalSelector.add(2, new TravelToLightSourceGoal(this, 8));
         this.goalSelector.add(3, new TemptGoal(this, 1.25, stack -> stack.isIn(PrideMothsInitialize.CAN_MOTH_EAT), false));
         this.targetSelector.add(2, new AnimalMateGoal(this, 1.0));
         this.goalSelector.add(8, new MothWanderAroundGoal());
@@ -100,6 +100,36 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     public static MothVariation getPrideVariation(Random random) {
         return PRIDE_VARIATIONS.get(random.nextInt(PRIDE_VARIATIONS.size()));
+    }
+
+    public static final List<MothVariation> ASEXUAL_VISIBILITY_DAY_VARIATIONS = List.of(
+            MothVariation.ASEXUAL, MothVariation.DEMISEXUAL, MothVariation.AROACE);
+    public static final List<MothVariation> AROMANTIC_VISIBILITY_DAY_VARIATIONS = List.of(
+            MothVariation.AROMANTIC, MothVariation.DEMIROMANTIC, MothVariation.AROACE);
+
+    public static MothVariation getAceVariation(Random random) {
+        return PRIDE_VARIATIONS.get(random.nextInt(ASEXUAL_VISIBILITY_DAY_VARIATIONS.size()));
+    }
+
+    public static MothVariation getAroVariation(Random random) {
+        return PRIDE_VARIATIONS.get(random.nextInt(AROMANTIC_VISIBILITY_DAY_VARIATIONS.size()));
+    }
+
+    public static final List<MothVariation> DEMIGENDER_VISIBILITY_DAY_VARIATIONS = List.of(
+            MothVariation.DEMIBOY, MothVariation.DEMIGIRL, MothVariation.DEMIGENDER);
+
+    public static MothVariation getDemigenderVariation(Random random) {
+        return PRIDE_VARIATIONS.get(random.nextInt(DEMIGENDER_VISIBILITY_DAY_VARIATIONS.size()));
+    }
+
+    public static final List<MothVariation> TRANSGENDER_VISIBILITY_DAY_VARIATIONS = List.of(
+            MothVariation.TRANSGENDER, MothVariation.NON_BINARY, MothVariation.AGENDER,
+            MothVariation.DEMIBOY, MothVariation.DEMIGIRL, MothVariation.DEMIGENDER,
+            MothVariation.GENDERFLUID, MothVariation.GENDER_QUEER, MothVariation.GENDERFAE, MothVariation.GENDERFAUN,
+            MothVariation.BIGENDER, MothVariation.PANGENDER);
+
+    public static MothVariation getTransgenderVariation(Random random) {
+        return PRIDE_VARIATIONS.get(random.nextInt(TRANSGENDER_VISIBILITY_DAY_VARIATIONS.size()));
     }
 
     public static MothVariation getOtherVariation(Random random) {
@@ -150,9 +180,47 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         date = LocalDate.now();
         int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
 
-        if (getLocalMonthFromUser == 6 || PrideMothsConfigs.GENERATE_PRIDE_VARIANTS_OUTSIDE_OF_PRIDE_MONTH) {
+        if (IPrideMoths.isAgenderDayOfVisibility()) {
+            setMothVariant(MothVariation.AGENDER);
+        } else if (IPrideMoths.isBisexualDayOfVisibility()) {
+            setMothVariant(MothVariation.BISEXUAL);
+        } else if (IPrideMoths.isGayDayOfVisibility()) {
+            setMothVariant(MothVariation.GAY);
+        } else if (IPrideMoths.isLesbianDayOfVisibility()) {
+            setMothVariant(MothVariation.LESBIAN);
+        } else if (IPrideMoths.isPansexualDayOfVisibility()) {
+            setMothVariant(MothVariation.PANSEXUAL);
+        } else if (IPrideMoths.isOmnisexualDayOfVisibility()) {
+            setMothVariant(MothVariation.OMNISEXUAL);
+        } else if (IPrideMoths.isPolyamorousDayOfVisibility()) {
+            setMothVariant(MothVariation.POLYAMOROUS);
+        } else if (IPrideMoths.isPolysexualDayOfVisibility()) {
+            setMothVariant(MothVariation.POLYSEXUAL);
+        } else if (IPrideMoths.isIntersexDayOfVisibility()) {
+            setMothVariant(MothVariation.INTERSEX);
+        } else if (IPrideMoths.isXenogenderDayOfVisibility()) {
+            setMothVariant(MothVariation.XENOGENDER);
+        } else if (IPrideMoths.isGenderQueerDayOfVisibility()) {
+            setMothVariant(MothVariation.GENDER_QUEER);
+        } else if (IPrideMoths.isGenderfluidWeekOfVisibility()) {
+            setMothVariant(MothVariation.GENDERFLUID);
+        }
+
+        else if (IPrideMoths.isTransgenderDayOfVisibility()) {
+            setMothVariant(getTransgenderVariation(random));
+        } else if (IPrideMoths.isAsexualDayOfVisibility()) {
+            setMothVariant(getAceVariation(random));
+        } else if (IPrideMoths.isAromanticDayOfVisibility()) {
+            setMothVariant(getAroVariation(random));
+        } else if (IPrideMoths.isDemigenderDayOfVisibility()) {
+            setMothVariant(getDemigenderVariation(random));
+        }
+
+        else if (getLocalMonthFromUser == 6 || PrideMothsConfigs.GENERATE_PRIDE_VARIANTS_OUTSIDE_OF_PRIDE_MONTH) {
             setMothVariant(getPrideVariation(random));
-        } else {
+        }
+
+        else {
             setMothVariant(getOtherVariation(random));
         }
 
@@ -185,33 +253,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         }
 
         if (player.getStackInHand(hand).getItem() == ItemsRegistrar.GLASS_JAR && !this.isBaby()) {
-            Item item;
-
-            switch (this.getMothVariant()) {
-                case RARE -> item = ItemsRegistrar.RARE_MOTH_JAR;
-                case AGENDER -> item = ItemsRegistrar.AGENDER_MOTH_JAR;
-                case AROACE -> item = ItemsRegistrar.AROACE_MOTH_JAR;
-                case AROMANTIC -> item = ItemsRegistrar.AROMANTIC_MOTH_JAR;
-                case ASEXUAL -> item = ItemsRegistrar.ASEXUAL_MOTH_JAR;
-                case BISEXUAL -> item = ItemsRegistrar.BISEXUAL_MOTH_JAR;
-                case DEMIBOY -> item = ItemsRegistrar.DEMIBOY_MOTH_JAR;
-                case DEMIGENDER -> item = ItemsRegistrar.DEMIGENDER_MOTH_JAR;
-                case DEMIGIRL -> item = ItemsRegistrar.DEMIGIRL_MOTH_JAR;
-                case DEMIROMANTIC -> item = ItemsRegistrar.DEMIROMANTIC_MOTH_JAR;
-                case DEMISEXUAL -> item = ItemsRegistrar.DEMISEXUAL_MOTH_JAR;
-                case GAY -> item = ItemsRegistrar.GAY_MOTH_JAR;
-                case LESBIAN -> item = ItemsRegistrar.LESBIAN_MOTH_JAR;
-                case LGBT -> item = ItemsRegistrar.LGBT_MOTH_JAR;
-                case NON_BINARY -> item = ItemsRegistrar.NON_BINARY_MOTH_JAR;
-                case OMNISEXUAL -> item = ItemsRegistrar.OMNISEXUAL_MOTH_JAR;
-                case PANSEXUAL -> item = ItemsRegistrar.PANSEXUAL_MOTH_JAR;
-                case POLYAMOROUS -> item = ItemsRegistrar.POLYAMOROUS_MOTH_JAR;
-                case POLYSEXUAL -> item = ItemsRegistrar.POLYSEXUAL_MOTH_JAR;
-                case TRANSGENDER -> item = ItemsRegistrar.TRANSGENDER_MOTH_JAR;
-                default -> item = ItemsRegistrar.MOTH_JAR;
-            }
-
-            ItemStack itemStack = new ItemStack(item);
+            ItemStack itemStack = getMothJarItemFromVariation();
             if (this.hasCustomName()) {
                 this.setCustomName(itemStack.get(DataComponentTypes.CUSTOM_NAME));
                 // itemStack.setName(this.getCustomName());
@@ -238,6 +280,49 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         }
 
         return ActionResult.PASS;
+    }
+
+    @Override
+    public @Nullable ItemStack getPickBlockStack() {
+        return getMothJarItemFromVariation();
+    }
+
+    private @NotNull ItemStack getMothJarItemFromVariation() {
+        Item item;
+
+        switch (this.getMothVariant()) {
+            case RARE -> item = ItemsRegistrar.RARE_MOTH_JAR;
+            case AGENDER -> item = ItemsRegistrar.AGENDER_MOTH_JAR;
+            case AROACE -> item = ItemsRegistrar.AROACE_MOTH_JAR;
+            case AROMANTIC -> item = ItemsRegistrar.AROMANTIC_MOTH_JAR;
+            case ASEXUAL -> item = ItemsRegistrar.ASEXUAL_MOTH_JAR;
+            case BISEXUAL -> item = ItemsRegistrar.BISEXUAL_MOTH_JAR;
+            case DEMIBOY -> item = ItemsRegistrar.DEMIBOY_MOTH_JAR;
+            case DEMIGENDER -> item = ItemsRegistrar.DEMIGENDER_MOTH_JAR;
+            case DEMIGIRL -> item = ItemsRegistrar.DEMIGIRL_MOTH_JAR;
+            case DEMIROMANTIC -> item = ItemsRegistrar.DEMIROMANTIC_MOTH_JAR;
+            case DEMISEXUAL -> item = ItemsRegistrar.DEMISEXUAL_MOTH_JAR;
+            case GAY -> item = ItemsRegistrar.GAY_MOTH_JAR;
+            case LESBIAN -> item = ItemsRegistrar.LESBIAN_MOTH_JAR;
+            case LGBT -> item = ItemsRegistrar.LGBT_MOTH_JAR;
+            case NON_BINARY -> item = ItemsRegistrar.NON_BINARY_MOTH_JAR;
+            case OMNISEXUAL -> item = ItemsRegistrar.OMNISEXUAL_MOTH_JAR;
+            case PANSEXUAL -> item = ItemsRegistrar.PANSEXUAL_MOTH_JAR;
+            case POLYAMOROUS -> item = ItemsRegistrar.POLYAMOROUS_MOTH_JAR;
+            case POLYSEXUAL -> item = ItemsRegistrar.POLYSEXUAL_MOTH_JAR;
+            case TRANSGENDER -> item = ItemsRegistrar.TRANSGENDER_MOTH_JAR;
+            case GENDERFLUID -> item = ItemsRegistrar.GENDERFLUID_MOTH_JAR;
+            case INTERSEX -> item = ItemsRegistrar.INTERSEX_MOTH_JAR;
+            case XENOGENDER -> item = ItemsRegistrar.XENOGENDER_MOTH_JAR;
+            case GENDER_QUEER -> item = ItemsRegistrar.GENDER_QUEER_MOTH_JAR;
+            case GENDERFAE -> item = ItemsRegistrar.GENDERFAE_MOTH_JAR;
+            case GENDERFAUN -> item = ItemsRegistrar.GENDERFAUN_MOTH_JAR;
+            case BIGENDER -> item = ItemsRegistrar.BIGENDER_MOTH_JAR;
+            case PANGENDER -> item = ItemsRegistrar.PANGENDER_MOTH_JAR;
+            default -> item = ItemsRegistrar.MOTH_JAR;
+        }
+
+        return new ItemStack(item);
     }
 
     public void setMothVariant(MothVariation type) {
@@ -280,66 +365,59 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         return false;
     }
 
+    private boolean queerNames() {
+        String name = this.getName().getString();
+        return name.equalsIgnoreCase("lgbt")
+                || name.equalsIgnoreCase("lgbtq")
+                || name.equalsIgnoreCase("lgbtqia")
+                || name.equalsIgnoreCase("lgbtqia+");
+    }
+
+    private boolean nonBinaryNames() {
+        String name = this.getName().getString();
+        return name.equalsIgnoreCase("non-binary")
+                || name.equalsIgnoreCase("non_binary")
+                || name.equalsIgnoreCase("nonbinary")
+                || name.equalsIgnoreCase("nyan-binary");
+    }
+
+    private boolean twoNames(String i0, String i1) {
+        String name = this.getName().getString();
+        return name.equalsIgnoreCase(i0) || name.equalsIgnoreCase(i1);
+    }
+
     @Override
     public void tick() {
         super.tick();
 
         if (this.hasCustomName() && !this.isBaby()) {
-            if (this.getMothVariant() != MothVariation.NON_BINARY && this.getName().getString().equalsIgnoreCase("non-binary")) {
+            if (this.getMothVariant() != MothVariation.NON_BINARY && nonBinaryNames()) {
                 this.setMothVariant(MothVariation.NON_BINARY);
-            } else if (this.getMothVariant() != MothVariation.NON_BINARY && this.getName().getString().equalsIgnoreCase("non binary")) {
-                this.setMothVariant(MothVariation.NON_BINARY);
-            } else if (this.getMothVariant() != MothVariation.TRANSGENDER && this.getName().getString().equalsIgnoreCase("trans")) {
+            } else if (this.getMothVariant() != MothVariation.TRANSGENDER && twoNames("trans", "transgender")) {
                 this.setMothVariant(MothVariation.TRANSGENDER);
-            } else if (this.getMothVariant() != MothVariation.TRANSGENDER && this.getName().getString().equalsIgnoreCase("transgender")) {
-                this.setMothVariant(MothVariation.TRANSGENDER);
-            } else if (this.getMothVariant() != MothVariation.LGBT && this.getName().getString().equalsIgnoreCase("lgbt")) {
+            } else if (this.getMothVariant() != MothVariation.LGBT && queerNames()) {
                 this.setMothVariant(MothVariation.LGBT);
-            } else if (this.getMothVariant() != MothVariation.LGBT && this.getName().getString().equalsIgnoreCase("lgbtq")) {
-                this.setMothVariant(MothVariation.LGBT);
-            } else if (this.getMothVariant() != MothVariation.LGBT && this.getName().getString().equalsIgnoreCase("lgbtqia")) {
-                this.setMothVariant(MothVariation.LGBT);
-            } else if (this.getMothVariant() != MothVariation.GAY && this.getName().getString().equalsIgnoreCase("gay")) {
+            } else if (this.getMothVariant() != MothVariation.GAY && twoNames("gay", "mlm")) {
                 this.setMothVariant(MothVariation.GAY);
-            } else if (this.getMothVariant() != MothVariation.GAY && this.getName().getString().equalsIgnoreCase("mlm")) {
-                this.setMothVariant(MothVariation.GAY);
-            } else if (this.getMothVariant() != MothVariation.LESBIAN && this.getName().getString().equalsIgnoreCase("lesbian")) {
-                this.setMothVariant(MothVariation.LESBIAN);
-            } else if (this.getMothVariant() != MothVariation.LESBIAN && this.getName().getString().equalsIgnoreCase("wlw")) {
+            } else if (this.getMothVariant() != MothVariation.LESBIAN && twoNames("lesbian", "wlw")) {
                 this.setMothVariant(MothVariation.LESBIAN);
             } else if (this.getMothVariant() != MothVariation.AGENDER && this.getName().getString().equalsIgnoreCase("agender")) {
                 this.setMothVariant(MothVariation.AGENDER);
-            } else if (this.getMothVariant() != MothVariation.ASEXUAL && this.getName().getString().equalsIgnoreCase("asexual")) {
+            } else if (this.getMothVariant() != MothVariation.ASEXUAL && twoNames("asexual", "ace")) {
                 this.setMothVariant(MothVariation.ASEXUAL);
-            } else if (this.getMothVariant() != MothVariation.ASEXUAL && this.getName().getString().equalsIgnoreCase("ace")) {
-                this.setMothVariant(MothVariation.ASEXUAL);
-            } else if (this.getMothVariant() != MothVariation.BISEXUAL && this.getName().getString().equalsIgnoreCase("bisexual")) {
+            } else if (this.getMothVariant() != MothVariation.BISEXUAL && twoNames("bisexual", "bi")) {
                 this.setMothVariant(MothVariation.BISEXUAL);
-            } else if (this.getMothVariant() != MothVariation.BISEXUAL && this.getName().getString().equalsIgnoreCase("bi")) {
-                this.setMothVariant(MothVariation.BISEXUAL);
-            } else if (this.getMothVariant() != MothVariation.PANSEXUAL && this.getName().getString().equalsIgnoreCase("pansexual")) {
+            } else if (this.getMothVariant() != MothVariation.PANSEXUAL && twoNames("pansexual", "pan")) {
                 this.setMothVariant(MothVariation.PANSEXUAL);
-            } else if (this.getMothVariant() != MothVariation.PANSEXUAL && this.getName().getString().equalsIgnoreCase("pan")) {
-                this.setMothVariant(MothVariation.PANSEXUAL);
-            } else if (this.getMothVariant() != MothVariation.POLYAMOROUS && this.getName().getString().equalsIgnoreCase("polyamorous")) {
+            } else if (this.getMothVariant() != MothVariation.POLYAMOROUS && twoNames("polyamorous", "polygamous")) {
                 this.setMothVariant(MothVariation.POLYAMOROUS);
-            } else if (this.getMothVariant() != MothVariation.POLYAMOROUS && this.getName().getString().equalsIgnoreCase("polygamous")) {
-                this.setMothVariant(MothVariation.POLYAMOROUS);
-            } else if (this.getMothVariant() != MothVariation.POLYSEXUAL && this.getName().getString().equalsIgnoreCase("polysexual")) {
+            } else if (this.getMothVariant() != MothVariation.POLYSEXUAL && twoNames("polysexual", "poly")) {
                 this.setMothVariant(MothVariation.POLYSEXUAL);
-            } else if (this.getMothVariant() != MothVariation.POLYSEXUAL && this.getName().getString().equalsIgnoreCase("poly")) {
-                this.setMothVariant(MothVariation.POLYSEXUAL);
-            } else if (this.getMothVariant() != MothVariation.OMNISEXUAL && this.getName().getString().equalsIgnoreCase("omnisexual")) {
+            } else if (this.getMothVariant() != MothVariation.OMNISEXUAL && twoNames("omnisexual", "omni")) {
                 this.setMothVariant(MothVariation.OMNISEXUAL);
-            } else if (this.getMothVariant() != MothVariation.OMNISEXUAL && this.getName().getString().equalsIgnoreCase("omni")) {
-                this.setMothVariant(MothVariation.OMNISEXUAL);
-            } else if (this.getMothVariant() != MothVariation.DEMISEXUAL && this.getName().getString().equalsIgnoreCase("demisexual")) {
+            } else if (this.getMothVariant() != MothVariation.DEMISEXUAL && twoNames("demisexual", "demi")) {
                 this.setMothVariant(MothVariation.DEMISEXUAL);
-            } else if (this.getMothVariant() != MothVariation.DEMISEXUAL && this.getName().getString().equalsIgnoreCase("demi")) {
-                this.setMothVariant(MothVariation.DEMISEXUAL);
-            } else if (this.getMothVariant() != MothVariation.DEMIROMANTIC && this.getName().getString().equalsIgnoreCase("demiromantic")) {
-                this.setMothVariant(MothVariation.DEMIROMANTIC);
-            } else if (this.getMothVariant() != MothVariation.DEMIROMANTIC && this.getName().getString().equalsIgnoreCase("demiro")) {
+            } else if (this.getMothVariant() != MothVariation.DEMIROMANTIC && twoNames("demiromantic", "demiro")) {
                 this.setMothVariant(MothVariation.DEMIROMANTIC);
             } else if (this.getMothVariant() != MothVariation.DEMIBOY && this.getName().getString().equalsIgnoreCase("demiboy")) {
                 this.setMothVariant(MothVariation.DEMIBOY);
@@ -349,11 +427,25 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 this.setMothVariant(MothVariation.DEMIGENDER);
             } else if (this.getMothVariant() != MothVariation.AROACE && this.getName().getString().equalsIgnoreCase("aroace")) {
                 this.setMothVariant(MothVariation.AROACE);
+            } else if (this.getMothVariant() != MothVariation.GENDERFLUID && twoNames("gender_fluid", "genderfluid")) {
+                this.setMothVariant(MothVariation.GENDERFLUID);
+            } else if (this.getMothVariant() != MothVariation.INTERSEX && this.getName().getString().equalsIgnoreCase("intersex")) {
+                this.setMothVariant(MothVariation.INTERSEX);
+            } else if (this.getMothVariant() != MothVariation.XENOGENDER && this.getName().getString().equalsIgnoreCase("xenogender")) {
+                this.setMothVariant(MothVariation.XENOGENDER);
+            } else if (this.getMothVariant() != MothVariation.GENDER_QUEER && twoNames("gender_queer", "genderqueer")) {
+                this.setMothVariant(MothVariation.GENDER_QUEER);
+            } else if (this.getMothVariant() != MothVariation.GENDERFAE && this.getName().getString().equalsIgnoreCase("genderfae")) {
+                this.setMothVariant(MothVariation.GENDERFAE);
+            } else if (this.getMothVariant() != MothVariation.GENDERFAUN && this.getName().getString().equalsIgnoreCase("genderfaun")) {
+                this.setMothVariant(MothVariation.GENDERFAUN);
+            } else if (this.getMothVariant() != MothVariation.BIGENDER && this.getName().getString().equalsIgnoreCase("bigender")) {
+                this.setMothVariant(MothVariation.BIGENDER);
+            } else if (this.getMothVariant() != MothVariation.PANGENDER && this.getName().getString().equalsIgnoreCase("pangender")) {
+                this.setMothVariant(MothVariation.PANGENDER);
             }
 
-            if (this.getMothVariant() != MothVariation.ALLY && this.getCustomName().getString().equalsIgnoreCase("ally")) {
-                this.setMothVariant(MothVariation.ALLY);
-            } else if (this.getMothVariant() != MothVariation.ALLY && this.getCustomName().getString().equalsIgnoreCase("straight")) {
+            if (this.getMothVariant() != MothVariation.ALLY && twoNames("ally", "straight")) {
                 this.setMothVariant(MothVariation.ALLY);
             }
 
@@ -379,22 +471,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             }
         }
 
-    }
-
-    public static class MothFlyGoal extends FlyGoal {
-        public MothFlyGoal(PathAwareEntity pathAwareEntity, double d) {
-            super(pathAwareEntity, d);
-        }
-
-        @Nullable
-        @Override
-        protected Vec3d getWanderTarget() {
-            Vec3d vec3d = this.mob.getRotationVec(0.0F);
-            Vec3d vec3d2 = AboveGroundTargeting.find(this.mob, 8, 7,
-                    vec3d.x, vec3d.z, 1.5707964F, 3, 1);
-            return vec3d2 != null ? vec3d2 : NoPenaltySolidTargeting.find(this.mob, 8,
-                    4, -2, vec3d.x, vec3d.z, 1.5707963705062866);
-        }
     }
 
     @Override
