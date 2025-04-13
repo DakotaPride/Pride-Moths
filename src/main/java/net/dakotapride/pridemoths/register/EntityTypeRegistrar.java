@@ -15,7 +15,7 @@ public class EntityTypeRegistrar {
     public static EntityType<MothEntity> MOTH = Registry.register(
             Registries.ENTITY_TYPE, Identifier.of(PrideMothsInitialize.MOD_ID, "moth"),
             EntityType.Builder.create(MothEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(0.45F, 0.45F).build());
+                    .dimensions(0.45F, 0.45F).maxTrackingRange(10).build());
 
     public static void yep() {
         FabricDefaultAttributeRegistry.register(MOTH, MothEntity.setAttributes());
