@@ -19,6 +19,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -37,6 +38,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -186,6 +188,9 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     @Override
     protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof MothEnclosureBlockEntity mothEnclosureBlockEntity) {
+            if (player instanceof ServerPlayerEntity serverPlayerEntity && serverPlayerEntity.interactionManager.getGameMode() == GameMode.ADVENTURE)
+                return ActionResult.FAIL;
+
             if (!stack.isIn(PrideMothsInitialize.MOTH_JARS)) {
                 int i = state.get(FUZZ_LEVEL);
                 boolean bl = false;
