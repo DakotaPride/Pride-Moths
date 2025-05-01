@@ -12,7 +12,10 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.AboveGroundTargeting;
 import net.minecraft.entity.ai.NoPenaltySolidTargeting;
 import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -23,8 +26,8 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -48,9 +51,12 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
@@ -59,8 +65,8 @@ import java.util.List;
 
 public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IPrideMoths {
     private static final TrackedData<String> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.STRING);
-    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    public boolean fromJar = false;
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    public static final TrackedData<Boolean> FROM_JAR = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final List<MothVariation> PRIDE_VARIATIONS = List.of(
             MothVariation.TRANSGENDER, MothVariation.LGBT, MothVariation.NON_BINARY, MothVariation.AGENDER, MothVariation.ASEXUAL,
             MothVariation.GAY, MothVariation.LESBIAN, MothVariation.BISEXUAL, MothVariation.PANSEXUAL, MothVariation.POLYAMOROUS,
@@ -334,17 +340,28 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         super.initDataTracker(builder);
 
         builder.add(VARIANT, MothVariation.DEFAULT.toString());
+        builder.add(FROM_JAR, false);
 
         // this.dataTracker.startTracking(VARIANT, MothVariation.DEFAULT.toString());
+    }
+
+    public boolean isFromGlassJar() {
+        return this.dataTracker.get(FROM_JAR);
+    }
+
+    public void setFromGlassJar(boolean b) {
+        this.dataTracker.set(FROM_JAR, b);
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound tag) {
         super.readCustomDataFromNbt(tag);
 
-        this.fromJar = tag.getBoolean("FromGlassJar");
+        //this.fromJar = tag.getBoolean("FromGlassJar");
+        this.setFromGlassJar(tag.getBoolean("FromGlassJar", false));
         if (tag.contains("MothVariant")) {
-            this.setMothVariant(MothVariation.valueOf(tag.getString("MothVariant")));
+            //this.setMothVariant(MothVariation.valueOf(tag.getString("MothVariant")));
+            this.setMothVariant(tag.get("MothVariant", MothVariation.INDEX_CODEC).orElse(MothVariation.DEFAULT));
         }
     }
 
@@ -352,7 +369,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     public void writeCustomDataToNbt(NbtCompound tag) {
         super.writeCustomDataToNbt(tag);
 
-        tag.putBoolean("FromGlassJar", fromJar);
+        //tag.putBoolean("FromGlassJar", FROM_JAR);
+        tag.putBoolean("FromGlassJar", this.isFromGlassJar());
         tag.putString("MothVariant", this.getMothVariant().toString());
     }
 
@@ -361,7 +379,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean handleFallDamage(double fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
     }
 
@@ -493,21 +511,28 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controller) {
-        controller.add(new AnimationController<>(this, "controller", 0, this::predicate));
+    public void registerControllers(final AnimatableManager.ControllerRegistrar controller) {
+        //controller.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controller.add(new AnimationController<>("controller", 0, this::animController));
     }
 
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
-        // if (event.isMoving()) {
-        //            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.flight", Animation.LoopType.LOOP));
-        //        } else {
-        //            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
-        //        }
-
-        event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
+    protected PlayState animController(final AnimationTest<GeoAnimatable> animTest) {
+        animTest.setAndContinue(RawAnimation.begin().thenLoop("animation.moth.idle"));
 
         return PlayState.CONTINUE;
     }
+
+//    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
+//        // if (event.isMoving()) {
+//        //            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.flight", Animation.LoopType.LOOP));
+//        //        } else {
+//        //            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
+//        //        }
+//
+//        event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
+//
+//        return PlayState.CONTINUE;
+//    }
 
     @Nullable
     @Override

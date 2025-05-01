@@ -1,11 +1,11 @@
 package net.dakotapride.pridemoths.item;
 
-import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,6 +22,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.RaycastContext;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class GlassJarItem extends Item {
     public GlassJarItem(boolean i, Settings settings) {
@@ -114,7 +115,7 @@ public class GlassJarItem extends Item {
 
             moth.setPosition(blockPos2.getX() + .5f, blockPos2.getY(), blockPos2.getZ() + .5f);
             moth.setMothVariant(variation);
-            moth.fromJar = true;
+            moth.setFromGlassJar(true);
 
             if (this.getDefaultStack().get(DataComponentTypes.CUSTOM_NAME) != null) {
                 moth.setCustomName(context.getStack().getName());
@@ -134,11 +135,11 @@ public class GlassJarItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.translatable("text.pridemoths.jar.details").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        textConsumer.accept(Text.translatable("text.pridemoths.jar.details").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
 
         if (!stack.isOf(ItemsRegistrar.GLASS_JAR)) {
-            tooltip.add(Text.translatable("text.pridemoths.jar." + getMothVariant(stack.getItem()).getVariation()).formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
+            textConsumer.accept(Text.translatable("text.pridemoths.jar." + getMothVariant(stack.getItem()).getVariation()).formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
         }
     }
 }

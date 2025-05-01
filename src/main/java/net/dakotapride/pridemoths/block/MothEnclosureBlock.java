@@ -345,16 +345,16 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
         return itemStack;
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        super.appendTooltip(stack, context, tooltip, options);
-
-        for (ItemStack itemStack : stack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).iterateNonEmpty()) {
-            if (itemStack.isIn(PrideMothsInitialize.MOTH_JARS) && itemStack.getItem() instanceof GlassJarItem jarItem) {
-                tooltip.add(Text.translatable("container.mothEnclosure.itemCount." + GlassJarItem.getMothVariant(jarItem).getVariation()).formatted(Formatting.ITALIC, Formatting.GRAY));
-            }
-        }
-    }
+//    @Override
+//    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+//        super.appendTooltip(stack, context, tooltip, options);
+//
+//        for (ItemStack itemStack : stack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).iterateNonEmpty()) {
+//            if (itemStack.isIn(PrideMothsInitialize.MOTH_JARS) && itemStack.getItem() instanceof GlassJarItem jarItem) {
+//                tooltip.add(Text.translatable("container.mothEnclosure.itemCount." + GlassJarItem.getMothVariant(jarItem).getVariation()).formatted(Formatting.ITALIC, Formatting.GRAY));
+//            }
+//        }
+//    }
 
     @Override
     public MapCodec<? extends BlockWithEntity> getCodec() {
@@ -384,9 +384,9 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     }
 
     @Override
-    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
         world.updateComparators(pos, this);
-        super.onStateReplaced(state, world, pos, newState, moved);
+        super.onStateReplaced(state, world, pos, moved);
     }
 
     @Override

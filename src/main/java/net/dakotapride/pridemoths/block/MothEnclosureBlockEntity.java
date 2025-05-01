@@ -5,7 +5,9 @@ import net.dakotapride.pridemoths.register.BlockEntityTypeRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.EnchantingTableBlockEntity;
 import net.minecraft.component.ComponentMap;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,9 +16,11 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Nameable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -69,12 +73,12 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
         super.readNbt(nbt, registryLookup);
         //this.inventory.clear();
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (nbt.contains("Items", NbtElement.LIST_TYPE)) {
-            Inventories.readNbt(nbt, this.inventory, registryLookup);
-        }
-        this.lastInteractedSlot = nbt.getInt("last_interacted_slot");
-        if (nbt.contains("CustomName", NbtElement.STRING_TYPE)) {
-            this.customName = tryParseCustomName(nbt.getString("CustomName"), registryLookup);
+        Inventories.readNbt(nbt, this.inventory, registryLookup);
+
+        this.lastInteractedSlot = nbt.getInt("last_interacted_slot", -1);
+        if (nbt.contains("CustomName")) {
+            //this.customName = tryParseCustomName(nbt.getString("CustomName"), registryLookup);
+            this.customName = tryParseCustomName(nbt.get("CustomName"), registryLookup);
         }
     }
 
@@ -84,7 +88,8 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
         Inventories.writeNbt(nbt, this.inventory, false, registryLookup);
         nbt.putInt("last_interacted_slot", this.lastInteractedSlot);
         if (this.hasCustomName()) {
-            nbt.putString("CustomName", Text.Serialization.toJsonString(this.customName, registryLookup));
+            //nbt.putString("CustomName", Text.Serialization.toJsonString(this.customName, registryLookup));
+            nbt.put("CustomName", TextCodecs.CODEC, registryLookup.getOps(NbtOps.INSTANCE), this.customName);
         }
     }
 

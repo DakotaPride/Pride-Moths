@@ -5,19 +5,16 @@ import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.client.model.MothModel;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 import java.util.Map;
 
-public class MothRenderer extends GeoEntityRenderer<MothEntity> {
+public class MothRenderer<R extends LivingEntityRenderState & GeoRenderState> extends GeoEntityRenderer<MothEntity, R> {
     public static final Map<MothVariation, Identifier> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MothVariation.class), (map) -> {
                 map.put(MothVariation.DEFAULT, Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png"));
@@ -57,26 +54,37 @@ public class MothRenderer extends GeoEntityRenderer<MothEntity> {
         super(ctx, new MothModel());
     }
 
-    @Override
-    public Identifier getTextureLocation(MothEntity entity) {
-        if (entity.isBaby()) {
-            if (entity.getMothVariant() == MothVariation.RARE) {
-                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
-            } else {
-                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
-            }
-        }
-
-        return LOCATION_BY_VARIANT.get(entity.getMothVariant());
-    }
+//    @Override
+//    public void updateRenderState(MothEntity entity, MothRenderState entityRenderState, float partialTick) {
+//        entityRenderState.variation = entity.getMothVariant();
+//        entityRenderState.baby = entity.isBaby();
+//    }
 
     @Override
-    public RenderLayer getRenderType(MothEntity entity, Identifier texture, @Nullable VertexConsumerProvider bufferSource, float partialTick) {
+    public Identifier getTextureLocation(R renderState) {
+//        boolean baby = renderState.baby;
+//        MothVariation variation = renderState.variation;
+//
+//        if (baby) {
+//            if (variation == MothVariation.RARE)
+//                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
+//            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
+//        }
 
-        if (entity.isBaby()) {
-
-        }
-
-        return super.getRenderType(entity, texture, bufferSource, partialTick);
+        // return LOCATION_BY_VARIANT.get(variation);
+        return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
     }
+
+    //    @Override
+//    public Identifier getTextureLocation(MothEntity entity) {
+//        if (entity.isBaby()) {
+//            if (entity.getMothVariant() == MothVariation.RARE) {
+//                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
+//            } else {
+//                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
+//            }
+//        }
+//
+//        return LOCATION_BY_VARIANT.get(entity.getMothVariant());
+//    }
 }
