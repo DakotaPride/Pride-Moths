@@ -1,5 +1,5 @@
 Bugs
-- Moth Enclosure will drop all of its contents, but still retain them
+- Moth Enclosure will drop all of its contents, but still retains them
     - Duplication glitch
     - Unintended behaviour
 - Moth Enclosure tooltip doesn't show the variations, but instead shows the exact item names inside the container
