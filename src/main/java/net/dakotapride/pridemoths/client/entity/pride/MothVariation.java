@@ -56,6 +56,10 @@ public enum MothVariation implements StringIdentifiable {
         return this.index;
     }
 
+    public static MothVariation byIndex(int index) {
+        return INDEX_MAPPER.apply(index);
+    }
+
     public String getVariation() {
         return variation;
     }

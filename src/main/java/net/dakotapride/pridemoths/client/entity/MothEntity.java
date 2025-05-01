@@ -64,7 +64,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IPrideMoths {
-    private static final TrackedData<String> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.STRING);
+    private static final TrackedData<Integer> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public static final TrackedData<Boolean> FROM_JAR = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final List<MothVariation> PRIDE_VARIATIONS = List.of(
@@ -332,14 +332,14 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     public void setMothVariant(MothVariation type) {
-        this.dataTracker.set(VARIANT, type.toString());
+        this.dataTracker.set(VARIANT, type.getIndex());
     }
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
 
-        builder.add(VARIANT, MothVariation.DEFAULT.toString());
+        builder.add(VARIANT, MothVariation.DEFAULT.getIndex());
         builder.add(FROM_JAR, false);
 
         // this.dataTracker.startTracking(VARIANT, MothVariation.DEFAULT.toString());
@@ -359,10 +359,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
         //this.fromJar = tag.getBoolean("FromGlassJar");
         this.setFromGlassJar(tag.getBoolean("FromGlassJar", false));
-        if (tag.contains("MothVariant")) {
-            //this.setMothVariant(MothVariation.valueOf(tag.getString("MothVariant")));
-            this.setMothVariant(tag.get("MothVariant", MothVariation.INDEX_CODEC).orElse(MothVariation.DEFAULT));
-        }
+        this.setMothVariant(tag.get("MothVariant", MothVariation.INDEX_CODEC).orElse(MothVariation.DEFAULT));
     }
 
     @Override
@@ -371,11 +368,12 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
         //tag.putBoolean("FromGlassJar", FROM_JAR);
         tag.putBoolean("FromGlassJar", this.isFromGlassJar());
-        tag.putString("MothVariant", this.getMothVariant().toString());
+        //tag.putString("MothVariant", this.getMothVariant().toString());
+        tag.put("MothVariant", MothVariation.INDEX_CODEC, this.getMothVariant());
     }
 
     public MothVariation getMothVariant() {
-        return MothVariation.valueOf(this.dataTracker.get(VARIANT));
+        return MothVariation.byIndex(this.dataTracker.get(VARIANT));
     }
 
     @Override
@@ -433,6 +431,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 this.setMothVariant(MothVariation.POLYSEXUAL);
             } else if (this.getMothVariant() != MothVariation.OMNISEXUAL && twoNames("omnisexual", "omni")) {
                 this.setMothVariant(MothVariation.OMNISEXUAL);
+            } else if (this.getMothVariant() != MothVariation.AROMANTIC && twoNames("aromantic", "aro")) {
+                this.setMothVariant(MothVariation.AROMANTIC);
             } else if (this.getMothVariant() != MothVariation.DEMISEXUAL && twoNames("demisexual", "demi")) {
                 this.setMothVariant(MothVariation.DEMISEXUAL);
             } else if (this.getMothVariant() != MothVariation.DEMIROMANTIC && twoNames("demiromantic", "demiro")) {

@@ -9,34 +9,39 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 public class MothModel extends GeoModel<MothEntity> {
 
+    MothVariation variation;
+    boolean baby;
+
+    @Override
+    public void addAdditionalStateData(MothEntity animatable, GeoRenderState renderState) {
+        super.addAdditionalStateData(animatable, renderState);
+        variation = animatable.getMothVariant();
+        baby = animatable.isBaby();
+    }
+
     @Override
     public Identifier getModelResource(GeoRenderState renderState) {
-//        boolean baby = ((MothRenderState)renderState).baby;
-//
-//        if (baby)
-//            return Identifier.of(PrideMothsInitialize.MOD_ID, "baby_moth");
+        if (baby)
+            return Identifier.of(PrideMothsInitialize.MOD_ID, "baby_moth");
         return Identifier.of(PrideMothsInitialize.MOD_ID, "moth");
     }
 
     @Override
     public Identifier getTextureResource(GeoRenderState renderState) {
-//        boolean baby = ((MothRenderState)renderState).baby;
-//        MothVariation variation = ((MothRenderState)renderState).variation;
-//
-//        if (baby) {
-//            if (variation == MothVariation.RARE) {
-//                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
-//            } else {
-//                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
-//            }
-//        }
-//
-//        if (variation == MothVariation.RARE) {
-//            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/rare.png");
-//        } else {
-//            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
-//        }
-        return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
+        if (baby) {
+            if (variation == MothVariation.RARE) {
+                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
+            } else {
+                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
+            }
+        }
+
+        if (variation == MothVariation.RARE) {
+            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/rare.png");
+        } else {
+            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
+        }
+        //return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
     }
 
     @Override

@@ -54,7 +54,17 @@ public class MothRenderer<R extends LivingEntityRenderState & GeoRenderState> ex
         super(ctx, new MothModel());
     }
 
-//    @Override
+    MothVariation variation;
+    boolean baby;
+
+    @Override
+    public void addRenderData(MothEntity animatable, Void relatedObject, R renderState) {
+        super.addRenderData(animatable, relatedObject, renderState);
+        variation = animatable.getMothVariant();
+        baby = animatable.isBaby();
+    }
+
+    //    @Override
 //    public void updateRenderState(MothEntity entity, MothRenderState entityRenderState, float partialTick) {
 //        entityRenderState.variation = entity.getMothVariant();
 //        entityRenderState.baby = entity.isBaby();
@@ -62,17 +72,14 @@ public class MothRenderer<R extends LivingEntityRenderState & GeoRenderState> ex
 
     @Override
     public Identifier getTextureLocation(R renderState) {
-//        boolean baby = renderState.baby;
-//        MothVariation variation = renderState.variation;
-//
-//        if (baby) {
-//            if (variation == MothVariation.RARE)
-//                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
-//            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
-//        }
+        if (baby) {
+            if (variation == MothVariation.RARE)
+                return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/rare.png");
+            return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/baby/moth.png");
+        }
 
-        // return LOCATION_BY_VARIANT.get(variation);
-        return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
+        return LOCATION_BY_VARIANT.get(variation);
+        //return Identifier.of(PrideMothsInitialize.MOD_ID, "textures/model/moth.png");
     }
 
     //    @Override

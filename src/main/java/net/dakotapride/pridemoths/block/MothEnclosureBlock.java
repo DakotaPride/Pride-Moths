@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.item.GlassJarItem;
 import net.dakotapride.pridemoths.register.BlockEntityTypeRegistrar;
+import net.dakotapride.pridemoths.register.BlocksRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.block.*;
@@ -11,13 +12,11 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlockStateComponent;
 import net.minecraft.component.type.ContainerComponent;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -46,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.Consumer;
 
 public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final MapCodec<MothEnclosureBlock> CODEC = createCodec(MothEnclosureBlock::new);
@@ -66,6 +66,22 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
         }
 
         this.setDefaultState(blockState);
+    }
+
+    public static class MothEnclosureBlockItem extends BlockItem {
+        public MothEnclosureBlockItem(Block block, Settings settings) {
+            super(block, settings.registryKey(PrideMothsInitialize.keyOfItem("moth_enclosure")).translationKey("block.pridemoths.moth_enclosure"));
+        }
+
+        @Override
+        public void appendTooltip(ItemStack itemStack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+            for (ItemStack stack : itemStack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).iterateNonEmpty()) {
+                if (stack.isIn(PrideMothsInitialize.MOTH_JARS) && stack.getItem() instanceof GlassJarItem jarItem) {
+                    textConsumer.accept(Text.translatable("container.mothEnclosure.itemCount." +
+                            GlassJarItem.getMothVariant(jarItem).getVariation()).formatted(Formatting.ITALIC, Formatting.GRAY));
+                }
+            }
+        }
     }
 
     @Override

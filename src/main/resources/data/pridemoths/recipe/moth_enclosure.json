@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": {
-      "item": "pridemoths:moth_fuzz"
-    },
-    "P": {
-      "tag": "minecraft:planks"
-    }
+    "H": "pridemoths:moth_fuzz",
+    "P": "#minecraft:planks"
   },
   "pattern": [
     "PPP",
