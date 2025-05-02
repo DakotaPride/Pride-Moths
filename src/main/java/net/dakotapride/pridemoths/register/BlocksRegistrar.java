@@ -6,6 +6,7 @@ import net.dakotapride.pridemoths.block.MothEnclosureBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -71,7 +72,7 @@ public class BlocksRegistrar {
 
         RegistryKey<Item> itemKey = PrideMothsInitialize.keyOfItem("moth_enclosure");
 
-        BlockItem blockItem = new MothEnclosureBlock.MothEnclosureBlockItem(block, new Item.Settings().registryKey(itemKey).translationKey("block.pridemoths.moth_enclosure"));
+        BlockItem blockItem = new MothEnclosureBlock.MothEnclosureBlockItem(block, new Item.Settings().registryKey(itemKey).translationKey("block.pridemoths.moth_enclosure").component(DataComponentsRegistrar.MOTH_CONTAINER, ContainerComponent.DEFAULT));
         Registry.register(Registries.ITEM, itemKey, blockItem);
 
         return Registry.register(Registries.BLOCK, blockKey, block);

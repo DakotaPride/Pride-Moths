@@ -2,7 +2,6 @@ Bugs
 - Moth Enclosure will drop all of its contents, but still retains them
     - Duplication glitch
     - Unintended behaviour
-- Moth Enclosure shows it's actual contents still, but the variations tooltip now works
 
 FIXED
 - MothRenderer, MothModel, and MothRenderState cause crash when the given entity is loaded on the player's screen
@@ -11,5 +10,6 @@ FIXED
 - Moths do not retain their variation upon relogging into the world
 - Moth Enclosure recipe is broken
 - Moth Enclosure tooltip doesn't show the variations, but instead shows the exact item names inside the container
+    - Moth Enclosure shows it's actual contents still, but the variations tooltip now works
 - Tooltips show underneath the intended point of which they should
     - Below the advanced tooltips section showing the components + item id

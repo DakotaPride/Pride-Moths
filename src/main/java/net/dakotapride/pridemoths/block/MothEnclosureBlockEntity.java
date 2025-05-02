@@ -2,6 +2,7 @@ package net.dakotapride.pridemoths.block;
 
 import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.register.BlockEntityTypeRegistrar;
+import net.dakotapride.pridemoths.register.DataComponentsRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -73,7 +74,9 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
         super.readNbt(nbt, registryLookup);
         //this.inventory.clear();
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        Inventories.readNbt(nbt, this.inventory, registryLookup);
+        if (!this.getInventory().isEmpty()) {
+            Inventories.readNbt(nbt, this.inventory, registryLookup);
+        }
 
         this.lastInteractedSlot = nbt.getInt("last_interacted_slot", -1);
         if (nbt.contains("CustomName")) {
@@ -174,14 +177,14 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
     protected void readComponents(ComponentsAccess components) {
         super.readComponents(components);
         this.customName = components.get(DataComponentTypes.CUSTOM_NAME);
-        components.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).copyTo(this.inventory);
+        components.getOrDefault(DataComponentsRegistrar.MOTH_CONTAINER, ContainerComponent.DEFAULT).copyTo(this.inventory);
     }
 
     @Override
     protected void addComponents(ComponentMap.Builder componentMapBuilder) {
         super.addComponents(componentMapBuilder);
         componentMapBuilder.add(DataComponentTypes.CUSTOM_NAME, this.customName);
-        componentMapBuilder.add(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(this.inventory));
+        componentMapBuilder.add(DataComponentsRegistrar.MOTH_CONTAINER, ContainerComponent.fromStacks(this.inventory));
     }
 
     @Override
