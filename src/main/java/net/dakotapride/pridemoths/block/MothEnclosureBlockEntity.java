@@ -204,7 +204,7 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
 
     @Override
     public Text getDisplayName() {
-        return this.getName();
+        return Text.of("Moth Enclosure");
     }
 
     @Nullable
