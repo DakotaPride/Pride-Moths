@@ -25,8 +25,16 @@ public interface IPrideMoths {
     boolean isNov = month_of_year == 11;
     boolean isDec = month_of_year == 12;
 
+
+    List<Integer> b = List.of(25, 26, 27, 28, 29, 30, 31);
+
     static boolean isWorldMothWeek() {
-        return week_of_month == 4 && isJuly;
+        for (Integer i : b) {
+            if (day_of_month == i && isJuly) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static boolean isTransgenderDayOfVisibility() {
