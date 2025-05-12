@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": 13552324
-      },
-      {
-        "type": "minecraft:constant",
-        "value": 8545116
-      }
-    ]
+    "model": "pridemoths:item/moth_spawn_egg"
   }
 }

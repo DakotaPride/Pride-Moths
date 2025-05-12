@@ -27,7 +27,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -177,10 +176,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     }
 
-    @Override
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
-        LocalDate date;
-        date = LocalDate.now();
+    public void setFromInitialize() {
+        LocalDate date = LocalDate.now();
         int getLocalMonthFromUser = date.get(ChronoField.MONTH_OF_YEAR);
 
         if (IPrideMoths.isAgenderDayOfVisibility()) {
@@ -226,6 +223,11 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         else {
             setMothVariant(getOtherVariation(random));
         }
+    }
+
+    @Override
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        setFromInitialize();
 
         return super.initialize(world, difficulty, spawnReason, entityData);
     }

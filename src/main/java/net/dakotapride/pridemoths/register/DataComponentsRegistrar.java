@@ -15,7 +15,7 @@ public class DataComponentsRegistrar {
 //            "moths",
 //            builder -> builder.codec(MothEnclosureBlockEntity.MothData.LIST_CODEC).packetCodec(MothEnclosureBlockEntity.MothData.PACKET_CODEC.collect(PacketCodecs.toList())).cache()
 //    );
-public static final ComponentType<ContainerComponent> MOTH_CONTAINER = register("container",
+    public static final ComponentType<ContainerComponent> MOTH_CONTAINER = register("container",
         builder -> builder.codec(ContainerComponent.CODEC).packetCodec(ContainerComponent.PACKET_CODEC).cache());
 
     private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

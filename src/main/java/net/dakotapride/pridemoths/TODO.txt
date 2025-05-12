@@ -1,7 +1,6 @@
-Bugs -- NONE LEFT IN FABRIC
+Bugs -- NONE LEFT IN FABRIC OR NEOFORGE
 
-Goals
-- Port to Neoforge 1.21.5
+Goals -- DONE
 
 FIXED
 - MothRenderer, MothModel, and MothRenderState cause crash when the given entity is loaded on the player's screen
@@ -16,3 +15,21 @@ FIXED
 - Moth Enclosure will drop all of its contents, but still retains them
     - Duplication glitch
     - Unintended behaviour
+
+ACCOMPLISHED
+- Port to Neoforge 1.21.5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
