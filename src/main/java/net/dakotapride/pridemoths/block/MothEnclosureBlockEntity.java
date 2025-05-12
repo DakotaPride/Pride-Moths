@@ -174,6 +174,11 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
     }
 
     @Override
+    public void onBlockReplaced(BlockPos pos, BlockState oldState) {
+        //super.onBlockReplaced(pos, oldState);
+    }
+
+    @Override
     protected void readComponents(ComponentsAccess components) {
         super.readComponents(components);
         this.customName = components.get(DataComponentTypes.CUSTOM_NAME);

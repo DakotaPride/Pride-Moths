@@ -9,6 +9,7 @@ import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlockStateComponent;
 import net.minecraft.component.type.ContainerComponent;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -351,6 +353,11 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     }
 
     @Override
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        ItemScatterer.onStateReplaced(state, world, pos);
+    }
+
+    @Override
     public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
         ItemStack itemStack = super.getPickStack(world, pos, state, includeData);
         world.getBlockEntity(pos, BlockEntityTypeRegistrar.MOTH_ENCLOSURE_BLOCK_ENTITY).ifPresent(blockEntity -> blockEntity.readComponents(itemStack));
@@ -400,12 +407,6 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, FUZZ_LEVEL);
         SLOT_OCCUPIED_PROPERTIES.forEach(builder::add);
-    }
-
-    @Override
-    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
-        world.updateComparators(pos, this);
-        super.onStateReplaced(state, world, pos, moved);
     }
 
     @Override

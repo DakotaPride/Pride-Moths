@@ -1,7 +1,7 @@
-Bugs
-- Moth Enclosure will drop all of its contents, but still retains them
-    - Duplication glitch
-    - Unintended behaviour
+Bugs -- NONE LEFT IN FABRIC
+
+Goals
+- Port to Neoforge 1.21.5
 
 FIXED
 - MothRenderer, MothModel, and MothRenderState cause crash when the given entity is loaded on the player's screen
@@ -13,3 +13,6 @@ FIXED
     - Moth Enclosure shows it's actual contents still, but the variations tooltip now works
 - Tooltips show underneath the intended point of which they should
     - Below the advanced tooltips section showing the components + item id
+- Moth Enclosure will drop all of its contents, but still retains them
+    - Duplication glitch
+    - Unintended behaviour
