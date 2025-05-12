@@ -28,7 +28,9 @@ public class EntityTypeRegistrar {
                 SpawnGroup.CREATURE, MOTH, 80, 1, 3);
         BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE),
                 SpawnGroup.CREATURE, MOTH, 100, 2, 5);
-        BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.PLAINS),
+        BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.BIRCH_FOREST),
+                SpawnGroup.CREATURE, MOTH, 160, 3, 7);
+        BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
                 SpawnGroup.CREATURE, MOTH, 160, 3, 7);
     }
 }
