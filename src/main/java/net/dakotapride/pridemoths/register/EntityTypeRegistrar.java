@@ -24,9 +24,11 @@ public class EntityTypeRegistrar {
 
     public static void yep() {
         FabricDefaultAttributeRegistry.register(MOTH, MothEntity.setAttributes());
-        BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE),
-                SpawnGroup.CREATURE, MOTH, 60, 3, 7);
         BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.PLAINS),
-                SpawnGroup.CREATURE, MOTH, 100, 3, 7);
+                SpawnGroup.CREATURE, MOTH, 80, 1, 3);
+        BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.CHERRY_GROVE),
+                SpawnGroup.CREATURE, MOTH, 100, 2, 5);
+        BiomeModifications.addSpawn(biome -> biome.getBiomeKey().equals(BiomeKeys.PLAINS),
+                SpawnGroup.CREATURE, MOTH, 160, 3, 7);
     }
 }
