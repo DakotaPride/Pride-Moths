@@ -1,0 +1,27 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "estrogen"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "pridemoths:moth_fuzz"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "F F",
+    "F F"
+  ],
+  "results": [
+    {
+      "id": "estrogen:thigh_highs"
+    }
+  ]
+}

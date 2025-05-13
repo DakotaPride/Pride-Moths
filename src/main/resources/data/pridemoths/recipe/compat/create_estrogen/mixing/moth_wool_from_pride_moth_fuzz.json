@@ -1,0 +1,26 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "estrogen"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "F": {
+      "item": "pridemoths:moth_fuzz"
+    }
+  },
+  "pattern": [
+    "FF",
+    "FF"
+  ],
+  "results": [
+    {
+      "id": "estrogen:moth_wool"
+    }
+  ]
+}

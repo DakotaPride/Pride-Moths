@@ -1,0 +1,24 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "estrogen"
+      ]
+    }
+  ],
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "minecraft:elytra"
+    },
+    {
+      "item": "pridemoths:moth_fuzz"
+    }
+  ],
+  "results": [
+    {
+      "id": "estrogen:moth_elytra"
+    }
+  ]
+}
