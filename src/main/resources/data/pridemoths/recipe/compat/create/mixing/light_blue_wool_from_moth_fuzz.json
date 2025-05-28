@@ -25,9 +25,9 @@
       "item": "minecraft:light_blue_dye"
     },
     {
+      "type": "fluid_stack",
       "amount": 1000,
-      "fluid": "minecraft:water",
-      "nbt": {}
+      "fluid": "minecraft:water"
     }
   ],
   "results": [
