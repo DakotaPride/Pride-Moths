@@ -223,8 +223,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             setMothVariant(getOtherVariation(random));
         }
 
-        PrideMothsInitialize.LOGGER.info("[HAPPY PRIDE MOTH!] Set moth variation to " + getMothVariant().toString());
-
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
