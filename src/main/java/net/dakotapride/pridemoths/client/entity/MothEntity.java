@@ -107,18 +107,18 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             MothVariation.AROMANTIC, MothVariation.DEMIROMANTIC, MothVariation.AROACE);
 
     public static MothVariation getAceVariation(Random random) {
-        return PRIDE_VARIATIONS.get(random.nextInt(ASEXUAL_VISIBILITY_DAY_VARIATIONS.size()));
+        return ASEXUAL_VISIBILITY_DAY_VARIATIONS.get(random.nextInt(ASEXUAL_VISIBILITY_DAY_VARIATIONS.size()));
     }
 
     public static MothVariation getAroVariation(Random random) {
-        return PRIDE_VARIATIONS.get(random.nextInt(AROMANTIC_VISIBILITY_DAY_VARIATIONS.size()));
+        return AROMANTIC_VISIBILITY_DAY_VARIATIONS.get(random.nextInt(AROMANTIC_VISIBILITY_DAY_VARIATIONS.size()));
     }
 
     public static final List<MothVariation> DEMIGENDER_VISIBILITY_DAY_VARIATIONS = List.of(
             MothVariation.DEMIBOY, MothVariation.DEMIGIRL, MothVariation.DEMIGENDER);
 
     public static MothVariation getDemigenderVariation(Random random) {
-        return PRIDE_VARIATIONS.get(random.nextInt(DEMIGENDER_VISIBILITY_DAY_VARIATIONS.size()));
+        return DEMIGENDER_VISIBILITY_DAY_VARIATIONS.get(random.nextInt(DEMIGENDER_VISIBILITY_DAY_VARIATIONS.size()));
     }
 
     public static final List<MothVariation> TRANSGENDER_VISIBILITY_DAY_VARIATIONS = List.of(
@@ -128,7 +128,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             MothVariation.BIGENDER, MothVariation.PANGENDER);
 
     public static MothVariation getTransgenderVariation(Random random) {
-        return PRIDE_VARIATIONS.get(random.nextInt(TRANSGENDER_VISIBILITY_DAY_VARIATIONS.size()));
+        return TRANSGENDER_VISIBILITY_DAY_VARIATIONS.get(random.nextInt(TRANSGENDER_VISIBILITY_DAY_VARIATIONS.size()));
     }
 
     public static MothVariation getOtherVariation(Random random) {
@@ -222,6 +222,8 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         else {
             setMothVariant(getOtherVariation(random));
         }
+
+        PrideMothsInitialize.LOGGER.info("[HAPPY PRIDE MOTH!] Set moth variation to " + getMothVariant().toString());
 
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
