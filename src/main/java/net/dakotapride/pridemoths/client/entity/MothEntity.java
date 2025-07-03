@@ -254,7 +254,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         if (player.getStackInHand(hand).getItem() == ItemsRegistrar.GLASS_JAR && !this.isBaby()) {
             ItemStack itemStack = getMothJarItemFromVariation();
             if (this.hasCustomName()) {
-                this.setCustomName(itemStack.get(DataComponentTypes.CUSTOM_NAME));
+                itemStack.set(DataComponentTypes.CUSTOM_NAME, this.getCustomName());
             }
 
             if (!player.getAbilities().creativeMode) {
