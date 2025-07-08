@@ -31,11 +31,12 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -352,22 +353,18 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound tag) {
-        super.readCustomDataFromNbt(tag);
-
-        //this.fromJar = tag.getBoolean("FromGlassJar");
-        this.setFromGlassJar(tag.getBoolean("FromGlassJar", false));
-        this.setMothVariant(tag.get("MothVariant", MothVariation.INDEX_CODEC).orElse(MothVariation.DEFAULT));
+    protected void readCustomData(ReadView view) {
+        super.readCustomData(view);
+        this.setFromGlassJar(view.getBoolean("FromGlassJar", false));
+        this.setMothVariant(view.read("MothVariant", MothVariation.INDEX_CODEC).orElse(MothVariation.DEFAULT));
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound tag) {
-        super.writeCustomDataToNbt(tag);
+    protected void writeCustomData(WriteView view) {
+        super.writeCustomData(view);
 
-        //tag.putBoolean("FromGlassJar", FROM_JAR);
-        tag.putBoolean("FromGlassJar", this.isFromGlassJar());
-        //tag.putString("MothVariant", this.getMothVariant().toString());
-        tag.put("MothVariant", MothVariation.INDEX_CODEC, this.getMothVariant());
+        view.putBoolean("FromGlassJar", this.isFromGlassJar());
+        view.put("MothVariant", MothVariation.INDEX_CODEC, this.getMothVariant());
     }
 
     public MothVariation getMothVariant() {
@@ -483,7 +480,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Override
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation birdNavigation = new BirdNavigation(this, world);
-        birdNavigation.setCanPathThroughDoors(false);
+        birdNavigation.setCanOpenDoors(false);
         birdNavigation.setCanSwim(false);
         //birdNavigation.setCanEnterOpenDoors(false);
 

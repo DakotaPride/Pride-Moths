@@ -6,7 +6,6 @@ import net.dakotapride.pridemoths.register.DataComponentsRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.EnchantingTableBlockEntity;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.DataComponentTypes;
@@ -15,11 +14,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Nameable;
@@ -70,29 +67,26 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
     }
 
     @Override
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.readNbt(nbt, registryLookup);
-        //this.inventory.clear();
+    protected void readData(ReadView view) {
+        super.readData(view);
+
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         if (!this.getInventory().isEmpty()) {
-            Inventories.readNbt(nbt, this.inventory, registryLookup);
+            Inventories.readData(view, this.inventory);
         }
 
-        this.lastInteractedSlot = nbt.getInt("last_interacted_slot", -1);
-        if (nbt.contains("CustomName")) {
-            //this.customName = tryParseCustomName(nbt.getString("CustomName"), registryLookup);
-            this.customName = tryParseCustomName(nbt.get("CustomName"), registryLookup);
-        }
+        this.lastInteractedSlot = view.getInt("last_interacted_slot", -1);
+        this.customName = tryParseCustomName(view, "CustomName");
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.writeNbt(nbt, registryLookup);
-        Inventories.writeNbt(nbt, this.inventory, false, registryLookup);
-        nbt.putInt("last_interacted_slot", this.lastInteractedSlot);
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        Inventories.writeData(view, this.inventory, false);
+        view.putInt("last_interacted_slot", this.lastInteractedSlot);
         if (this.hasCustomName()) {
             //nbt.putString("CustomName", Text.Serialization.toJsonString(this.customName, registryLookup));
-            nbt.put("CustomName", TextCodecs.CODEC, registryLookup.getOps(NbtOps.INSTANCE), this.customName);
+            view.put("CustomName", TextCodecs.CODEC, this.customName);
         }
     }
 
@@ -193,9 +187,10 @@ public class MothEnclosureBlockEntity extends BlockEntity implements Inventory, 
     }
 
     @Override
-    public void removeFromCopiedStackNbt(NbtCompound nbt) {
-        nbt.remove("CustomName");
-        nbt.remove("Items");
+    public void removeFromCopiedStackData(WriteView view) {
+        super.removeFromCopiedStackData(view);
+        view.remove("CustomName");
+        view.remove("Items");
     }
 
 //    @Nullable
