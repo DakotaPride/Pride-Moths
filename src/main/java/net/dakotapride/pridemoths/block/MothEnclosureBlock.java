@@ -311,12 +311,12 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
                 //&& player.isCreative()
                 && serverWorld.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)
                 && world.getBlockEntity(pos) instanceof MothEnclosureBlockEntity mothEnclosureBlockEntity) {
+            ItemStack itemStack = new ItemStack(this);
             //int i = state.get(FUZZ_LEVEL);
             boolean slot0 = state.get(SLOT_OCCUPIED_PROPERTIES.getFirst());
             boolean slot1 = state.get(SLOT_OCCUPIED_PROPERTIES.get(1));
             boolean slot2 = state.get(SLOT_OCCUPIED_PROPERTIES.get(2));
             if (slot0 || slot1 || slot2) {
-                ItemStack itemStack = new ItemStack(this);
                 itemStack.applyComponentsFrom(mothEnclosureBlockEntity.createComponentMap());
                 world.getBlockEntity(pos, BlockEntityTypeRegistrar.MOTH_ENCLOSURE_BLOCK_ENTITY).ifPresent(blockEntity -> blockEntity.readComponents(itemStack));
                 itemStack.set(DataComponentTypes.BLOCK_STATE, BlockStateComponent.DEFAULT
@@ -326,11 +326,11 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
                 if (mothEnclosureBlockEntity.hasCustomName()) {
                     itemStack.set(DataComponentTypes.CUSTOM_NAME, mothEnclosureBlockEntity.getCustomName());
                 }
-
-                ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, itemStack);
-                itemEntity.setToDefaultPickupDelay();
-                world.spawnEntity(itemEntity);
             }
+
+            ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, itemStack);
+            itemEntity.setToDefaultPickupDelay();
+            world.spawnEntity(itemEntity);
         }
 
         return super.onBreak(world, pos, state, player);
