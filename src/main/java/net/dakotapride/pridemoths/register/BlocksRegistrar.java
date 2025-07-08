@@ -6,6 +6,7 @@ import net.dakotapride.pridemoths.block.MothEnclosureBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -24,7 +25,7 @@ public class BlocksRegistrar {
 //            settings -> new BlockItem(FUZZY_CARPET, settings), new Item.Settings());
 
     public static Block MOTH_ENCLOSURE = registerMothEnclosure(MothEnclosureBlock::new,
-            AbstractBlock.Settings.copy(Blocks.BEEHIVE));
+            AbstractBlock.Settings.copy(Blocks.BEEHIVE).mapColor(MapColor.PINK));
 //    public static BlockItem MOTH_ENCLOSURE_ITEM = Registry.register(Registries.ITEM, Identifier.of(PrideMothsInitialize.MOD_ID, "moth_enclosure"),
 //            new BlockItem(MOTH_ENCLOSURE, new Item.Settings()));
 
