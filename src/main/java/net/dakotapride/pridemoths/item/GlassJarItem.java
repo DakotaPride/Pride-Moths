@@ -2,6 +2,7 @@ package net.dakotapride.pridemoths.item;
 
 import net.dakotapride.pridemoths.client.entity.MothEntity;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
+import net.dakotapride.pridemoths.register.DataComponentsRegistrar;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.minecraft.component.DataComponentTypes;
@@ -121,6 +122,12 @@ public class GlassJarItem extends Item {
                 moth.setCustomName(context.getStack().getName());
             }
 
+            if (context.getStack().getComponents().contains(DataComponentsRegistrar.CONTAINS_BABY)
+                    && context.getStack().getComponents().contains(DataComponentsRegistrar.SAVED_AGE)) {
+                moth.setBaby(true);
+                moth.setBreedingAge(context.getStack().getComponents().get(DataComponentsRegistrar.SAVED_AGE));
+            }
+
             context.getWorld().playSound(context.getPlayer(), context.getBlockPos(), SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.NEUTRAL, 1.0f, 1.4f);
             context.getWorld().spawnEntity(moth);
 
@@ -137,6 +144,12 @@ public class GlassJarItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
         textConsumer.accept(Text.translatable("text.pridemoths.jar.details").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
+
+        textConsumer.accept(Text.literal(""));
+
+        if (stack.getComponents().contains(DataComponentsRegistrar.CONTAINS_BABY)) {
+            textConsumer.accept(Text.translatable("text.pridemoths.jar.has_baby").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
+        }
 
         if (!stack.isOf(ItemsRegistrar.GLASS_JAR)) {
             textConsumer.accept(Text.translatable("text.pridemoths.jar." + getMothVariant(stack.getItem()).getVariation()).formatted(Formatting.ITALIC).formatted(Formatting.GRAY));

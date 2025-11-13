@@ -31,8 +31,9 @@ public class FuzzyCarpetBlock extends CarpetBlock {
 //        tooltip.add(Text.translatable("text.pridemoths.fuzzy_carpet.details").formatted(Formatting.ITALIC).formatted(Formatting.GRAY));
 //    }
 
+
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler collisionHandler) {
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean bl) {
         boolean isHostile = entity instanceof HostileEntity;
         if (isHostile) {
             ((HostileEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 600, 9));

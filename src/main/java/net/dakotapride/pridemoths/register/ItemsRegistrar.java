@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public class ItemsRegistrar {
     public static Item MOTH_SPAWN_EGG = registerItem("moth_spawn_egg", 
-            settings -> new SpawnEggItem(EntityTypeRegistrar.MOTH, settings), new Item.Settings());
+            settings -> new SpawnEggItem(settings.spawnEgg(EntityTypeRegistrar.MOTH)), new Item.Settings());
     public static Item MOTH_FUZZ = registerItem("moth_fuzz",
             Item::new, new Item.Settings());
     public static Item FRUITFUL_STEW = registerItem("fruitful_stew",

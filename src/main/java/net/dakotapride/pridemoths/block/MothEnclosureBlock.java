@@ -214,7 +214,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
                     if (stack.isIn(ConventionalItemTags.SHEAR_TOOLS)) {
                         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         dropMothFuzz(world, pos, state);
-                        stack.damage(1, player, LivingEntity.getSlotForHand(hand));
+                        stack.damage(1, player, hand.getEquipmentSlot());
                         bl = true;
                         world.emitGameEvent(player, GameEvent.SHEAR, pos);
                     }
@@ -300,7 +300,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     }
 
     private static void tryAddGlassJarWithMothInside(World world, BlockPos pos, PlayerEntity player, MothEnclosureBlockEntity blockEntity, ItemStack stack, int slot) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
             SoundEvent soundEvent = SoundEvents.ITEM_BOTTLE_EMPTY;
             blockEntity.setStack(slot, stack.splitUnlessCreative(1, player));
@@ -309,7 +309,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     }
 
     private static void tryRemoveGlassJarWithMothInside(World world, BlockPos pos, PlayerEntity player, MothEnclosureBlockEntity blockEntity, int slot) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             ItemStack itemStack = blockEntity.removeStack(slot, 1);
             SoundEvent soundEvent = SoundEvents.ITEM_BOTTLE_FILL;
             world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -323,7 +323,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
 
     @Override
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!world.isClient && world instanceof ServerWorld serverWorld
+        if (!world.isClient() && world instanceof ServerWorld serverWorld
                 //&& player.isCreative()
                 && serverWorld.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)
                 && world.getBlockEntity(pos) instanceof MothEnclosureBlockEntity mothEnclosureBlockEntity) {
@@ -446,7 +446,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return getRedstoneAnalogOutput(state);
     }
 }

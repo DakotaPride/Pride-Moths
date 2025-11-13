@@ -4,6 +4,7 @@ import net.dakotapride.pridemoths.PrideMothsInitialize;
 import net.dakotapride.pridemoths.client.entity.pride.IPrideMoths;
 import net.dakotapride.pridemoths.client.entity.pride.MothVariation;
 import net.dakotapride.pridemoths.config.PrideMothsConfigs;
+import net.dakotapride.pridemoths.register.DataComponentsRegistrar;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
 import net.dakotapride.pridemoths.register.ItemsRegistrar;
 import net.minecraft.block.BlockState;
@@ -48,24 +49,14 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animatable.manager.AnimatableManager;
-import software.bernie.geckolib.animatable.processing.AnimationController;
-import software.bernie.geckolib.animatable.processing.AnimationTest;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.EnumSet;
 import java.util.List;
 
-public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IPrideMoths {
+public class MothEntity extends AnimalEntity implements Flutterer, IPrideMoths {
     private static final TrackedData<Integer> VARIANT = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public static final TrackedData<Boolean> FROM_JAR = DataTracker.registerData(MothEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     public static final List<MothVariation> PRIDE_VARIATIONS = List.of(
             MothVariation.TRANSGENDER, MothVariation.LGBT, MothVariation.NON_BINARY, MothVariation.AGENDER, MothVariation.ASEXUAL,
@@ -74,6 +65,9 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
             MothVariation.DEMISEXUAL, MothVariation.DEMIGENDER, MothVariation.DEMIROMANTIC, MothVariation.GENDERFLUID, MothVariation.INTERSEX,
             MothVariation.XENOGENDER, MothVariation.GENDER_QUEER, MothVariation.GENDERFAE, MothVariation.GENDERFAUN, MothVariation.BIGENDER,
             MothVariation.PANGENDER);
+
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
     public MothEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -94,6 +88,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 .add(EntityAttributes.TEMPT_RANGE, 10.0);
     }
 
+    @Override
     protected void initGoals() {
         this.goalSelector.add(5, new SwimGoal(this));
         this.goalSelector.add(3, new TemptGoal(this, 1.25, stack -> stack.isIn(PrideMothsInitialize.CAN_MOTH_EAT), false));
@@ -171,7 +166,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     @Override
     protected void onGrowUp() {
         super.onGrowUp();
-        if (!this.isBaby() && this.getWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
+        if (!this.isBaby() && this.getEntityWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
             this.dropItem(serverWorld, ItemsRegistrar.MOTH_FUZZ);
         }
 
@@ -239,7 +234,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         if (isBreedingItem(itemstack)) {
             if (isFavouredFoodItem(itemstack)) {
                 int i = this.getBreedingAge();
-                if (!this.getWorld().isClient && i == 0 && this.canEat()) {
+                if (!this.getEntityWorld().isClient() && i == 0 && this.canEat()) {
                     this.eat(player, hand, itemstack);
                     this.lovePlayer(player);
                     return ActionResult.SUCCESS_SERVER;
@@ -251,17 +246,22 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                     //return ActionResult.SUCCESS;
                 }
 
-                if (this.getWorld().isClient) {
+                if (this.getEntityWorld().isClient()) {
                     return ActionResult.CONSUME;
                 }
 
             }
         }
 
-        if (player.getStackInHand(hand).getItem() == ItemsRegistrar.GLASS_JAR && !this.isBaby()) {
+        if (player.getStackInHand(hand).getItem() == ItemsRegistrar.GLASS_JAR) {
             ItemStack itemStack = getMothJarItemFromVariation();
             if (this.hasCustomName()) {
                 itemStack.set(DataComponentTypes.CUSTOM_NAME, this.getCustomName());
+            }
+
+            if (this.isBaby()) {
+                itemStack.set(DataComponentsRegistrar.CONTAINS_BABY, this.isBaby());
+                itemStack.set(DataComponentsRegistrar.SAVED_AGE, this.breedingAge);
             }
 
             if (!player.getAbilities().creativeMode) {
@@ -279,7 +279,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 }
             }
 
-            this.getWorld().playSound(player, player.getBlockPos(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
+            this.getEntityWorld().playSound(player, player.getBlockPos(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0f, 1.0f);
             this.discard();
             return ActionResult.SUCCESS;
         }
@@ -397,11 +397,24 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
         return name.equalsIgnoreCase(i0) || name.equalsIgnoreCase(i1);
     }
 
+    private void setupAnimationStates() {
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = 60;
+            this.idleAnimationState.start(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
 
-        if (this.hasCustomName() && !this.isBaby()) {
+        if (this.getEntityWorld().isClient()) {
+            this.setupAnimationStates();
+        }
+
+        if (this.hasCustomName()) {
             if (this.getMothVariant() != MothVariation.NON_BINARY && nonBinaryNames()) {
                 this.setMothVariant(MothVariation.NON_BINARY);
             } else if (this.getMothVariant() != MothVariation.TRANSGENDER && twoNames("trans", "transgender")) {
@@ -462,7 +475,7 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
                 this.setMothVariant(MothVariation.ALLY);
             }
 
-            if (this.getWorld() instanceof ServerWorld world) {
+            if (this.getEntityWorld() instanceof ServerWorld world) {
                 if (this.getCustomName().getString().equalsIgnoreCase("super straight")) {
                     this.kill(world);
                 } else if (this.getCustomName().getString().equalsIgnoreCase("super_straight")) {
@@ -496,30 +509,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
     protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
     }
 
-    @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controller) {
-        //controller.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controller.add(new AnimationController<>("controller", 0, this::animController));
-    }
-
-    protected PlayState animController(final AnimationTest<GeoAnimatable> animTest) {
-        animTest.setAndContinue(RawAnimation.begin().thenLoop("animation.moth.idle"));
-
-        return PlayState.CONTINUE;
-    }
-
-//    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
-//        // if (event.isMoving()) {
-//        //            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.flight", Animation.LoopType.LOOP));
-//        //        } else {
-//        //            event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
-//        //        }
-//
-//        event.getController().setAnimation(RawAnimation.begin().then("animation.moth.idle", Animation.LoopType.LOOP));
-//
-//        return PlayState.CONTINUE;
-//    }
-
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
@@ -534,11 +523,6 @@ public class MothEntity extends AnimalEntity implements GeoEntity, Flutterer, IP
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
     }
 
     // Fake target

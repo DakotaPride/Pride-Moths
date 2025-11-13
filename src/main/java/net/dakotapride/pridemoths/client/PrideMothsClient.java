@@ -1,18 +1,11 @@
 package net.dakotapride.pridemoths.client;
 
-import net.dakotapride.pridemoths.PrideMothsInitialize;
+import net.dakotapride.pridemoths.client.model.MothModel;
 import net.dakotapride.pridemoths.client.renderer.MothRenderer;
-import net.dakotapride.pridemoths.item.GlassJarItem;
-import net.dakotapride.pridemoths.register.BlocksRegistrar;
 import net.dakotapride.pridemoths.register.EntityTypeRegistrar;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 public class PrideMothsClient implements ClientModInitializer {
 
@@ -33,7 +26,7 @@ public class PrideMothsClient implements ClientModInitializer {
 //                }
 //            }
 //        });
-
+        EntityModelLayerRegistry.registerModelLayer(MothModel.LAYER_LOCATION, MothModel::getTexturedModelData);
         EntityRendererRegistry.register(EntityTypeRegistrar.MOTH, MothRenderer::new);
 
     }
