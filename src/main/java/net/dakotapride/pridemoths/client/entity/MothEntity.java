@@ -43,10 +43,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.rule.GameRules;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -166,7 +166,7 @@ public class MothEntity extends AnimalEntity implements Flutterer, IPrideMoths {
     @Override
     protected void onGrowUp() {
         super.onGrowUp();
-        if (!this.isBaby() && this.getEntityWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
+        if (!this.isBaby() && this.getEntityWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getValue(GameRules.DO_MOB_LOOT)) {
             this.dropItem(serverWorld, ItemsRegistrar.MOTH_FUZZ);
         }
 

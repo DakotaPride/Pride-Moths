@@ -41,10 +41,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
+import net.minecraft.world.rule.GameRules;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -325,7 +325,7 @@ public class MothEnclosureBlock extends BlockWithEntity implements BlockEntityPr
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!world.isClient() && world instanceof ServerWorld serverWorld
                 //&& player.isCreative()
-                && serverWorld.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)
+                && serverWorld.getGameRules().getValue(GameRules.DO_TILE_DROPS)
                 && world.getBlockEntity(pos) instanceof MothEnclosureBlockEntity mothEnclosureBlockEntity) {
             ItemStack itemStack = new ItemStack(this);
             //int i = state.get(FUZZ_LEVEL);
